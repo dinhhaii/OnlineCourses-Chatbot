@@ -26,6 +26,7 @@ router.post("/webhook", (req, res) => {
       let event = entry.messaging[0];
       let sender_psid = event.sender.id;
       if (event.message) {
+        console.log(event.message);
         handleMessage(sender_psid, event.message); 
       } else {
         handlePostback(sender_psid, event.postback);
