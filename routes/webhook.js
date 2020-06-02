@@ -19,8 +19,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/webhook", (req, res) => {
-  let { body } = req;
-
+  let body = req.body;
+  console.log(body);
   if (body.object === 'page') {
     body.entry.forEach(function(entry) {
       let event = entry.messaging[0];
