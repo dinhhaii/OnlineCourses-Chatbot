@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
   }
 });
 
-router.post("/webhook", (req, res) => {
+router.post("/", (req, res) => {
   let body = req.body;
   try {
     if (body.object === "page") {
