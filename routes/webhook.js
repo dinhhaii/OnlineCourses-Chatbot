@@ -1,12 +1,43 @@
 var express = require('express');
 var router = express.Router();
-const constant = require('../utils/constant');
+const { VERIFY_TOKEN } = require('../utils/constant');
+const { handleMessage, handlePostback } = require('../services/webhook');
 
 router.get("/", (req, res) => {
-  if (req.query['hub.verify_token'] === "hacademy-chatbot") {
-      res.send(req.query['hub.challenge']);
+  let mode = req.query['hub.mode'];
+  let token = req.query['hub.verify_token'];
+  let challenge = req.query['hub.challenge'];
+    
+  if (mode && token) {
+    if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+      console.log('WEBHOOK_VERIFIED');
+      res.status(200).send(challenge);
+    } else {
+      res.sendStatus(403);      
+    }
   }
-  res.send("Wrong token");
 });
+
+router.post("/webhook", (req, res) => {
+  let { body } = req;
+
+  if (body.object === 'page') {
+    body.entry.forEach(function(entry) {
+      let event = entry.messaging[0];
+      let sender_psid = event.sender.id;
+      if (event.message) {
+        handleMessage(sender_psid, event.message); 
+      } else {
+        handlePostback(sender_psid, event.postback);
+      }
+
+    });
+
+    res.status(200).send('EVENT_RECEIVED');
+
+  } else {
+    res.sendStatus(404);
+  }
+})
 
 module.exports = router;
