@@ -1,0 +1,35 @@
+{
+  "name": "OnlineCourses-Chatbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "10.16.3"
+  },
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dinhhaii/OnlineCourses-Chatbot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dinhhaii/OnlineCourses-Chatbot/issues"
+  },
+  "homepage": "https://github.com/dinhhaii/OnlineCourses-Chatbot#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.3",
+    "path": "^0.12.7",
+    "query-string": "^6.12.1",
+    "uuid": "^7.0.3"
+  }
+}
