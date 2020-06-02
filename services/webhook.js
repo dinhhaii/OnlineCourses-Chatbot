@@ -1,7 +1,7 @@
 const request = require("request");
 const PAGE_ACCESS_TOKEN = require("../utils/constant");
 
-const callSendAPI = (sender_psid, response) => {
+function callSendAPI(sender_psid, response) {
   let request_body = {
     recipient: {
       id: sender_psid,
@@ -12,9 +12,7 @@ const callSendAPI = (sender_psid, response) => {
   request(
     {
       url: "https://graph.facebook.com/v2.6/me/messages",
-      qs: {
-        access_token: process.env.PAGE_ACCESS_TOKEN || PAGE_ACCESS_TOKEN,
-      },
+      qs: { access_token: process.env.PAGE_ACCESS_TOKEN || PAGE_ACCESS_TOKEN },
       method: "POST",
       json: request_body,
     },
@@ -26,9 +24,9 @@ const callSendAPI = (sender_psid, response) => {
       }
     }
   );
-};
+}
 
-export const handleMessage = (sender_psid, received_message) => {
+function handleMessage(sender_psid, received_message) {
   let response;
 
   if (received_message.text) {
@@ -67,9 +65,9 @@ export const handleMessage = (sender_psid, received_message) => {
   }
 
   callSendAPI(sender_psid, response);
-};
+}
 
-export const handlePostback = (sender_psid, received_postback) => {
+function handlePostback(sender_psid, received_postback) {
   let response;
 
   let payload = received_postback.payload;
@@ -81,4 +79,6 @@ export const handlePostback = (sender_psid, received_postback) => {
   }
 
   callSendAPI(sender_psid, response);
-};
+}
+
+module.exports = { handleMessage, handlePostback };
