@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const { VERIFY_TOKEN } = require("../utils/constant");
-const services = require("../services/webhook");
+const { handleMessage, handlePostback } = require("../services/webhook");
 
 router.get("/", (req, res) => {
   let mode = req.query["hub.mode"];
@@ -27,9 +27,9 @@ router.post("/", (req, res) => {
         let sender_psid = event.sender.id;
         if (event.message) {
           console.log(event.message);
-          services.handleMessage(sender_psid, event.message);
+          handleMessage(sender_psid, event.message);
         } else {
-          services.handlePostback(sender_psid, event.postback);
+          handlePostback(sender_psid, event.postback);
         }
       });
 
