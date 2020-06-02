@@ -19,7 +19,6 @@ router.get("/", (req, res) => {
 
 router.post("/webhook", (req, res) => {
   let body = req.body;
-  if (body.object === "page") {
     body.entry.forEach(function (entry) {
       let event = entry.messaging[0];
       let sender_psid = event.sender.id;
@@ -32,9 +31,7 @@ router.post("/webhook", (req, res) => {
     });
 
     res.status(200).send("EVENT_RECEIVED");
-  } else {
-    res.sendStatus(404);
-  }
+  
 });
 
 module.exports = router;
