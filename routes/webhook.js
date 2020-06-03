@@ -4,19 +4,18 @@ const { VERIFY_TOKEN, PAGE_ACCESS_TOKEN } = require("../utils/constant");
 const { handleMessage, handlePostback } = require("../services/webhook");
 const { FacebookProfileAPIClient, FacebookMessagingAPIClient, ValidateWebhook, FacebookMessageParser } = require('fb-messenger-bot-api');
 
-const messagingClient = new FacebookMessagingAPIClient(process.env.PAGE_ACCESS_TOKEN || PAGE_ACCESS_TOKEN);
-const profileClient = new FacebookProfileAPIClient(process.env.PAGE_ACCESS_TOKEN);
-
 router.get('/', (req, res) => {
   ValidateWebhook.validateServer(req, res, VERIFY_TOKEN);
 });
 
 router.post('/', async (req, res) => {
+  const messagingClient = new FacebookMessagingAPIClient(process.env.PAGE_ACCESS_TOKEN || PAGE_ACCESS_TOKEN);
+  const profileClient = new FacebookProfileAPIClient(process.env.PAGE_ACCESS_TOKEN);
   const incomingMessages = FacebookMessageParser.parsePayload(req.body);  
   try {
   for (let messaging of incomingMessages) {
     const senderId = messaging.sender.id;
-    console.log(sender);
+    console.log(senderId);
     // await messagingClient.markSeen(senderId);
     // await messagingClient.toggleTyping(senderId, true);
     // const result = await messagingClient.sendTextMessage(senderId, "Test");
