@@ -16,10 +16,10 @@ router.post('/', async (req, res) => {
   for (let messaging of incomingMessages) {
     const senderId = messaging.sender.id;
     console.log(senderId);
-    // await messagingClient.markSeen(senderId);
-    // await messagingClient.toggleTyping(senderId, true);
-    // const result = await messagingClient.sendTextMessage(senderId, "Test");
-    // console.log(`Message sent ${result}`);  
+    await messagingClient.markSeen(senderId);
+    await messagingClient.toggleTyping(senderId, true);
+    const result = await messagingClient.sendTextMessage(senderId, "Test");
+    console.log(`Message sent ${result}`);  
   }
   res.status(200).send("EVENT_RECEIVED");
 } catch(error) {
