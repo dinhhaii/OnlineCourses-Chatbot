@@ -2,25 +2,30 @@ var express = require("express");
 var router = express.Router();
 const { VERIFY_TOKEN, PAGE_ACCESS_TOKEN } = require("../utils/constant");
 const { handleMessage, handlePostback } = require("../services/webhook");
-const { FacebookMessagingAPIClient, ValidateWebhook, FacebookMessageParser } = require('fb-messenger-bot-api');
+const { FacebookProfileAPIClient, FacebookMessagingAPIClient, ValidateWebhook, FacebookMessageParser } = require('fb-messenger-bot-api');
 
 const messagingClient = new FacebookMessagingAPIClient(process.env.PAGE_ACCESS_TOKEN || PAGE_ACCESS_TOKEN);
+const profileClient = new FacebookProfileAPIClient(process.env.PAGE_ACCESS_TOKEN);
 
 router.get('/', (req, res) => {
   ValidateWebhook.validateServer(req, res, VERIFY_TOKEN);
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const incomingMessages = FacebookMessageParser.parsePayload(req.body);  
-  incomingMessages.forEach(messaging => {
+  try {
+  for (let messaging of incomingMessages) {
     const senderId = messaging.sender.id;
-    messagingClient.markSeen(senderId)
-    .then(() => messagingClient.toggleTyping(sen
-  })
-  
-  // messagingClient.sendTextMessage(senderId, 'Hello',(result) => console.log(`Result sent with: ${result}`));
-  
-  // messagingClient.sendTextMessage(senderId,'Hello');
+    await messagingClient.markSeen(senderId);
+    await messagingClient.toggleTyping(senderId, true);
+    const result = await messagingClient.sendTextMessage(senderId, "Test");
+    console.log(`Message sent ${result}`);  
+  }
+  res.status(200).send("EVENT_RECEIVED");
+} catch(error) {
+  console.log(error);
+  res.status(500).send(error);
+}
 });
 
 
