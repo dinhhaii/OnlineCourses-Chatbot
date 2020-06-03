@@ -22,16 +22,14 @@ router.post("/", (req, res) => {
   let body = req.body;
   try {
     if (body.object === "page") {
-      body.entry.forEach(function (entry) {
-        let event = entry.messaging[0];
-        let sender_psid = event.sender.id;
-        console.log(event);
-        if (event.message) {
-          handleMessage(sender_psid, event.message);
-        } else if (event.postback) {
-          handlePostback(sender_psid, event.postback);
-        }
-      });
+      let messaging_events = body.entry[0].messaging;
+      for (let i = 0; i < messaging_events.length; i++) {
+        let event = req.body.entry[0].messaging[i];
+        let psid = event.sender.id;
+        psidToFbid.getFromWebhookEvent(event).then((fbid) => {
+          console.log("Got psid = " + psid + ", fbid = " + fbid);
+        });
+      }
 
       res.status(200).send("EVENT_RECEIVED");
     } else {
