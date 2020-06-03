@@ -13,15 +13,18 @@ router.post('/', async (req, res) => {
   const profileClient = new FacebookProfileAPIClient(process.env.PAGE_ACCESS_TOKEN);
   const incomingMessages = FacebookMessageParser.parsePayload(req.body);  
   try {
+    await profileClient.setGreetingMessage('Message that will be visible first thing when opening chat window with your bot/page');
 
-    const senderId = incomingMessages[0].sender.id;
-    console.log(incomingMessages);
-    // await messagingClient.markSeen(senderId);
-    // await messagingClient.toggleTyping(senderId, true);
-    // const result = await messagingClient.sendTextMessage(senderId, "Test");
-    // console.log(`Message sent ${result}`);  
-  
-  res.status(200).send("EVENT_RECEIVED");
+    for (let messaging of incomingMessages) {
+      const senderId = messaging.sender.id;
+      if (messaging.message) {
+        await messagingClient.markSeen(senderId);
+        await messagingClient.toggleTyping(senderId, true);
+        const result = await messagingClient.sendTextMessage(senderId, "Test");
+        console.log(`Message sent ${result}`);  
+      }
+    }
+    res.status(200).send("EVENT_RECEIVED");
 } catch(error) {
   console.log(error);
   res.status(500).send(error);
