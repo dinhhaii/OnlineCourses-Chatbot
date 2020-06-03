@@ -25,10 +25,10 @@ router.post("/", (req, res) => {
       body.entry.forEach(function (entry) {
         let event = entry.messaging[0];
         let sender_psid = event.sender.id;
+        console.log(event);
         if (event.message) {
-          console.log(event.message);
           handleMessage(sender_psid, event.message);
-        } else {
+        } else if (event.postback) {
           handlePostback(sender_psid, event.postback);
         }
       });
