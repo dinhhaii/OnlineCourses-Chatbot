@@ -30,6 +30,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.3",
     "path": "^0.12.7",
+    "psid-to-fbid": "^1.2.0",
     "query-string": "^6.12.1",
     "request": "^2.88.2",
     "uuid": "^7.0.3"
