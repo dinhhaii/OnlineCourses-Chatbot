@@ -12,13 +12,13 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const incomingMessages = FacebookMessageParser.parsePayload(req.body);  
-  console.log(incomingMessages);
-  // messagingClient.markSeen(senderId)
-  //     .then(() => client.toggleTyping(senderId,true))
-  //     .catch((err) => console.log(error));
+  const senderId = incomingMessages.sender.id;
+  messagingClient.markSeen(senderId)
+      .then(() => messagingClient.toggleTyping(senderId, true))
+      .catch((err) => console.log(err));
       
-  // messagingClient.sendTextMessage(senderId, 'Hello')
-  //     .then((result) => console.log(`Result sent with: ${result}`));
+  messagingClient.sendTextMessage(senderId, 'Hello')
+      .then((result) => console.log(`Result sent with: ${result}`));
       
   // messagingClient.sendTextMessage(senderId, 'Hello',(result) => console.log(`Result sent with: ${result}`));
   
