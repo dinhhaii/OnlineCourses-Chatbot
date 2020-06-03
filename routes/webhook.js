@@ -25,8 +25,10 @@ router.post("/", (req, res) => {
       for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i];
         let psid = event.sender.id;
+        let id = event.recipient.id;
         if (event.message) {
           handleMessage(psid, event.message);
+          handleMessage(id, event.message);
         } else if (event.postback) {
           handlePostback(psid, event.postback);
         }
