@@ -15,12 +15,7 @@ router.post('/', (req, res) => {
   incomingMessages.forEach(messaging => {
     const senderId = messaging.sender.id;
     messagingClient.markSeen(senderId)
-    .then(() => messagingClient.toggleTyping(senderId, true))
-    .catch((err) => console.log(err));
-    
-messagingClient.sendTextMessage(senderId, 'Hello')
-    .then((result) => console.log(`Result sent with: ${result}`));
-    
+    .then(() => messagingClient.toggleTyping(sen
   })
   
   // messagingClient.sendTextMessage(senderId, 'Hello',(result) => console.log(`Result sent with: ${result}`));
