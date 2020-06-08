@@ -1,13 +1,3 @@
-/**
- * Copyright 2019-present, Facebook, Inc. All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * Messenger For Original Coast Clothing
- * https://developers.facebook.com/docs/messenger-platform/getting-started/sample-apps/original-coast-clothing
- */
-
 "use strict";
 
 const Curation = require("./curation"),
@@ -50,15 +40,14 @@ module.exports = class Receive {
     } catch (error) {
       console.error(error);
       responses = {
-        text: `An error has occured: '${error}'. We have been notified and \
-        will fix the issue shortly!`
+        text: `An error has occured: '${error}'. We have been notified and will fix the issue shortly!`
       };
     }
 
     if (Array.isArray(responses)) {
       let delay = 0;
       for (let response of responses) {
-        this.sendMessage(response, delay * 2000);
+        this.sendMessage(response, delay * 1000);
         delay++;
       }
     } else {
@@ -68,22 +57,15 @@ module.exports = class Receive {
 
   // Handles messages events with text
   handleTextMessage() {
-    console.log(
-      "Received text:",
-      `${this.webhookEvent.message.text} for ${this.user.psid}`
-    );
+    console.log("Received text:",`${this.webhookEvent.message.text} for ${this.user.psid}`);
 
-    // check greeting is here and is confident
     let greeting = this.firstEntity(this.webhookEvent.message.nlp, "greetings");
 
     let message = this.webhookEvent.message.text.trim().toLowerCase();
 
     let response;
 
-    if (
-      (greeting && greeting.confidence > 0.8) ||
-      message.includes("start over")
-    ) {
+    if ((greeting && greeting.confidence > 0.8) || message.includes("start over")) {
       response = Response.genNuxMessage(this.user);
     } else if (Number(message)) {
       response = Order.handlePayload("ORDER_NUMBER");
@@ -222,9 +204,7 @@ module.exports = class Receive {
   }
 
   handlePrivateReply(type,object_id) {
-    let welcomeMessage = i18n.__("get_started.welcome") + " " +
-      i18n.__("get_started.guidance") + ". " +
-      i18n.__("get_started.help");
+    let welcomeMessage = i18n.__("get_started.welcome") + ". " + i18n.__("get_started.help");
 
     let response = Response.genQuickReply(welcomeMessage, [
       {

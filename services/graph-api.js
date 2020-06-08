@@ -52,14 +52,11 @@ module.exports = class GraphAPi {
       `Setting app ${config.appId} callback url to ${config.webhookUrl}`
     );
 
-    let fields =
-      "messages, messaging_postbacks, messaging_optins, message_deliveries, messaging_referrals";
+    let fields = "messages, messaging_postbacks, messaging_optins, message_deliveries, messaging_referrals";
 
     if (customFields !== undefined) {
       fields = fields + ", " + customFields;
     }
-
-    console.log(fields);
 
     request(
       {
@@ -94,8 +91,6 @@ module.exports = class GraphAPi {
     if (customFields !== undefined) {
       fields = fields + ", " + customFields;
     }
-
-    console.log(fields);
 
     request(
       {
@@ -135,7 +130,6 @@ module.exports = class GraphAPi {
     return new Promise(function(resolve, reject) {
       let body = [];
 
-      // Send the HTTP request to the Graph API
       request({
         uri: `${config.mPlatfom}/${senderPsid}`,
         qs: {
@@ -145,7 +139,6 @@ module.exports = class GraphAPi {
         method: "GET"
       })
         .on("response", function(response) {
-          // console.log(response.statusCode);
 
           if (response.statusCode !== 200) {
             reject(Error(response.statusCode));
@@ -247,9 +240,7 @@ module.exports = class GraphAPi {
   }
 
   static callNLPConfigsAPI() {
-    // Send the HTTP request to the Built-in NLP Configs API
     // https://developers.facebook.com/docs/graph-api/reference/page/nlp_configs/
-
     console.log(`Enable Built-in NLP for Page ${config.pageId}`);
     request(
       {
@@ -278,7 +269,7 @@ module.exports = class GraphAPi {
         {
           _eventName: "postback_payload",
           _value: eventName,
-          _origin: "original_coast_clothing"
+          _origin: "hacademy-chatbot"
         }
       ]),
       advertiser_tracking_enabled: 1,

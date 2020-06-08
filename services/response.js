@@ -125,13 +125,7 @@ module.exports = class Response {
   }
 
   static genNuxMessage(user) {
-    let welcome = this.genText(
-      i18n.__("get_started.welcome", {
-        userFirstName: user.firstName
-      })
-    );
-
-    let guide = this.genText(i18n.__("get_started.guidance"));
+    let welcome = this.genText(i18n.__("get_started.welcome", { userFirstName: user.firstName }));
 
     let curation = this.genQuickReply(i18n.__("get_started.help"), [
       {
@@ -144,6 +138,6 @@ module.exports = class Response {
       }
     ]);
 
-    return [welcome, guide, curation];
+    return [welcome, curation];
   }
 };
