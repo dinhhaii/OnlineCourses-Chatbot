@@ -1,0 +1,4477 @@
+{
+  "settings": {
+    "languages": [
+      "en"
+    ],
+    "nlu": {
+      "log": true
+    },
+    "tag": "nlp",
+    "threshold": 0.5,
+    "autoLoad": true,
+    "autoSave": true,
+    "modelFileName": "model.nlp"
+  },
+  "nluManager": {
+    "settings": {
+      "tag": "nlu-manager",
+      "log": true
+    },
+    "locales": [
+      "en"
+    ],
+    "languageNames": {},
+    "domainManagers": {
+      "en": {
+        "settings": {
+          "locale": "en",
+          "tag": "domain-manager-en",
+          "nluByDomain": {
+            "default": {
+              "className": "NeuralNlu",
+              "settings": {}
+            }
+          },
+          "trainByDomain": false,
+          "useStemDict": true
+        },
+        "stemDict": {
+          "ani,discount,do,have,you": {
+            "intent": "discount",
+            "domain": "default"
+          },
+          "how,is,mani,maximum,off,on,percent,this,websit": {
+            "intent": "discount",
+            "domain": "default"
+          },
+          "are,cours,free,on,this,websit,what": {
+            "intent": "discount",
+            "domain": "default"
+          },
+          "cours,discount,have,on,this,websit,what": {
+            "intent": "discount",
+            "domain": "default"
+          },
+          "a,cours,free,i,need": {
+            "intent": "discount",
+            "domain": "default"
+          },
+          "cours,free": {
+            "intent": "discount",
+            "domain": "default"
+          },
+          "cours,low-pric": {
+            "intent": "discount",
+            "domain": "default"
+          },
+          "cours,doe,hacademi,have,what": {
+            "intent": "course",
+            "domain": "default"
+          },
+          "comput,cours,i,need,scienc,some": {
+            "intent": "course",
+            "domain": "default"
+          },
+          "a,cours,i,need": {
+            "intent": "course",
+            "domain": "default"
+          },
+          "about,could,cours,javascript,me,tell,you": {
+            "intent": "course",
+            "domain": "default"
+          },
+          "can,cours,me,recommend,some,you": {
+            "intent": "course",
+            "domain": "default"
+          },
+          "doe,hacademi,have,how,mani,subject": {
+            "intent": "course",
+            "domain": "default"
+          },
+          "cours,doe,hacademi,how,mani": {
+            "intent": "course",
+            "domain": "default"
+          },
+          "cours": {
+            "intent": "course",
+            "domain": "default"
+          },
+          "cours,english": {
+            "intent": "course",
+            "domain": "default"
+          },
+          "cours,music": {
+            "intent": "course",
+            "domain": "default"
+          },
+          "a,can,cours,how,i,purchas": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "a,buy,cours,how,to": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "a,cours,how,purchas,to": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "onlin,payment": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "card,for,payment,use,what": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "card,have,i,visa": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "can,card,i,my,pay,visa,with": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "card,have,i,master": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "can,card,i,master,my,pay,with": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "card,discov,have,i": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "can,card,discov,i,my,pay,with": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "american,card,express,have,i": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "american,can,card,express,i,my,pay,with": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "pay,paypal,with": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "have,i,paypal": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "can,i,pay,paypal,with": {
+            "intent": "payment",
+            "domain": "default"
+          },
+          "doe,hacademi,have,subject,what": {
+            "intent": "subject",
+            "domain": "default"
+          },
+          "subject": {
+            "intent": "subject",
+            "domain": "default"
+          },
+          "hacademi,how,mani,on,subject": {
+            "intent": "subject",
+            "domain": "default"
+          },
+          "design,here,is,subject,there": {
+            "intent": "subject",
+            "domain": "default"
+          },
+          "cours,each,how,mani,on,subject": {
+            "intent": "subject",
+            "domain": "default"
+          },
+          "a,becom,hacademi,how,lectur,on,to": {
+            "intent": "lecturer",
+            "domain": "default"
+          },
+          "cours,hacademi,how,on,to,upload": {
+            "intent": "lecturer",
+            "domain": "default"
+          },
+          "a,becom,can,hacademi,i,on,teacher": {
+            "intent": "lecturer",
+            "domain": "default"
+          },
+          "can,cours,hacademi,i,my,on,teach": {
+            "intent": "lecturer",
+            "domain": "default"
+          },
+          "a,be,hacademi,i,on,teacher,to,want": {
+            "intent": "lecturer",
+            "domain": "default"
+          },
+          "a,be,hacademi,on,teacher": {
+            "intent": "lecturer",
+            "domain": "default"
+          },
+          "account,get,how,teacher,to": {
+            "intent": "lecturer",
+            "domain": "default"
+          },
+          "a,as,how,login,teacher,to": {
+            "intent": "lecturer",
+            "domain": "default"
+          },
+          "a,as,how,lectur,login,to": {
+            "intent": "lecturer",
+            "domain": "default"
+          },
+          "doe,hacademi,how,lectur,recruit": {
+            "intent": "lecturer",
+            "domain": "default"
+          },
+          "hacademi,is,what": {
+            "intent": "hacademy",
+            "domain": "default"
+          },
+          "for,is,this,websit,what": {
+            "intent": "hacademy",
+            "domain": "default"
+          },
+          "definit,hacademi,of": {
+            "intent": "hacademy",
+            "domain": "default"
+          },
+          "hacademi,whi": {
+            "intent": "hacademy",
+            "domain": "default"
+          },
+          "explain,hacademi": {
+            "intent": "hacademy",
+            "domain": "default"
+          },
+          "is,this,websit,what": {
+            "intent": "hacademy",
+            "domain": "default"
+          },
+          "about,hacademi": {
+            "intent": "hacademy",
+            "domain": "default"
+          },
+          "contact,how,to": {
+            "intent": "contact",
+            "domain": "default"
+          },
+          "a,contact,have,i,problem,the,use,websit,when": {
+            "intent": "contact",
+            "domain": "default"
+          },
+          "got,have,i,into,some,the,troubl,use,websit": {
+            "intent": "contact",
+            "domain": "default"
+          },
+          "contact,to,where": {
+            "intent": "contact",
+            "domain": "default"
+          },
+          "contact,section": {
+            "intent": "contact",
+            "domain": "default"
+          },
+          "can,comment,how,i": {
+            "intent": "comment",
+            "domain": "default"
+          },
+          "ask,can,dure,how,i,lesson,someth,the": {
+            "intent": "comment",
+            "domain": "default"
+          },
+          "ask,dure,lesson,question,the": {
+            "intent": "comment",
+            "domain": "default"
+          },
+          "dure,question,studi": {
+            "intent": "comment",
+            "domain": "default"
+          },
+          "a,comment,lesson,on": {
+            "intent": "comment",
+            "domain": "default"
+          },
+          "a,cours,doe,have,how,lesson,mani": {
+            "intent": "lesson",
+            "domain": "default"
+          },
+          "a,doe,have,lesson,what": {
+            "intent": "lesson",
+            "domain": "default"
+          },
+          "a,in,lesson,what": {
+            "intent": "lesson",
+            "domain": "default"
+          },
+          "can,feedback,give,how,i": {
+            "intent": "feedback",
+            "domain": "default"
+          },
+          "feedback,section": {
+            "intent": "feedback",
+            "domain": "default"
+          },
+          "cours,feedback,for,give,i,this,to,want": {
+            "intent": "feedback",
+            "domain": "default"
+          },
+          "can,feedback,i,see,the,where": {
+            "intent": "feedback",
+            "domain": "default"
+          },
+          "account,an,can,creat,how,i": {
+            "intent": "register",
+            "domain": "default"
+          },
+          "account,can,facebook,i,login,my,with": {
+            "intent": "register",
+            "domain": "default"
+          },
+          "account,can,googl,i,login,my,with": {
+            "intent": "register",
+            "domain": "default"
+          },
+          "account,an,i,need": {
+            "intent": "register",
+            "domain": "default"
+          },
+          "account,an,creat,hacademi,on": {
+            "intent": "register",
+            "domain": "default"
+          },
+          "account,creat,learner": {
+            "intent": "register",
+            "domain": "default"
+          },
+          "account,an,creat": {
+            "intent": "register",
+            "domain": "default"
+          },
+          "can,how,i,login": {
+            "intent": "login",
+            "domain": "default"
+          },
+          "how,login,to": {
+            "intent": "login",
+            "domain": "default"
+          },
+          "learner,login": {
+            "intent": "login",
+            "domain": "default"
+          },
+          "login": {
+            "intent": "login",
+            "domain": "default"
+          },
+          "in,sign": {
+            "intent": "login",
+            "domain": "default"
+          },
+          "forgot,i,my,password": {
+            "intent": "forgot_password",
+            "domain": "default"
+          },
+          "a,can,how,my,password,retriev": {
+            "intent": "forgot_password",
+            "domain": "default"
+          },
+          "forgot,password": {
+            "intent": "forgot_password",
+            "domain": "default"
+          },
+          "do,i,my,not,password,rememb": {
+            "intent": "forgot_password",
+            "domain": "default"
+          },
+          "password,retriev": {
+            "intent": "forgot_password",
+            "domain": "default"
+          },
+          "back,i,my,need,password": {
+            "intent": "forgot_password",
+            "domain": "default"
+          },
+          "do,email,i,not,receiv,verif": {
+            "intent": "verification",
+            "domain": "default"
+          },
+          "account,how,my,to,verifi": {
+            "intent": "verification",
+            "domain": "default"
+          },
+          "account,verifi": {
+            "intent": "verification",
+            "domain": "default"
+          },
+          "email,resend,verif": {
+            "intent": "verification",
+            "domain": "default"
+          },
+          "account,verif": {
+            "intent": "verification",
+            "domain": "default"
+          },
+          "a,can,cours,how,i,report": {
+            "intent": "report",
+            "domain": "default"
+          },
+          "a,file,report": {
+            "intent": "report",
+            "domain": "default"
+          },
+          "a,cours,report": {
+            "intent": "report",
+            "domain": "default"
+          },
+          "how,report,to": {
+            "intent": "report",
+            "domain": "default"
+          },
+          "i,need,report,to": {
+            "intent": "report",
+            "domain": "default"
+          },
+          "doe,how,place,report,take": {
+            "intent": "report",
+            "domain": "default"
+          }
+        },
+        "intentDict": {
+          "discount": "default",
+          "course": "default",
+          "payment": "default",
+          "subject": "default",
+          "lecturer": "default",
+          "hacademy": "default",
+          "contact": "default",
+          "comment": "default",
+          "lesson": "default",
+          "feedback": "default",
+          "register": "default",
+          "login": "default",
+          "forgot_password": "default",
+          "verification": "default",
+          "report": "default"
+        },
+        "sentences": [
+          {
+            "domain": "default",
+            "utterance": "Do you have any discount?",
+            "intent": "discount"
+          },
+          {
+            "domain": "default",
+            "utterance": "How many percent is maximum off on this website?",
+            "intent": "discount"
+          },
+          {
+            "domain": "default",
+            "utterance": "What courses are free on this website?",
+            "intent": "discount"
+          },
+          {
+            "domain": "default",
+            "utterance": "What courses have discount on this website?",
+            "intent": "discount"
+          },
+          {
+            "domain": "default",
+            "utterance": "I need a free course",
+            "intent": "discount"
+          },
+          {
+            "domain": "default",
+            "utterance": "free courses",
+            "intent": "discount"
+          },
+          {
+            "domain": "default",
+            "utterance": "low-price courses",
+            "intent": "discount"
+          },
+          {
+            "domain": "default",
+            "utterance": "What courses does Hacademy have?",
+            "intent": "course"
+          },
+          {
+            "domain": "default",
+            "utterance": "I need some Computer Science courses",
+            "intent": "course"
+          },
+          {
+            "domain": "default",
+            "utterance": "I need a course",
+            "intent": "course"
+          },
+          {
+            "domain": "default",
+            "utterance": "Could you tell me about Javascript Courses?",
+            "intent": "course"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can you recommend me some courses?",
+            "intent": "course"
+          },
+          {
+            "domain": "default",
+            "utterance": "How many subjects does Hacademy have?",
+            "intent": "course"
+          },
+          {
+            "domain": "default",
+            "utterance": "How many courses does Hacademy?",
+            "intent": "course"
+          },
+          {
+            "domain": "default",
+            "utterance": "course",
+            "intent": "course"
+          },
+          {
+            "domain": "default",
+            "utterance": "English courses",
+            "intent": "course"
+          },
+          {
+            "domain": "default",
+            "utterance": "Music courses",
+            "intent": "course"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I purchase a course?",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "How to buy a courses?",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "How to purchase a courses?",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "online payment",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "What cards used for payment?",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "I have Visa card",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I pay with my Visa card?",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "I have Master card",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I pay with my Master card?",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "I have Discover card",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I pay with my Discover card?",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "I have American Express card",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I pay with my American Express card?",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "pay with PayPal",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "I have PayPal",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I pay with PayPal?",
+            "intent": "payment"
+          },
+          {
+            "domain": "default",
+            "utterance": "What subject does Hacademy have?",
+            "intent": "subject"
+          },
+          {
+            "domain": "default",
+            "utterance": "subject",
+            "intent": "subject"
+          },
+          {
+            "domain": "default",
+            "utterance": "How many subjects on Hacademy?",
+            "intent": "subject"
+          },
+          {
+            "domain": "default",
+            "utterance": "Is there Design subject here?",
+            "intent": "subject"
+          },
+          {
+            "domain": "default",
+            "utterance": "How many course on each subject?",
+            "intent": "subject"
+          },
+          {
+            "domain": "default",
+            "utterance": "How to become a lecturer on Hacademy?",
+            "intent": "lecturer"
+          },
+          {
+            "domain": "default",
+            "utterance": "How to upload courses on Hacademy?",
+            "intent": "lecturer"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I become a teacher on Hacademy?",
+            "intent": "lecturer"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I teach my courses on Hacademy?",
+            "intent": "lecturer"
+          },
+          {
+            "domain": "default",
+            "utterance": "I want to be a teacher on Hacademy",
+            "intent": "lecturer"
+          },
+          {
+            "domain": "default",
+            "utterance": "be a teacher on Hacademy",
+            "intent": "lecturer"
+          },
+          {
+            "domain": "default",
+            "utterance": "How to get teacher account?",
+            "intent": "lecturer"
+          },
+          {
+            "domain": "default",
+            "utterance": "How to login as a teacher?",
+            "intent": "lecturer"
+          },
+          {
+            "domain": "default",
+            "utterance": "How to login as a lecturer?",
+            "intent": "lecturer"
+          },
+          {
+            "domain": "default",
+            "utterance": "How does Hacademy recruit lecturer?",
+            "intent": "lecturer"
+          },
+          {
+            "domain": "default",
+            "utterance": "What is Hacademy?",
+            "intent": "hacademy"
+          },
+          {
+            "domain": "default",
+            "utterance": "What is this website for?",
+            "intent": "hacademy"
+          },
+          {
+            "domain": "default",
+            "utterance": "definition of Hacademy",
+            "intent": "hacademy"
+          },
+          {
+            "domain": "default",
+            "utterance": "Why Hacademy?",
+            "intent": "hacademy"
+          },
+          {
+            "domain": "default",
+            "utterance": "explain Hacademy",
+            "intent": "hacademy"
+          },
+          {
+            "domain": "default",
+            "utterance": "What is this website?",
+            "intent": "hacademy"
+          },
+          {
+            "domain": "default",
+            "utterance": "about Hacademy",
+            "intent": "hacademy"
+          },
+          {
+            "domain": "default",
+            "utterance": "How to contact?",
+            "intent": "contact"
+          },
+          {
+            "domain": "default",
+            "utterance": "contact when I have a problem using the website",
+            "intent": "contact"
+          },
+          {
+            "domain": "default",
+            "utterance": "I've got into some troubles using the website",
+            "intent": "contact"
+          },
+          {
+            "domain": "default",
+            "utterance": "Where to contact?",
+            "intent": "contact"
+          },
+          {
+            "domain": "default",
+            "utterance": "contact section",
+            "intent": "contact"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I comment?",
+            "intent": "comment"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I ask something during the lesson?",
+            "intent": "comment"
+          },
+          {
+            "domain": "default",
+            "utterance": "ask questions during the lesson",
+            "intent": "comment"
+          },
+          {
+            "domain": "default",
+            "utterance": "questions during study",
+            "intent": "comment"
+          },
+          {
+            "domain": "default",
+            "utterance": "comment on a lesson",
+            "intent": "comment"
+          },
+          {
+            "domain": "default",
+            "utterance": "How many lessons does a course have?",
+            "intent": "lesson"
+          },
+          {
+            "domain": "default",
+            "utterance": "What does a lesson have?",
+            "intent": "lesson"
+          },
+          {
+            "domain": "default",
+            "utterance": "what in a lesson?",
+            "intent": "lesson"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I give feedback?",
+            "intent": "feedback"
+          },
+          {
+            "domain": "default",
+            "utterance": "feedback section?",
+            "intent": "feedback"
+          },
+          {
+            "domain": "default",
+            "utterance": "I want to give feedback for this course",
+            "intent": "feedback"
+          },
+          {
+            "domain": "default",
+            "utterance": "Where can I see the feedback?",
+            "intent": "feedback"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I create an account?",
+            "intent": "register"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I login with my facebook account?",
+            "intent": "register"
+          },
+          {
+            "domain": "default",
+            "utterance": "Can I login with my google account?",
+            "intent": "register"
+          },
+          {
+            "domain": "default",
+            "utterance": "I need an account?",
+            "intent": "register"
+          },
+          {
+            "domain": "default",
+            "utterance": "create an account on Hacademy",
+            "intent": "register"
+          },
+          {
+            "domain": "default",
+            "utterance": "create learner account",
+            "intent": "register"
+          },
+          {
+            "domain": "default",
+            "utterance": "create an account",
+            "intent": "register"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I login?",
+            "intent": "login"
+          },
+          {
+            "domain": "default",
+            "utterance": "how to login?",
+            "intent": "login"
+          },
+          {
+            "domain": "default",
+            "utterance": "learner login?",
+            "intent": "login"
+          },
+          {
+            "domain": "default",
+            "utterance": "How to login?",
+            "intent": "login"
+          },
+          {
+            "domain": "default",
+            "utterance": "login",
+            "intent": "login"
+          },
+          {
+            "domain": "default",
+            "utterance": "sign in",
+            "intent": "login"
+          },
+          {
+            "domain": "default",
+            "utterance": "I forgot my password",
+            "intent": "forgot_password"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can a retrieve my password?",
+            "intent": "forgot_password"
+          },
+          {
+            "domain": "default",
+            "utterance": "forgot password",
+            "intent": "forgot_password"
+          },
+          {
+            "domain": "default",
+            "utterance": "I don't remember my password",
+            "intent": "forgot_password"
+          },
+          {
+            "domain": "default",
+            "utterance": "password retrieving",
+            "intent": "forgot_password"
+          },
+          {
+            "domain": "default",
+            "utterance": "I need my password back!",
+            "intent": "forgot_password"
+          },
+          {
+            "domain": "default",
+            "utterance": "I don't receive verification email",
+            "intent": "verification"
+          },
+          {
+            "domain": "default",
+            "utterance": "How to verify my account?",
+            "intent": "verification"
+          },
+          {
+            "domain": "default",
+            "utterance": "verify account",
+            "intent": "verification"
+          },
+          {
+            "domain": "default",
+            "utterance": "resend verification email",
+            "intent": "verification"
+          },
+          {
+            "domain": "default",
+            "utterance": "verification account",
+            "intent": "verification"
+          },
+          {
+            "domain": "default",
+            "utterance": "How can I report a course?",
+            "intent": "report"
+          },
+          {
+            "domain": "default",
+            "utterance": "file a report",
+            "intent": "report"
+          },
+          {
+            "domain": "default",
+            "utterance": "report a course",
+            "intent": "report"
+          },
+          {
+            "domain": "default",
+            "utterance": "how to report?",
+            "intent": "report"
+          },
+          {
+            "domain": "default",
+            "utterance": "I need to report!",
+            "intent": "report"
+          },
+          {
+            "domain": "default",
+            "utterance": "how does reports take place?",
+            "intent": "report"
+          }
+        ],
+        "domains": {
+          "master_domain": {
+            "settings": {
+              "locale": "en",
+              "tag": "nlu-en",
+              "keepStopwords": true,
+              "nonefeatureValue": 1,
+              "nonedeltaMultiplier": 1.2,
+              "spellCheck": false,
+              "spellCheckDistance": 1,
+              "filterZeros": true,
+              "log": true
+            },
+            "features": {
+              "do": 1,
+              "you": 1,
+              "have": 1,
+              "ani": 1,
+              "discount": 1,
+              "how": 1,
+              "mani": 1,
+              "percent": 1,
+              "is": 1,
+              "maximum": 1,
+              "off": 1,
+              "on": 1,
+              "this": 1,
+              "websit": 1,
+              "what": 1,
+              "cours": 1,
+              "are": 1,
+              "free": 1,
+              "i": 1,
+              "need": 1,
+              "a": 1,
+              "low-pric": 1,
+              "doe": 1,
+              "hacademi": 1,
+              "some": 1,
+              "comput": 1,
+              "scienc": 1,
+              "could": 1,
+              "tell": 1,
+              "me": 1,
+              "about": 1,
+              "javascript": 1,
+              "can": 1,
+              "recommend": 1,
+              "subject": 1,
+              "english": 1,
+              "music": 1,
+              "purchas": 1,
+              "to": 1,
+              "buy": 1,
+              "onlin": 1,
+              "payment": 1,
+              "card": 1,
+              "use": 1,
+              "for": 1,
+              "visa": 1,
+              "pay": 1,
+              "with": 1,
+              "my": 1,
+              "master": 1,
+              "discov": 1,
+              "american": 1,
+              "express": 1,
+              "paypal": 1,
+              "there": 1,
+              "design": 1,
+              "here": 1,
+              "each": 1,
+              "becom": 1,
+              "lectur": 1,
+              "upload": 1,
+              "teacher": 1,
+              "teach": 1,
+              "want": 1,
+              "be": 1,
+              "get": 1,
+              "account": 1,
+              "login": 1,
+              "as": 1,
+              "recruit": 1,
+              "definit": 1,
+              "of": 1,
+              "whi": 1,
+              "explain": 1,
+              "contact": 1,
+              "when": 1,
+              "problem": 1,
+              "the": 1,
+              "got": 1,
+              "into": 1,
+              "troubl": 1,
+              "where": 1,
+              "section": 1,
+              "comment": 1,
+              "ask": 1,
+              "someth": 1,
+              "dure": 1,
+              "lesson": 1,
+              "question": 1,
+              "studi": 1,
+              "in": 1,
+              "give": 1,
+              "feedback": 1,
+              "see": 1,
+              "creat": 1,
+              "an": 1,
+              "facebook": 1,
+              "googl": 1,
+              "learner": 1,
+              "sign": 1,
+              "forgot": 1,
+              "password": 1,
+              "retriev": 1,
+              "not": 1,
+              "rememb": 1,
+              "back": 1,
+              "receiv": 1,
+              "verif": 1,
+              "email": 1,
+              "verifi": 1,
+              "resend": 1,
+              "report": 1,
+              "file": 1,
+              "take": 1,
+              "place": 1
+            },
+            "intents": {
+              "discount": 1,
+              "course": 1,
+              "payment": 1,
+              "subject": 1,
+              "lecturer": 1,
+              "hacademy": 1,
+              "contact": 1,
+              "comment": 1,
+              "lesson": 1,
+              "feedback": 1,
+              "register": 1,
+              "login": 1,
+              "forgot_password": 1,
+              "verification": 1,
+              "report": 1
+            },
+            "intentFeatures": {
+              "discount": [
+                "do",
+                "you",
+                "have",
+                "ani",
+                "discount",
+                "how",
+                "mani",
+                "percent",
+                "is",
+                "maximum",
+                "off",
+                "on",
+                "this",
+                "websit",
+                "what",
+                "cours",
+                "are",
+                "free",
+                "i",
+                "need",
+                "a",
+                "low-pric"
+              ],
+              "course": [
+                "what",
+                "cours",
+                "doe",
+                "hacademi",
+                "have",
+                "i",
+                "need",
+                "some",
+                "comput",
+                "scienc",
+                "a",
+                "could",
+                "you",
+                "tell",
+                "me",
+                "about",
+                "javascript",
+                "can",
+                "recommend",
+                "how",
+                "mani",
+                "subject",
+                "english",
+                "music"
+              ],
+              "payment": [
+                "how",
+                "can",
+                "i",
+                "purchas",
+                "a",
+                "cours",
+                "to",
+                "buy",
+                "onlin",
+                "payment",
+                "what",
+                "card",
+                "use",
+                "for",
+                "have",
+                "visa",
+                "pay",
+                "with",
+                "my",
+                "master",
+                "discov",
+                "american",
+                "express",
+                "paypal"
+              ],
+              "subject": [
+                "what",
+                "subject",
+                "doe",
+                "hacademi",
+                "have",
+                "how",
+                "mani",
+                "on",
+                "is",
+                "there",
+                "design",
+                "here",
+                "cours",
+                "each"
+              ],
+              "lecturer": [
+                "how",
+                "to",
+                "becom",
+                "a",
+                "lectur",
+                "on",
+                "hacademi",
+                "upload",
+                "cours",
+                "can",
+                "i",
+                "teacher",
+                "teach",
+                "my",
+                "want",
+                "be",
+                "get",
+                "account",
+                "login",
+                "as",
+                "doe",
+                "recruit"
+              ],
+              "hacademy": [
+                "what",
+                "is",
+                "hacademi",
+                "this",
+                "websit",
+                "for",
+                "definit",
+                "of",
+                "whi",
+                "explain",
+                "about"
+              ],
+              "contact": [
+                "how",
+                "to",
+                "contact",
+                "when",
+                "i",
+                "have",
+                "a",
+                "problem",
+                "use",
+                "the",
+                "websit",
+                "got",
+                "into",
+                "some",
+                "troubl",
+                "where",
+                "section"
+              ],
+              "comment": [
+                "how",
+                "can",
+                "i",
+                "comment",
+                "ask",
+                "someth",
+                "dure",
+                "the",
+                "lesson",
+                "question",
+                "studi",
+                "on",
+                "a"
+              ],
+              "lesson": [
+                "how",
+                "mani",
+                "lesson",
+                "doe",
+                "a",
+                "cours",
+                "have",
+                "what",
+                "in"
+              ],
+              "feedback": [
+                "how",
+                "can",
+                "i",
+                "give",
+                "feedback",
+                "section",
+                "want",
+                "to",
+                "for",
+                "this",
+                "cours",
+                "where",
+                "see",
+                "the"
+              ],
+              "register": [
+                "how",
+                "can",
+                "i",
+                "creat",
+                "an",
+                "account",
+                "login",
+                "with",
+                "my",
+                "facebook",
+                "googl",
+                "need",
+                "on",
+                "hacademi",
+                "learner"
+              ],
+              "login": [
+                "how",
+                "can",
+                "i",
+                "login",
+                "to",
+                "learner",
+                "sign",
+                "in"
+              ],
+              "forgot_password": [
+                "i",
+                "forgot",
+                "my",
+                "password",
+                "how",
+                "can",
+                "a",
+                "retriev",
+                "do",
+                "not",
+                "rememb",
+                "need",
+                "back"
+              ],
+              "verification": [
+                "i",
+                "do",
+                "not",
+                "receiv",
+                "verif",
+                "email",
+                "how",
+                "to",
+                "verifi",
+                "my",
+                "account",
+                "resend"
+              ],
+              "report": [
+                "how",
+                "can",
+                "i",
+                "report",
+                "a",
+                "cours",
+                "file",
+                "to",
+                "need",
+                "doe",
+                "take",
+                "place"
+              ]
+            },
+            "featuresToIntent": {
+              "do": [
+                "discount",
+                "forgot_password",
+                "verification"
+              ],
+              "you": [
+                "discount",
+                "course"
+              ],
+              "have": [
+                "discount",
+                "course",
+                "payment",
+                "subject",
+                "contact",
+                "lesson"
+              ],
+              "ani": [
+                "discount"
+              ],
+              "discount": [
+                "discount"
+              ],
+              "how": [
+                "discount",
+                "course",
+                "payment",
+                "subject",
+                "lecturer",
+                "contact",
+                "comment",
+                "lesson",
+                "feedback",
+                "register",
+                "login",
+                "forgot_password",
+                "verification",
+                "report"
+              ],
+              "mani": [
+                "discount",
+                "course",
+                "subject",
+                "lesson"
+              ],
+              "percent": [
+                "discount"
+              ],
+              "is": [
+                "discount",
+                "subject",
+                "hacademy"
+              ],
+              "maximum": [
+                "discount"
+              ],
+              "off": [
+                "discount"
+              ],
+              "on": [
+                "discount",
+                "subject",
+                "lecturer",
+                "comment",
+                "register"
+              ],
+              "this": [
+                "discount",
+                "hacademy",
+                "feedback"
+              ],
+              "websit": [
+                "discount",
+                "hacademy",
+                "contact"
+              ],
+              "what": [
+                "discount",
+                "course",
+                "payment",
+                "subject",
+                "hacademy",
+                "lesson"
+              ],
+              "cours": [
+                "discount",
+                "course",
+                "payment",
+                "subject",
+                "lecturer",
+                "lesson",
+                "feedback",
+                "report"
+              ],
+              "are": [
+                "discount"
+              ],
+              "free": [
+                "discount"
+              ],
+              "i": [
+                "discount",
+                "course",
+                "payment",
+                "lecturer",
+                "contact",
+                "comment",
+                "feedback",
+                "register",
+                "login",
+                "forgot_password",
+                "verification",
+                "report"
+              ],
+              "need": [
+                "discount",
+                "course",
+                "register",
+                "forgot_password",
+                "report"
+              ],
+              "a": [
+                "discount",
+                "course",
+                "payment",
+                "lecturer",
+                "contact",
+                "comment",
+                "lesson",
+                "forgot_password",
+                "report"
+              ],
+              "low-pric": [
+                "discount"
+              ],
+              "doe": [
+                "course",
+                "subject",
+                "lecturer",
+                "lesson",
+                "report"
+              ],
+              "hacademi": [
+                "course",
+                "subject",
+                "lecturer",
+                "hacademy",
+                "register"
+              ],
+              "some": [
+                "course",
+                "contact"
+              ],
+              "comput": [
+                "course"
+              ],
+              "scienc": [
+                "course"
+              ],
+              "could": [
+                "course"
+              ],
+              "tell": [
+                "course"
+              ],
+              "me": [
+                "course"
+              ],
+              "about": [
+                "course",
+                "hacademy"
+              ],
+              "javascript": [
+                "course"
+              ],
+              "can": [
+                "course",
+                "payment",
+                "lecturer",
+                "comment",
+                "feedback",
+                "register",
+                "login",
+                "forgot_password",
+                "report"
+              ],
+              "recommend": [
+                "course"
+              ],
+              "subject": [
+                "course",
+                "subject"
+              ],
+              "english": [
+                "course"
+              ],
+              "music": [
+                "course"
+              ],
+              "purchas": [
+                "payment"
+              ],
+              "to": [
+                "payment",
+                "lecturer",
+                "contact",
+                "feedback",
+                "login",
+                "verification",
+                "report"
+              ],
+              "buy": [
+                "payment"
+              ],
+              "onlin": [
+                "payment"
+              ],
+              "payment": [
+                "payment"
+              ],
+              "card": [
+                "payment"
+              ],
+              "use": [
+                "payment",
+                "contact"
+              ],
+              "for": [
+                "payment",
+                "hacademy",
+                "feedback"
+              ],
+              "visa": [
+                "payment"
+              ],
+              "pay": [
+                "payment"
+              ],
+              "with": [
+                "payment",
+                "register"
+              ],
+              "my": [
+                "payment",
+                "lecturer",
+                "register",
+                "forgot_password",
+                "verification"
+              ],
+              "master": [
+                "payment"
+              ],
+              "discov": [
+                "payment"
+              ],
+              "american": [
+                "payment"
+              ],
+              "express": [
+                "payment"
+              ],
+              "paypal": [
+                "payment"
+              ],
+              "there": [
+                "subject"
+              ],
+              "design": [
+                "subject"
+              ],
+              "here": [
+                "subject"
+              ],
+              "each": [
+                "subject"
+              ],
+              "becom": [
+                "lecturer"
+              ],
+              "lectur": [
+                "lecturer"
+              ],
+              "upload": [
+                "lecturer"
+              ],
+              "teacher": [
+                "lecturer"
+              ],
+              "teach": [
+                "lecturer"
+              ],
+              "want": [
+                "lecturer",
+                "feedback"
+              ],
+              "be": [
+                "lecturer"
+              ],
+              "get": [
+                "lecturer"
+              ],
+              "account": [
+                "lecturer",
+                "register",
+                "verification"
+              ],
+              "login": [
+                "lecturer",
+                "register",
+                "login"
+              ],
+              "as": [
+                "lecturer"
+              ],
+              "recruit": [
+                "lecturer"
+              ],
+              "definit": [
+                "hacademy"
+              ],
+              "of": [
+                "hacademy"
+              ],
+              "whi": [
+                "hacademy"
+              ],
+              "explain": [
+                "hacademy"
+              ],
+              "contact": [
+                "contact"
+              ],
+              "when": [
+                "contact"
+              ],
+              "problem": [
+                "contact"
+              ],
+              "the": [
+                "contact",
+                "comment",
+                "feedback"
+              ],
+              "got": [
+                "contact"
+              ],
+              "into": [
+                "contact"
+              ],
+              "troubl": [
+                "contact"
+              ],
+              "where": [
+                "contact",
+                "feedback"
+              ],
+              "section": [
+                "contact",
+                "feedback"
+              ],
+              "comment": [
+                "comment"
+              ],
+              "ask": [
+                "comment"
+              ],
+              "someth": [
+                "comment"
+              ],
+              "dure": [
+                "comment"
+              ],
+              "lesson": [
+                "comment",
+                "lesson"
+              ],
+              "question": [
+                "comment"
+              ],
+              "studi": [
+                "comment"
+              ],
+              "in": [
+                "lesson",
+                "login"
+              ],
+              "give": [
+                "feedback"
+              ],
+              "feedback": [
+                "feedback"
+              ],
+              "see": [
+                "feedback"
+              ],
+              "creat": [
+                "register"
+              ],
+              "an": [
+                "register"
+              ],
+              "facebook": [
+                "register"
+              ],
+              "googl": [
+                "register"
+              ],
+              "learner": [
+                "register",
+                "login"
+              ],
+              "sign": [
+                "login"
+              ],
+              "forgot": [
+                "forgot_password"
+              ],
+              "password": [
+                "forgot_password"
+              ],
+              "retriev": [
+                "forgot_password"
+              ],
+              "not": [
+                "forgot_password",
+                "verification"
+              ],
+              "rememb": [
+                "forgot_password"
+              ],
+              "back": [
+                "forgot_password"
+              ],
+              "receiv": [
+                "verification"
+              ],
+              "verif": [
+                "verification"
+              ],
+              "email": [
+                "verification"
+              ],
+              "verifi": [
+                "verification"
+              ],
+              "resend": [
+                "verification"
+              ],
+              "report": [
+                "report"
+              ],
+              "file": [
+                "report"
+              ],
+              "take": [
+                "report"
+              ],
+              "place": [
+                "report"
+              ]
+            },
+            "neuralNetwork": {
+              "features": [
+                "do",
+                "you",
+                "have",
+                "ani",
+                "discount",
+                "how",
+                "mani",
+                "percent",
+                "is",
+                "maximum",
+                "off",
+                "on",
+                "this",
+                "websit",
+                "what",
+                "cours",
+                "are",
+                "free",
+                "i",
+                "need",
+                "a",
+                "low-pric",
+                "doe",
+                "hacademi",
+                "some",
+                "comput",
+                "scienc",
+                "could",
+                "tell",
+                "me",
+                "about",
+                "javascript",
+                "can",
+                "recommend",
+                "subject",
+                "english",
+                "music",
+                "purchas",
+                "to",
+                "buy",
+                "onlin",
+                "payment",
+                "card",
+                "use",
+                "for",
+                "visa",
+                "pay",
+                "with",
+                "my",
+                "master",
+                "discov",
+                "american",
+                "express",
+                "paypal",
+                "there",
+                "design",
+                "here",
+                "each",
+                "becom",
+                "lectur",
+                "upload",
+                "teacher",
+                "teach",
+                "want",
+                "be",
+                "get",
+                "account",
+                "login",
+                "as",
+                "recruit",
+                "definit",
+                "of",
+                "whi",
+                "explain",
+                "contact",
+                "when",
+                "problem",
+                "the",
+                "got",
+                "into",
+                "troubl",
+                "where",
+                "section",
+                "comment",
+                "ask",
+                "someth",
+                "dure",
+                "lesson",
+                "question",
+                "studi",
+                "in",
+                "give",
+                "feedback",
+                "see",
+                "creat",
+                "an",
+                "facebook",
+                "googl",
+                "learner",
+                "sign",
+                "forgot",
+                "password",
+                "retriev",
+                "not",
+                "rememb",
+                "back",
+                "receiv",
+                "verif",
+                "email",
+                "verifi",
+                "resend",
+                "report",
+                "file",
+                "take",
+                "place",
+                "nonefeature"
+              ],
+              "intents": [
+                "discount",
+                "course",
+                "payment",
+                "subject",
+                "lecturer",
+                "hacademy",
+                "contact",
+                "comment",
+                "lesson",
+                "feedback",
+                "register",
+                "login",
+                "forgot_password",
+                "verification",
+                "report",
+                "None"
+              ],
+              "perceptrons": [
+                [
+                  1.4307979345321655,
+                  0.5618726015090942,
+                  3.1212844848632812,
+                  1.7756682634353638,
+                  6.610087871551514,
+                  -0.642928957939148,
+                  0.4071994423866272,
+                  3.031000852584839,
+                  -0.5999491810798645,
+                  3.031000852584839,
+                  3.031000852584839,
+                  2.1660821437835693,
+                  1.7144286632537842,
+                  1.3555296659469604,
+                  -2.5612239837646484,
+                  1.0724843740463257,
+                  -2.654078960418701,
+                  12.42155647277832,
+                  -1.143839716911316,
+                  1.5024620294570923,
+                  -0.41750141978263855,
+                  12.35044002532959,
+                  -1.8933653831481934,
+                  -2.5643470287323,
+                  -1.6907895803451538,
+                  -1.2366935014724731,
+                  -1.2366935014724731,
+                  -0.759699285030365,
+                  -0.759699285030365,
+                  -1.21379554271698,
+                  -0.759699285030365,
+                  -0.759699285030365,
+                  -0.7876617312431335,
+                  -0.45409631729125977,
+                  -2.215928792953491,
+                  -1.8216456174850464,
+                  -1.7111376523971558,
+                  -0.463619202375412,
+                  -0.7748295068740845,
+                  -0.38051196932792664,
+                  -0.06729418784379959,
+                  -0.1939743161201477,
+                  -0.808157205581665,
+                  -0.4855799973011017,
+                  -1.7743799686431885,
+                  -0.22870907187461853,
+                  -0.054788921028375626,
+                  -0.054788921028375626,
+                  -0.22932368516921997,
+                  -0.1870894581079483,
+                  -0.17729215323925018,
+                  -0.08838683366775513,
+                  -0.08838683366775513,
+                  -0.982276439666748,
+                  -0.1340365707874298,
+                  -0.1340365707874298,
+                  -0.1340365707874298,
+                  -1.3632711172103882,
+                  -0.023441186174750328,
+                  -0.023441186174750328,
+                  -0.18255603313446045,
+                  -0.1092476099729538,
+                  -0.058266591280698776,
+                  0,
+                  -0.1092476099729538,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.35889989137649536,
+                  -0.35889989137649536,
+                  -0.35889989137649536,
+                  -0.35889989137649536,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.8233439326286316,
+                  0,
+                  0,
+                  0,
+                  -1.011009931564331,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.1710570901632309,
+                  0,
+                  -0.3448704481124878,
+                  -0.1710570901632309,
+                  0,
+                  -0.1738133430480957,
+                  -0.1738133430480957,
+                  -0.1738133430480957,
+                  0,
+                  0,
+                  -0.8099272847175598,
+                  0,
+                  0,
+                  0,
+                  8.977677907751058e-7,
+                  -0.9941065822271555
+                ],
+                [
+                  -2.1470372676849365,
+                  0.040897686034440994,
+                  8.171331405639648,
+                  -2.1470372676849365,
+                  -2.1470372676849365,
+                  -2.810816764831543,
+                  3.2405171394348145,
+                  0,
+                  -0.2566801607608795,
+                  0,
+                  0,
+                  -7.515435218811035,
+                  -0.96897953748703,
+                  -0.5726233720779419,
+                  -9.375999450683594,
+                  12.384956359863281,
+                  -0.0740182176232338,
+                  -11.97122573852539,
+                  -2.425095796585083,
+                  9.489483833312988,
+                  -5.709314823150635,
+                  -10.411553382873535,
+                  -1.1626806259155273,
+                  3.044276237487793,
+                  -0.8807323575019836,
+                  -2.1903412342071533,
+                  -2.1903412342071533,
+                  0.3797228932380676,
+                  0.3797228932380676,
+                  2.1879377365112305,
+                  -1.6924651861190796,
+                  0.3797228932380676,
+                  -1.510048270225525,
+                  1.8082162141799927,
+                  1.533196210861206,
+                  1.7826658487319946,
+                  1.781949520111084,
+                  -2.6822192668914795,
+                  -3.5655033588409424,
+                  -1.5600327253341675,
+                  -0.46442711353302,
+                  -0.6911434531211853,
+                  -3.5275490283966064,
+                  -0.7253209352493286,
+                  -1.1216756105422974,
+                  -0.9530670046806335,
+                  -0.3511611819267273,
+                  -0.3511611819267273,
+                  -2.6471846103668213,
+                  -0.945298969745636,
+                  -0.9315105676651001,
+                  -0.47095757722854614,
+                  -0.47095757722854614,
+                  -4.253062725067139,
+                  -0.10608720779418945,
+                  -0.10608720779418945,
+                  -0.10608720779418945,
+                  -5.306884288787842,
+                  0,
+                  -1.2461974620819092,
+                  -0.5628831386566162,
+                  0,
+                  -1.1108777523040771,
+                  -0.8949613571166992,
+                  0,
+                  0,
+                  -2.7868800163269043,
+                  0,
+                  0,
+                  -1.2461974620819092,
+                  -0.8317751884460449,
+                  -0.8317751884460449,
+                  -1.5367885828018188,
+                  -1.512614130973816,
+                  -0.006477630231529474,
+                  0,
+                  0,
+                  -0.4986054301261902,
+                  -0.4986054301261902,
+                  -0.4986054301261902,
+                  -0.4986054301261902,
+                  0,
+                  -0.011707185767591,
+                  0,
+                  0,
+                  0,
+                  -0.006115245167165995,
+                  -12.445415496826172,
+                  -0.006115245167165995,
+                  -0.006115245167165995,
+                  0,
+                  -0.8949613571166992,
+                  -0.9001909494400024,
+                  0,
+                  0,
+                  -2.7868800163269043,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.463508129119873,
+                  0,
+                  0,
+                  0,
+                  -1.463508129119873,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -4.951826572418213,
+                  0,
+                  0,
+                  0,
+                  8.977670518106606e-7,
+                  -1.6450600943147684
+                ],
+                [
+                  -1.2028053998947144,
+                  -0.9286550879478455,
+                  3.634725332260132,
+                  -0.7909472584724426,
+                  -0.7909472584724426,
+                  1.5921545028686523,
+                  -2.571533441543579,
+                  0,
+                  -0.7461236119270325,
+                  0,
+                  0,
+                  -3.462268352508545,
+                  -1.6937347650527954,
+                  -2.2598137855529785,
+                  -0.5418190360069275,
+                  0.020336946472525597,
+                  0,
+                  -1.6223711967468262,
+                  1.3940552473068237,
+                  -3.525745153427124,
+                  2.076920986175537,
+                  -0.8813084363937378,
+                  -2.8298182487487793,
+                  -3.7136332988739014,
+                  -0.7431550025939941,
+                  -0.09264481067657471,
+                  -0.09264481067657471,
+                  -0.13770778477191925,
+                  -0.13770778477191925,
+                  -0.13770778477191925,
+                  -0.13770778477191925,
+                  -0.13770778477191925,
+                  -1.071778655052185,
+                  0,
+                  -2.656276226043701,
+                  -0.5579632520675659,
+                  -0.49691805243492126,
+                  8.307571411132812,
+                  0.5292466282844543,
+                  8.171651840209961,
+                  5.431013107299805,
+                  7.022803783416748,
+                  6.145532131195068,
+                  -0.1645115315914154,
+                  -0.010216841474175453,
+                  1.306698203086853,
+                  2.8261890411376953,
+                  2.1634795665740967,
+                  -0.36220479011535645,
+                  1.302796721458435,
+                  1.2975504398345947,
+                  0.6466906070709229,
+                  0.6466906070709229,
+                  7.284252166748047,
+                  -0.2426127940416336,
+                  -0.2426127940416336,
+                  -0.2426127940416336,
+                  -0.6060431599617004,
+                  -1.230911374092102,
+                  -1.6019455194473267,
+                  -0.6427381634712219,
+                  -2.2235865592956543,
+                  -0.3355439007282257,
+                  -1.309810757637024,
+                  -0.11958687007427216,
+                  -0.7304378151893616,
+                  -1.7513973712921143,
+                  -3.0000123977661133,
+                  -1.744596004486084,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -2.975717544555664,
+                  -1.105792760848999,
+                  -1.105792760848999,
+                  -1.927151083946228,
+                  -0.6505102515220642,
+                  -0.6505102515220642,
+                  -0.6505102515220642,
+                  -0.2182341068983078,
+                  -0.19821302592754364,
+                  -2.156148672103882,
+                  -0.17084796726703644,
+                  -0.17084796726703644,
+                  -0.5190297365188599,
+                  -2.3815817832946777,
+                  -0.34818175435066223,
+                  -0.34818175435066223,
+                  -0.4990859627723694,
+                  -1.3529022932052612,
+                  -1.4916670322418213,
+                  0,
+                  -0.1689789593219757,
+                  -0.3065349757671356,
+                  -0.4168388843536377,
+                  -0.24587193131446838,
+                  0,
+                  -0.2607620358467102,
+                  -0.35921937227249146,
+                  -1.3906949758529663,
+                  -0.8821226954460144,
+                  -0.41185837984085083,
+                  -0.10330343246459961,
+                  -0.046051643788814545,
+                  -0.3085549473762512,
+                  -0.41763928532600403,
+                  -0.41763928532600403,
+                  -0.051716968417167664,
+                  -0.10908433049917221,
+                  -4.067337989807129,
+                  -0.1719103902578354,
+                  0,
+                  0,
+                  -0.3611757457256317,
+                  0.04387910322639865
+                ],
+                [
+                  -0.13428670167922974,
+                  -0.13428670167922974,
+                  -2.939646005630493,
+                  -0.13428670167922974,
+                  -0.3704569637775421,
+                  -4.248779296875,
+                  -2.437004804611206,
+                  -0.30730384588241577,
+                  -3.9750239849090576,
+                  -0.30730384588241577,
+                  -0.30730384588241577,
+                  6.460464954376221,
+                  -2.6689462661743164,
+                  -2.699148416519165,
+                  5.590720176696777,
+                  -1.7818081378936768,
+                  -1.6580449342727661,
+                  -1.661124348640442,
+                  -0.9376363754272461,
+                  -0.0031776772812008858,
+                  -2.910443067550659,
+                  -0.008204370737075806,
+                  -2.907911539077759,
+                  0.0014455507043749094,
+                  -0.030202476307749748,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.11191648244857788,
+                  0,
+                  -0.9042562246322632,
+                  0,
+                  14.240774154663086,
+                  0,
+                  0,
+                  0,
+                  -1.3861593008041382,
+                  0,
+                  0,
+                  -0.9104944467544556,
+                  -0.9104944467544556,
+                  -0.9406969547271729,
+                  -1.2443337440490723,
+                  0,
+                  -0.004882104694843292,
+                  -0.004882104694843292,
+                  -0.6367949843406677,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.004882104694843292,
+                  1.2626798152923584,
+                  1.2626798152923584,
+                  1.2626798152923584,
+                  1.8381396532058716,
+                  -0.8876509666442871,
+                  -0.9623004794120789,
+                  -0.6626973152160645,
+                  -1.1204464435577393,
+                  -0.6367949843406677,
+                  0,
+                  -0.8630867004394531,
+                  -0.046585239470005035,
+                  -1.7601242065429688,
+                  -0.4196530282497406,
+                  0,
+                  -0.28542381525039673,
+                  -0.17264607548713684,
+                  -0.17264607548713684,
+                  -0.17527836561203003,
+                  -0.14779870212078094,
+                  -0.23802787065505981,
+                  0,
+                  0,
+                  -0.14152681827545166,
+                  -0.030202476307749748,
+                  -0.030202476307749748,
+                  -0.030202476307749748,
+                  0,
+                  -0.4186573624610901,
+                  -0.7062835097312927,
+                  -0.11132435500621796,
+                  -0.022863224148750305,
+                  -0.27528688311576843,
+                  -1.2710307836532593,
+                  -0.2524236738681793,
+                  -0.16396255791187286,
+                  -0.3173340857028961,
+                  0,
+                  -0.18062953650951385,
+                  0,
+                  -1.6044578552246094,
+                  -1.5171077251434326,
+                  0,
+                  0,
+                  -0.24672459065914154,
+                  -0.23025012016296387,
+                  -0.1787930130958557,
+                  -0.3444390594959259,
+                  -0.16564598679542542,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.1941961944103241,
+                  -0.1591872274875641,
+                  -0.07089447975158691,
+                  -0.1591872274875641,
+                  -0.08349968492984772,
+                  0,
+                  -0.08349968492984772,
+                  -0.08349968492984772,
+                  -0.32283279299736023,
+                  -1.5743081492838267
+                ],
+                [
+                  0,
+                  -0.12317030131816864,
+                  -1.6630955934524536,
+                  0,
+                  0,
+                  0.016248343512415886,
+                  -3.486637830734253,
+                  0,
+                  -1.1692560911178589,
+                  0,
+                  0,
+                  4.183900356292725,
+                  -0.919951319694519,
+                  -1.0183287858963013,
+                  -1.643472671508789,
+                  1.8500008583068848,
+                  -0.2031041830778122,
+                  -0.2031041830778122,
+                  -0.02760404162108898,
+                  0,
+                  -0.3434833884239197,
+                  0,
+                  1.258711338043213,
+                  2.6444525718688965,
+                  -0.24038419127464294,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.12317030131816864,
+                  -0.9437376260757446,
+                  0,
+                  1.3401466608047485,
+                  -0.12317030131816864,
+                  -1.358824610710144,
+                  0,
+                  0,
+                  -1.2201640605926514,
+                  1.5464502573013306,
+                  -1.489392638206482,
+                  0,
+                  0,
+                  0,
+                  -0.6311098337173462,
+                  -0.7168472409248352,
+                  0,
+                  0,
+                  -0.6683914661407471,
+                  1.1728315353393555,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.13534823060035706,
+                  -0.41454946994781494,
+                  7.507181644439697,
+                  4.82506799697876,
+                  7.663439750671387,
+                  3.9206554889678955,
+                  -1.4914374351501465,
+                  0.9086681008338928,
+                  5.19207239151001,
+                  0.6329308152198792,
+                  0.45716506242752075,
+                  5.826798439025879,
+                  3.6576387882232666,
+                  -1.015056848526001,
+                  -1.015056848526001,
+                  -1.157900094985962,
+                  -1.0512056350708008,
+                  -2.682891845703125,
+                  -0.5138959288597107,
+                  -0.5138959288597107,
+                  -1.0847207307815552,
+                  -0.11721386015415192,
+                  -0.11721386015415192,
+                  -0.11721386015415192,
+                  -0.2899746298789978,
+                  0,
+                  -2.1406807899475098,
+                  -0.45361095666885376,
+                  -0.45361095666885376,
+                  -0.45361095666885376,
+                  -2.470043897628784,
+                  0,
+                  0,
+                  0,
+                  -0.8076542019844055,
+                  -0.8076542019844055,
+                  0,
+                  -2.442944049835205,
+                  -2.442944049835205,
+                  -0.3351956009864807,
+                  -0.33319640159606934,
+                  0,
+                  0,
+                  0,
+                  -0.6316266059875488,
+                  -0.6316266059875488,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.4478058815002441,
+                  0,
+                  -0.8378809094429016,
+                  0,
+                  0,
+                  0,
+                  8.977687571132265e-7,
+                  -2.5732439377683836
+                ],
+                [
+                  0,
+                  -0.3697398006916046,
+                  -3.7851953506469727,
+                  0,
+                  -0.042743902653455734,
+                  -2.7755134105682373,
+                  -1.2796128988265991,
+                  -1.1472718715667725,
+                  3.477540969848633,
+                  -1.1472718715667725,
+                  -1.1472718715667725,
+                  -4.465104103088379,
+                  3.967461347579956,
+                  3.540414571762085,
+                  0.5242921113967896,
+                  -3.121150016784668,
+                  -0.7108995914459229,
+                  -0.7108995914459229,
+                  -1.5354646444320679,
+                  -0.014511317946016788,
+                  -2.451512336730957,
+                  0,
+                  -3.9734063148498535,
+                  7.527303695678711,
+                  -0.3642244338989258,
+                  0,
+                  0,
+                  -0.3697398006916046,
+                  -0.3697398006916046,
+                  -0.3697398006916046,
+                  3.9926137924194336,
+                  -0.3697398006916046,
+                  -0.19431325793266296,
+                  0,
+                  -2.158592462539673,
+                  0,
+                  0,
+                  0,
+                  -0.9653276205062866,
+                  0,
+                  -0.0999128520488739,
+                  -1.0533010959625244,
+                  -0.9533882737159729,
+                  -1.8302316665649414,
+                  0.02901918813586235,
+                  0,
+                  -0.3223721981048584,
+                  -0.33266377449035645,
+                  -0.010291597805917263,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.3223721981048584,
+                  -0.9955150485038757,
+                  -0.9955150485038757,
+                  -0.9955150485038757,
+                  0,
+                  -0.037487778812646866,
+                  -0.9984944462776184,
+                  0,
+                  -0.9821879267692566,
+                  0,
+                  -0.44979673624038696,
+                  -0.9447001218795776,
+                  0,
+                  -1.5361899137496948,
+                  -0.9773222208023071,
+                  0,
+                  -0.9984944462776184,
+                  1.9982109069824219,
+                  1.9982109069824219,
+                  3.9960005283355713,
+                  3.9958932399749756,
+                  -1.2612464427947998,
+                  -0.5126190781593323,
+                  -0.5126190781593323,
+                  -1.03658127784729,
+                  -0.3642244338989258,
+                  -0.3642244338989258,
+                  -0.3642244338989258,
+                  -0.1679825335741043,
+                  -0.5329800248146057,
+                  -0.27924680709838867,
+                  -0.15973784029483795,
+                  -0.004397454671561718,
+                  -0.5188866853713989,
+                  -1.1164432764053345,
+                  -0.5144892334938049,
+                  -0.35914885997772217,
+                  -0.7764891982078552,
+                  -0.4590933620929718,
+                  -0.7589768171310425,
+                  0,
+                  -1.4886268377304077,
+                  -1.4501066207885742,
+                  -0.010291597805917263,
+                  0,
+                  -0.3763761520385742,
+                  -0.2267272174358368,
+                  -0.33353757858276367,
+                  -0.65557461977005,
+                  -0.32203811407089233,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.32789820432662964,
+                  -0.3248847723007202,
+                  -0.019746607169508934,
+                  -0.3248847723007202,
+                  -0.0033270721323788166,
+                  0,
+                  -0.0033270721323788166,
+                  -0.0033270721323788166,
+                  -0.9771758317947388,
+                  0.9777176769586515
+                ],
+                [
+                  -0.332005113363266,
+                  -0.22369886934757233,
+                  0.41614916920661926,
+                  -0.22369886934757233,
+                  -0.44927218556404114,
+                  0.30020102858543396,
+                  -0.35715314745903015,
+                  -0.01375157106667757,
+                  -0.17650258541107178,
+                  -0.01375157106667757,
+                  -0.01375157106667757,
+                  -0.686725914478302,
+                  -0.8030350208282471,
+                  1.6252391338348389,
+                  -1.0626009702682495,
+                  -1.0458143949508667,
+                  -0.0885806456208229,
+                  -0.0885806456208229,
+                  -1.1047821044921875,
+                  -0.5334812998771667,
+                  -1.2418391704559326,
+                  0,
+                  -0.6867457032203674,
+                  -0.2680494785308838,
+                  2.2315735816955566,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.018091320991516113,
+                  0,
+                  -1.5504958629608154,
+                  0,
+                  -0.16570959985256195,
+                  0,
+                  0,
+                  0,
+                  1.7610507011413574,
+                  0,
+                  -0.015382388606667519,
+                  -0.2507514953613281,
+                  -0.6380375027656555,
+                  1.8674224615097046,
+                  -0.5641598105430603,
+                  -0.1627214103937149,
+                  -0.03338775783777237,
+                  -0.042493198066949844,
+                  -0.5455427765846252,
+                  -0.12018690258264542,
+                  -0.07840877771377563,
+                  -0.041351318359375,
+                  -0.041351318359375,
+                  -0.181345596909523,
+                  -0.013103957287967205,
+                  -0.013103957287967205,
+                  -0.013103957287967205,
+                  0,
+                  -0.0397399440407753,
+                  -0.0397399440407753,
+                  -0.06277676671743393,
+                  -0.48746010661125183,
+                  0,
+                  -0.37547528743743896,
+                  -0.04999280348420143,
+                  -0.4374673068523407,
+                  -1.1380491256713867,
+                  -2.064424991607666,
+                  0,
+                  0,
+                  -0.022824279963970184,
+                  -0.022824279963970184,
+                  -0.026197683066129684,
+                  -0.02357076108455658,
+                  10.426079750061035,
+                  -0.12878182530403137,
+                  -0.12878182530403137,
+                  0.7661323547363281,
+                  2.2315735816955566,
+                  2.2315735816955566,
+                  2.2315735816955566,
+                  0.3110108971595764,
+                  2.073427200317383,
+                  -0.6836931705474854,
+                  -0.9463683366775513,
+                  -0.6488603949546814,
+                  -1.0315436124801636,
+                  -1.834656000137329,
+                  -0.3826831877231598,
+                  -0.08517525345087051,
+                  -0.16828294098377228,
+                  -0.32548248767852783,
+                  -2.294358015060425,
+                  -0.3902920186519623,
+                  -0.1648533046245575,
+                  -0.2177712768316269,
+                  -0.0091054392978549,
+                  0,
+                  -0.17136019468307495,
+                  -0.1481960564851761,
+                  -0.1420566737651825,
+                  -0.2849213182926178,
+                  -0.07015087455511093,
+                  -0.10830626636743546,
+                  -0.057943642139434814,
+                  -0.014770115725696087,
+                  -0.05036262422800064,
+                  -0.12578634917736053,
+                  -0.12578634917736053,
+                  -0.38114026188850403,
+                  -0.0754237249493599,
+                  -2.06138277053833,
+                  -0.13503652811050415,
+                  0,
+                  0,
+                  -0.17708609998226166,
+                  0.002728781889972849
+                ],
+                [
+                  -0.18486200273036957,
+                  -0.013790479861199856,
+                  -1.345644235610962,
+                  0,
+                  0,
+                  0.9037664532661438,
+                  -1.2545888423919678,
+                  -0.26947271823883057,
+                  -0.2960217297077179,
+                  -0.26947271823883057,
+                  -0.26947271823883057,
+                  1.479154109954834,
+                  -0.3234730660915375,
+                  -0.3389084041118622,
+                  -1.5078434944152832,
+                  -1.4923086166381836,
+                  0,
+                  0,
+                  0.6310355067253113,
+                  -0.04719534516334534,
+                  -1.0399492979049683,
+                  0,
+                  -1.276208519935608,
+                  -1.2461636066436768,
+                  -0.08322616666555405,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.013790479861199856,
+                  -0.007787889335304499,
+                  0,
+                  0.8366149067878723,
+                  -0.013790479861199856,
+                  -0.5227763056755066,
+                  0,
+                  0,
+                  -0.33713749051094055,
+                  -0.9513384103775024,
+                  0,
+                  -0.2834901213645935,
+                  -0.2834901213645935,
+                  -0.05486486107110977,
+                  -0.06943569332361221,
+                  -0.054000355303287506,
+                  -0.02970918081700802,
+                  -0.5882264971733093,
+                  -0.8428632020950317,
+                  -0.6746599078178406,
+                  -0.018049001693725586,
+                  -0.006509135942906141,
+                  -0.0005975401145406067,
+                  -0.0005975401145406067,
+                  -0.533361554145813,
+                  -0.026549004018306732,
+                  -0.026549004018306732,
+                  -0.026549004018306732,
+                  0,
+                  -0.6489819884300232,
+                  -0.1778181493282318,
+                  -0.014379067346453667,
+                  -0.6369747519493103,
+                  -0.03765377774834633,
+                  -0.054000355303287506,
+                  -0.1658109873533249,
+                  0,
+                  -1.1395164728164673,
+                  -2.8681600093841553,
+                  0,
+                  0,
+                  -0.014888145960867405,
+                  -0.014888145960867405,
+                  -0.012057089246809483,
+                  -0.009709896519780159,
+                  -0.4492279589176178,
+                  0,
+                  0,
+                  0.3511721193790436,
+                  -0.06943569332361221,
+                  -0.06943569332361221,
+                  -0.06943569332361221,
+                  -0.8565390706062317,
+                  -0.25867462158203125,
+                  9.631651878356934,
+                  1.2771445512771606,
+                  1.2332462072372437,
+                  4.837859630584717,
+                  1.9323583841323853,
+                  3.604618549346924,
+                  3.5607199668884277,
+                  -1.0272506475448608,
+                  -1.0299911499023438,
+                  -1.9810492992401123,
+                  -0.8565390706062317,
+                  -0.8848798871040344,
+                  -0.8848798871040344,
+                  -0.19548538327217102,
+                  -0.05915136635303497,
+                  -0.058324411511421204,
+                  -0.008326615206897259,
+                  -0.22762201726436615,
+                  -0.573351263999939,
+                  -0.33385470509529114,
+                  -0.18486200273036957,
+                  -0.00682721845805645,
+                  -0.00504743168130517,
+                  -0.17803476750850677,
+                  -0.31635457277297974,
+                  -0.31635457277297974,
+                  0,
+                  -0.13831979036331177,
+                  -0.5888644456863403,
+                  -0.06929818540811539,
+                  0,
+                  0,
+                  -0.5149508118629456,
+                  0.4968078992374569
+                ],
+                [
+                  -0.25302010774612427,
+                  -0.25302010774612427,
+                  1.2514196634292603,
+                  -0.25302010774612427,
+                  -0.6379033923149109,
+                  0.6099779009819031,
+                  2.6924893856048584,
+                  0,
+                  -0.0024821183178573847,
+                  0,
+                  0,
+                  -3.73250150680542,
+                  -0.6980774402618408,
+                  -0.7095070481300354,
+                  2.641887903213501,
+                  -0.6619656682014465,
+                  -0.2198193222284317,
+                  -0.36765795946121216,
+                  -1.069686770439148,
+                  -0.2393961101770401,
+                  3.3672807216644287,
+                  0,
+                  1.821379542350769,
+                  -3.367720365524292,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.1328157186508179,
+                  0,
+                  -1.2824950218200684,
+                  0,
+                  0,
+                  -0.25659650564193726,
+                  -1.0002048015594482,
+                  -0.2566949725151062,
+                  0,
+                  -0.1357455849647522,
+                  -0.1357455849647522,
+                  -0.2405499368906021,
+                  -0.22912034392356873,
+                  0,
+                  0,
+                  -0.07424847036600113,
+                  -0.5942563414573669,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.12309744954109192,
+                  0,
+                  -0.1653105467557907,
+                  0,
+                  -0.09337477385997772,
+                  0,
+                  0,
+                  -0.38472047448158264,
+                  -0.6079495549201965,
+                  -0.28840798139572144,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.10480436682701111,
+                  -0.10480436682701111,
+                  -0.10480436682701111,
+                  -0.9979425668716431,
+                  0,
+                  0,
+                  0,
+                  -0.05563288927078247,
+                  -0.12531033158302307,
+                  -3.0535483360290527,
+                  -0.8375052213668823,
+                  0,
+                  -0.8375052213668823,
+                  5.477251052856445,
+                  -0.8375052213668823,
+                  0,
+                  3.07100248336792,
+                  -0.24680636823177338,
+                  -0.4277495741844177,
+                  -0.05563288927078247,
+                  -0.24582599103450775,
+                  -0.22292686998844147,
+                  -0.0514507070183754,
+                  -0.02279777266085148,
+                  -0.14466525614261627,
+                  -1.0121804475784302,
+                  -0.04854926839470863,
+                  -0.562250554561615,
+                  -0.5137013792991638,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.05866279825568199,
+                  -0.05335768684744835,
+                  -0.013117791153490543,
+                  -0.05335768684744835,
+                  -1.51018488407135,
+                  -0.5811388492584229,
+                  -0.17274817824363708,
+                  -0.17274817824363708,
+                  -0.011444746516644955,
+                  -2.0582793070292515
+                ],
+                [
+                  -0.314614474773407,
+                  -0.17033536732196808,
+                  -0.48248448967933655,
+                  -0.01623215153813362,
+                  -0.17924845218658447,
+                  -0.2522713840007782,
+                  -0.07167212665081024,
+                  -0.07167212665081024,
+                  -0.21633222699165344,
+                  -0.07167212665081024,
+                  -0.07167212665081024,
+                  -0.6789401173591614,
+                  0.15302670001983643,
+                  -0.6826142072677612,
+                  -0.707629919052124,
+                  -0.790383517742157,
+                  -0.25932708382606506,
+                  -0.33104750514030457,
+                  -0.20260219275951385,
+                  -0.5417353510856628,
+                  -0.8094888925552368,
+                  -0.10854941606521606,
+                  0,
+                  -0.18492461740970612,
+                  -0.2573055326938629,
+                  -0.1084313914179802,
+                  -0.1084313914179802,
+                  -0.04916766658425331,
+                  -0.04916766658425331,
+                  -0.15410320460796356,
+                  -0.04916766658425331,
+                  -0.04916766658425331,
+                  0.39347121119499207,
+                  -0.10493555665016174,
+                  -0.04373917728662491,
+                  -0.0452294796705246,
+                  -0.03639264032244682,
+                  -0.1055019423365593,
+                  -0.3347211480140686,
+                  0,
+                  -0.01636567898094654,
+                  -0.156992107629776,
+                  -0.3295837640762329,
+                  -0.18456503748893738,
+                  0.5064157247543335,
+                  -0.07375363260507584,
+                  -0.15016327798366547,
+                  -0.8058273792266846,
+                  -0.9189717769622803,
+                  -0.05632698908448219,
+                  -0.03810244798660278,
+                  -0.02077426388859749,
+                  -0.02077426388859749,
+                  -0.22050343453884125,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.18492461740970612,
+                  0,
+                  0.6067777276039124,
+                  -0.18492461740970612,
+                  0,
+                  -1.2973543405532837,
+                  -1.3087794780731201,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -2.88517427444458,
+                  0,
+                  0,
+                  0.7352498173713684,
+                  -0.043938588351011276,
+                  -0.043938588351011276,
+                  -0.043938588351011276,
+                  0.7916319370269775,
+                  2.937598466873169,
+                  -0.46749088168144226,
+                  -0.44112613797187805,
+                  -0.3282356262207031,
+                  -0.44112613797187805,
+                  -0.44112613797187805,
+                  -0.11289053410291672,
+                  0,
+                  -0.1553816795349121,
+                  2.9995434284210205,
+                  9.613948822021484,
+                  1.2203141450881958,
+                  -0.48207950592041016,
+                  -0.6416903734207153,
+                  -0.40887123346328735,
+                  -0.24679286777973175,
+                  -0.02388090267777443,
+                  -0.1553816795349121,
+                  -0.24848972260951996,
+                  -0.4261578917503357,
+                  -0.07879352569580078,
+                  -0.29838234186172485,
+                  -0.0775226503610611,
+                  -0.021351996809244156,
+                  -0.22085970640182495,
+                  -0.2817787528038025,
+                  -0.2817787528038025,
+                  0,
+                  -0.06091906502842903,
+                  -0.8222503066062927,
+                  -0.04615166783332825,
+                  0,
+                  0,
+                  -0.10325898230075836,
+                  -0.051989114477829584
+                ],
+                [
+                  -0.5050010681152344,
+                  -0.04954780265688896,
+                  -0.07883869856595993,
+                  0,
+                  -0.046155866235494614,
+                  -3.015106201171875,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.06036878749728203,
+                  -0.1155974417924881,
+                  -0.1155974417924881,
+                  -0.1482802778482437,
+                  -1.2109919786453247,
+                  -0.06944157183170319,
+                  -0.17290832102298737,
+                  2.4022302627563477,
+                  2.647378444671631,
+                  -1.015272617340088,
+                  0,
+                  -0.03268282860517502,
+                  0.022545859217643738,
+                  -0.3727169334888458,
+                  -0.32316914200782776,
+                  -0.32316914200782776,
+                  0,
+                  0,
+                  -0.04954780265688896,
+                  0,
+                  0,
+                  0.5853134393692017,
+                  -0.04954780265688896,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -1.8129711151123047,
+                  0,
+                  0,
+                  0,
+                  -1.5993261337280273,
+                  0,
+                  0,
+                  -0.7760263681411743,
+                  -2.365422487258911,
+                  2.8585736751556396,
+                  0.514881432056427,
+                  -0.5130923390388489,
+                  -0.24590149521827698,
+                  -0.06430579721927643,
+                  -0.06430579721927643,
+                  -0.7660965919494629,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.24800801277160645,
+                  0,
+                  0,
+                  -0.3604704737663269,
+                  -0.22475700080394745,
+                  0,
+                  -0.03997965529561043,
+                  -0.07248280942440033,
+                  6.857430934906006,
+                  -0.5113711357116699,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.18402093648910522,
+                  0,
+                  0,
+                  0,
+                  -0.18402093648910522,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.1660100668668747,
+                  0,
+                  -0.18402093648910522,
+                  -0.18402093648910522,
+                  5.09451961517334,
+                  3.3937103748321533,
+                  2.612071990966797,
+                  2.611917734146118,
+                  3.33839750289917,
+                  -0.1660100668668747,
+                  -0.6370531916618347,
+                  -2.0203065872192383,
+                  -0.262047678232193,
+                  -0.5050010681152344,
+                  -0.39575210213661194,
+                  -0.7254559993743896,
+                  -0.10924903303384781,
+                  -4.0366291999816895,
+                  -0.10924903303384781,
+                  -4.037543773651123,
+                  0,
+                  -0.4151020348072052,
+                  0,
+                  0,
+                  0,
+                  8.977689844869019e-7,
+                  -2.818626220508175
+                ],
+                [
+                  -0.5417829155921936,
+                  -0.3293524980545044,
+                  -0.760368824005127,
+                  -0.15213006734848022,
+                  -0.15399736166000366,
+                  1.006446123123169,
+                  -0.6658543944358826,
+                  -0.2914481461048126,
+                  -0.3686397671699524,
+                  -0.2914481461048126,
+                  -0.2914481461048126,
+                  -0.5956971049308777,
+                  -0.34204989671707153,
+                  -0.34204989671707153,
+                  -0.42171230912208557,
+                  -1.3569004535675049,
+                  -0.04873446002602577,
+                  -0.19767557084560394,
+                  -0.8654325604438782,
+                  -0.34984806180000305,
+                  -5.83364725112915,
+                  -0.14749252796173096,
+                  -0.5441404581069946,
+                  -0.9919777512550354,
+                  -0.15883630514144897,
+                  -0.030578352510929108,
+                  -0.030578352510929108,
+                  -0.04896451532840729,
+                  -0.04896451532840729,
+                  -0.17722247540950775,
+                  -0.13464397192001343,
+                  -0.04896451532840729,
+                  -0.09658727049827576,
+                  -0.12825796008110046,
+                  -1.0797929763793945,
+                  -0.06563964486122131,
+                  -0.056787293404340744,
+                  -0.04397979751229286,
+                  -0.9564701914787292,
+                  -0.06318358331918716,
+                  -0.49714207649230957,
+                  -0.6516371965408325,
+                  -0.45331886410713196,
+                  -0.1544952243566513,
+                  -0.1544952243566513,
+                  -0.11538272351026535,
+                  -0.31171149015426636,
+                  -2.6503984928131104,
+                  -4.055768966674805,
+                  -0.08913534134626389,
+                  -0.06062980741262436,
+                  -0.03367577865719795,
+                  -0.03367577865719795,
+                  -0.36527132987976074,
+                  -0.07719159126281738,
+                  -0.07719159126281738,
+                  -0.07719159126281738,
+                  0,
+                  -0.028358453884720802,
+                  -2.179025173187256,
+                  -0.11033588647842407,
+                  -2.5122272968292236,
+                  0,
+                  0,
+                  0,
+                  -0.08879166841506958,
+                  -3.6177611351013184,
+                  11.373509407043457,
+                  -4.574101448059082,
+                  0,
+                  -0.10605169087648392,
+                  -0.10605169087648392,
+                  -0.13718010485172272,
+                  -0.12682217359542847,
+                  -1.4431034326553345,
+                  0,
+                  0,
+                  -0.2753329873085022,
+                  0,
+                  0,
+                  0,
+                  -0.05237095430493355,
+                  -0.39542442560195923,
+                  -1.2824311256408691,
+                  -0.24572142958641052,
+                  -0.20300209522247314,
+                  -0.510254979133606,
+                  -0.4391931891441345,
+                  -0.30725282430648804,
+                  -0.26453348994255066,
+                  5.612076759338379,
+                  -0.5411809086799622,
+                  -0.7448493242263794,
+                  -0.029611563310027122,
+                  -0.11005525290966034,
+                  0,
+                  -1.169668197631836,
+                  -1.1690168380737305,
+                  0.06783288717269897,
+                  5.805552959442139,
+                  -0.5728257298469543,
+                  -1.3111172914505005,
+                  -0.6620264053344727,
+                  -0.38965287804603577,
+                  -0.0748036727309227,
+                  -0.0014615529216825962,
+                  -0.3148491680622101,
+                  -0.7180300951004028,
+                  -0.5976589322090149,
+                  -0.959856390953064,
+                  -0.2828097939491272,
+                  -2.2066667079925537,
+                  -0.0954160988330841,
+                  -0.2615433931350708,
+                  -0.2615433931350708,
+                  -1.0801860094070435,
+                  1.0830340597271155
+                ],
+                [
+                  0.6067216992378235,
+                  -0.2811617851257324,
+                  -0.36360275745391846,
+                  -0.23843251168727875,
+                  -0.23843251168727875,
+                  -0.42251574993133545,
+                  -0.16265353560447693,
+                  -0.10907979309558868,
+                  -0.19045712053775787,
+                  -0.10907979309558868,
+                  -0.10907979309558868,
+                  -0.4168393015861511,
+                  -0.12069551646709442,
+                  -0.12069551646709442,
+                  -0.179817333817482,
+                  -1.4585011005401611,
+                  0,
+                  -0.208739772439003,
+                  -1.1968181133270264,
+                  1.2426674365997314,
+                  -0.20807667076587677,
+                  -0.003713602665811777,
+                  -0.09710795432329178,
+                  -0.5228095054626465,
+                  -0.10038476437330246,
+                  -0.057655490934848785,
+                  -0.057655490934848785,
+                  0,
+                  0,
+                  -0.04272928833961487,
+                  -0.037428420037031174,
+                  0,
+                  -0.6084004640579224,
+                  -0.04272928833961487,
+                  -0.5136211514472961,
+                  0,
+                  0,
+                  -0.07711945474147797,
+                  -0.949238657951355,
+                  0,
+                  -0.22006158530712128,
+                  -0.29395586252212524,
+                  -1.1098369359970093,
+                  -0.07389459758996964,
+                  -0.07512021064758301,
+                  -0.5591697692871094,
+                  -0.9986385107040405,
+                  -1.0618246793746948,
+                  1.2287734746932983,
+                  -0.335193932056427,
+                  -0.13067841529846191,
+                  -0.010900154709815979,
+                  -0.010900154709815979,
+                  -0.03429264575242996,
+                  -0.06601981073617935,
+                  -0.06601981073617935,
+                  -0.06601981073617935,
+                  0,
+                  -0.01250387541949749,
+                  -0.012905505485832691,
+                  0,
+                  -0.07738997042179108,
+                  -0.17954383790493011,
+                  0,
+                  -0.06488609313964844,
+                  0,
+                  -1.1356743574142456,
+                  -0.5135303139686584,
+                  0,
+                  -0.012905505485832691,
+                  -0.055966150015592575,
+                  -0.055966150015592575,
+                  -0.05522025004029274,
+                  -0.04703987017273903,
+                  -0.1728057861328125,
+                  0,
+                  0,
+                  -0.06543298810720444,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.3433798849582672,
+                  -0.050825703889131546,
+                  -0.06543298810720444,
+                  0,
+                  -0.1931619942188263,
+                  -0.2068239152431488,
+                  -0.1931619942188263,
+                  -0.12772904336452484,
+                  -0.30223071575164795,
+                  0,
+                  -0.17057427763938904,
+                  0,
+                  0,
+                  0,
+                  -0.039258647710084915,
+                  -0.023927530273795128,
+                  -0.12962961196899414,
+                  -0.21166564524173737,
+                  2.9349374771118164,
+                  9.034884452819824,
+                  2.960620164871216,
+                  0.8451542258262634,
+                  1.466260313987732,
+                  1.6730633974075317,
+                  -0.6211064457893372,
+                  -0.7464439272880554,
+                  -0.7008337378501892,
+                  -1.026877999305725,
+                  -0.07972729206085205,
+                  -1.1008440256118774,
+                  -0.25579699873924255,
+                  -0.030628712847828865,
+                  -0.030628712847828865,
+                  -0.513725221157074,
+                  0.5142391675801412
+                ],
+                [
+                  0.5952231884002686,
+                  -0.43858060240745544,
+                  -0.5741748213768005,
+                  -0.40216127038002014,
+                  -0.40216127038002014,
+                  -0.8539772629737854,
+                  -0.302237868309021,
+                  -0.20992138981819153,
+                  -0.30860087275505066,
+                  -0.20992138981819153,
+                  -0.20992138981819153,
+                  -0.5943434238433838,
+                  -0.26601022481918335,
+                  -0.26601022481918335,
+                  -0.19984103739261627,
+                  -1.1583760976791382,
+                  -0.056088827550411224,
+                  -0.16669698059558868,
+                  -1.98761785030365,
+                  -1.0702860355377197,
+                  -0.8619972467422485,
+                  -0.10688381642103195,
+                  -0.25382500886917114,
+                  -0.6913718581199646,
+                  0,
+                  0,
+                  0,
+                  -0.03641936928033829,
+                  -0.03641936928033829,
+                  -0.03641936928033829,
+                  -0.079169362783432,
+                  -0.03641936928033829,
+                  -1.816770076751709,
+                  0,
+                  -0.51017826795578,
+                  -0.06354692578315735,
+                  -0.05393528565764427,
+                  -0.04107433184981346,
+                  -0.26551762223243713,
+                  -0.05960336700081825,
+                  -0.2792203426361084,
+                  -0.40115034580230713,
+                  -0.404137521982193,
+                  -0.12193003296852112,
+                  -0.12193003296852112,
+                  -0.1585323065519333,
+                  -0.32673996686935425,
+                  -1.2515853643417358,
+                  1.118756651878357,
+                  -0.08837693184614182,
+                  -0.030768515542149544,
+                  -0.004529724828898907,
+                  -0.004529724828898907,
+                  -0.10292200744152069,
+                  -0.09867949038743973,
+                  -0.09867949038743973,
+                  -0.09867949038743973,
+                  0,
+                  -0.039164844900369644,
+                  -0.039164844900369644,
+                  -0.002416993258520961,
+                  -2.0767712593078613,
+                  0,
+                  0,
+                  0,
+                  -2.0767712593078613,
+                  4.638119697570801,
+                  -0.9248455166816711,
+                  0,
+                  0,
+                  -0.07332278043031693,
+                  -0.07332278043031693,
+                  -0.07069727033376694,
+                  -0.062129907310009,
+                  -0.5239789485931396,
+                  0,
+                  0,
+                  -0.09242915362119675,
+                  0,
+                  0,
+                  0,
+                  -0.251952201128006,
+                  -0.2940324544906616,
+                  0,
+                  -0.09242915362119675,
+                  0,
+                  -0.20810019969940186,
+                  -0.09242915362119675,
+                  -0.20810019969940186,
+                  -0.11567104607820511,
+                  -0.22465640306472778,
+                  0,
+                  -0.19053365290164948,
+                  0,
+                  -3.1322319507598877,
+                  -2.0236544609069824,
+                  -0.5632032752037048,
+                  -0.36164215207099915,
+                  -1.9493093490600586,
+                  -0.22465640306472778,
+                  -0.0427439920604229,
+                  -0.8548320531845093,
+                  0,
+                  0.9973844289779663,
+                  -0.8120880126953125,
+                  0,
+                  1.8094724416732788,
+                  7.417892932891846,
+                  3.2241904735565186,
+                  7.418993949890137,
+                  1.4147170782089233,
+                  -1.6469765901565552,
+                  -0.1949417144060135,
+                  -0.13968633115291595,
+                  -0.13968633115291595,
+                  -0.49855250120162964,
+                  0.4434576659836379
+                ],
+                [
+                  -0.27128443121910095,
+                  -0.36626139283180237,
+                  -0.7361814975738525,
+                  -0.27128443121910095,
+                  -0.37722155451774597,
+                  -0.4622967541217804,
+                  -0.7909884452819824,
+                  -0.44542399048805237,
+                  -0.44542399048805237,
+                  -0.44542399048805237,
+                  -0.44542399048805237,
+                  -1.0214102268218994,
+                  -0.8459986448287964,
+                  -0.8459986448287964,
+                  -0.6775912046432495,
+                  0.08425584435462952,
+                  -0.2946375012397766,
+                  -1.5778292417526245,
+                  0.1170005276799202,
+                  -0.584194004535675,
+                  0.46104684472084045,
+                  -0.2588643431663513,
+                  0.02061927504837513,
+                  -0.6524915099143982,
+                  -0.29502594470977783,
+                  -0.2145785391330719,
+                  -0.2145785391330719,
+                  -0.014529546722769737,
+                  -0.014529546722769737,
+                  -0.09497695416212082,
+                  -0.014529546722769737,
+                  -0.014529546722769737,
+                  0.35610586404800415,
+                  -0.08044741302728653,
+                  -0.30322492122650146,
+                  -0.02590632438659668,
+                  -0.02441636100411415,
+                  -1.4356108903884888,
+                  1.0194814205169678,
+                  -1.1468403339385986,
+                  -0.15739096701145172,
+                  -0.15739096701145172,
+                  -0.2621755301952362,
+                  0,
+                  0,
+                  -0.1434045433998108,
+                  -0.42704594135284424,
+                  -0.42704594135284424,
+                  -0.5268167853355408,
+                  -0.08699091523885727,
+                  -0.030916104093194008,
+                  -0.0008639414445497096,
+                  -0.0008639414445497096,
+                  -0.16487042605876923,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.17541180551052094,
+                  -0.48069649934768677,
+                  0,
+                  -0.6703091263771057,
+                  0,
+                  0,
+                  0,
+                  -0.26702749729156494,
+                  -0.3178814947605133,
+                  -0.7305107116699219,
+                  -0.7085663080215454,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.7228472232818604,
+                  0,
+                  0,
+                  -0.1562870889902115,
+                  0,
+                  0,
+                  0,
+                  -0.30643972754478455,
+                  -0.04366631433367729,
+                  -0.4000445604324341,
+                  -0.10820705443620682,
+                  -0.08790169656276703,
+                  -0.14597731828689575,
+                  -0.2537086009979248,
+                  -0.05807563289999962,
+                  -0.03777027130126953,
+                  -0.1737212836742401,
+                  -0.16744181513786316,
+                  -0.25918811559677124,
+                  -0.04808000847697258,
+                  -0.05085398256778717,
+                  -0.05085398256778717,
+                  0,
+                  0,
+                  0,
+                  -0.028219765052199364,
+                  -0.009287875145673752,
+                  -0.2739291489124298,
+                  -0.26464128494262695,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.04470604658126831,
+                  -0.04470604658126831,
+                  0,
+                  -0.04470604658126831,
+                  12.021647453308105,
+                  0.10018841177225113,
+                  0.49769899249076843,
+                  0.49769899249076843,
+                  -0.4899154007434845,
+                  -0.07561116808050615
+                ],
+                [
+                  -0.15372824668884277,
+                  -0.1923692673444748,
+                  -0.3795393109321594,
+                  -0.15372824668884277,
+                  -0.16771310567855835,
+                  -0.38364747166633606,
+                  -0.09164472669363022,
+                  -0.07099965214729309,
+                  -0.27062612771987915,
+                  -0.07099965214729309,
+                  -0.07099965214729309,
+                  -0.2436496615409851,
+                  -0.24497176706790924,
+                  -0.24497176706790924,
+                  -0.28603067994117737,
+                  -1.0465654134750366,
+                  -0.05403729900717735,
+                  -0.19342541694641113,
+                  -0.37416157126426697,
+                  -0.08649469912052155,
+                  -0.4595698416233063,
+                  -0.13744644820690155,
+                  -0.15092410147190094,
+                  -0.832578182220459,
+                  -0.036501988768577576,
+                  -0.02238861843943596,
+                  -0.02238861843943596,
+                  -0.024527637287974358,
+                  -0.024527637287974358,
+                  -0.03864101320505142,
+                  -0.21401897072792053,
+                  -0.024527637287974358,
+                  -0.1292063295841217,
+                  -0.01411337498575449,
+                  -1.0464515686035156,
+                  -0.10896375775337219,
+                  -0.10141829401254654,
+                  0,
+                  -0.34011775255203247,
+                  0,
+                  -0.48933127522468567,
+                  -0.5573288798332214,
+                  -0.24772344529628754,
+                  -0.06799822300672531,
+                  -0.08065718412399292,
+                  -0.06449657678604126,
+                  -0.3515912890434265,
+                  -0.3515912890434265,
+                  -0.042676545679569244,
+                  -0.04700315371155739,
+                  -0.04540000483393669,
+                  -0.022825555875897408,
+                  -0.022825555875897408,
+                  -0.34349292516708374,
+                  -0.08129265904426575,
+                  -0.08129265904426575,
+                  -0.08129265904426575,
+                  0,
+                  0,
+                  -0.03763467073440552,
+                  0,
+                  -0.07465200126171112,
+                  0,
+                  0,
+                  -0.017139088362455368,
+                  -0.042911797761917114,
+                  -0.6947131156921387,
+                  -1.0463443994522095,
+                  -0.028913069516420364,
+                  -0.02332272008061409,
+                  -0.12116196006536484,
+                  -0.12116196006536484,
+                  -0.2147829383611679,
+                  -0.214097261428833,
+                  -0.475544273853302,
+                  0,
+                  0,
+                  -0.08623094111680984,
+                  0,
+                  0,
+                  0,
+                  -0.2309371680021286,
+                  -0.6269230246543884,
+                  -0.1595853716135025,
+                  -0.08623094111680984,
+                  0,
+                  -0.3776099681854248,
+                  -0.18584173917770386,
+                  -0.3776099681854248,
+                  -0.29137909412384033,
+                  -0.5293454527854919,
+                  0,
+                  -0.41967281699180603,
+                  0,
+                  -0.2292787879705429,
+                  -0.14967569708824158,
+                  0,
+                  0,
+                  -0.28173503279685974,
+                  -0.5172235369682312,
+                  -0.34886717796325684,
+                  -0.6977178454399109,
+                  -0.34885096549987793,
+                  0,
+                  0,
+                  0,
+                  0,
+                  -0.3959723711013794,
+                  -0.3253006637096405,
+                  -0.35185152292251587,
+                  -0.3253006637096405,
+                  -0.3372032344341278,
+                  -0.24980118870735168,
+                  -0.08740217983722687,
+                  -0.08740217983722687,
+                  11.45284652709961,
+                  1.0466120025380818
+                ]
+              ],
+              "perceptronSettings": {
+                "log": true,
+                "locale": "en",
+                "tag": "nlu-en",
+                "keepStopwords": true,
+                "nonefeatureValue": 1,
+                "nonedeltaMultiplier": 1.2,
+                "spellCheck": false,
+                "spellCheckDistance": 1,
+                "filterZeros": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "intentDomains": {},
+    "extraSentences": [
+      [
+        "en",
+        "Do you have any discount?"
+      ],
+      [
+        "en",
+        "How many percent is maximum off on this website?"
+      ],
+      [
+        "en",
+        "What courses are free on this website?"
+      ],
+      [
+        "en",
+        "What courses have discount on this website?"
+      ],
+      [
+        "en",
+        "I need a free course"
+      ],
+      [
+        "en",
+        "free courses"
+      ],
+      [
+        "en",
+        "low-price courses"
+      ],
+      [
+        "en",
+        "What courses does Hacademy have?"
+      ],
+      [
+        "en",
+        "I need some Computer Science courses"
+      ],
+      [
+        "en",
+        "I need a course"
+      ],
+      [
+        "en",
+        "Could you tell me about Javascript Courses?"
+      ],
+      [
+        "en",
+        "Can you recommend me some courses?"
+      ],
+      [
+        "en",
+        "How many subjects does Hacademy have?"
+      ],
+      [
+        "en",
+        "How many courses does Hacademy?"
+      ],
+      [
+        "en",
+        "course"
+      ],
+      [
+        "en",
+        "English courses"
+      ],
+      [
+        "en",
+        "Music courses"
+      ],
+      [
+        "en",
+        "How can I purchase a course?"
+      ],
+      [
+        "en",
+        "How to buy a courses?"
+      ],
+      [
+        "en",
+        "How to purchase a courses?"
+      ],
+      [
+        "en",
+        "online payment"
+      ],
+      [
+        "en",
+        "What cards used for payment?"
+      ],
+      [
+        "en",
+        "I have Visa card"
+      ],
+      [
+        "en",
+        "Can I pay with my Visa card?"
+      ],
+      [
+        "en",
+        "I have Master card"
+      ],
+      [
+        "en",
+        "Can I pay with my Master card?"
+      ],
+      [
+        "en",
+        "I have Discover card"
+      ],
+      [
+        "en",
+        "Can I pay with my Discover card?"
+      ],
+      [
+        "en",
+        "I have American Express card"
+      ],
+      [
+        "en",
+        "Can I pay with my American Express card?"
+      ],
+      [
+        "en",
+        "pay with PayPal"
+      ],
+      [
+        "en",
+        "I have PayPal"
+      ],
+      [
+        "en",
+        "Can I pay with PayPal?"
+      ],
+      [
+        "en",
+        "What subject does Hacademy have?"
+      ],
+      [
+        "en",
+        "subject"
+      ],
+      [
+        "en",
+        "How many subjects on Hacademy?"
+      ],
+      [
+        "en",
+        "Is there Design subject here?"
+      ],
+      [
+        "en",
+        "How many course on each subject?"
+      ],
+      [
+        "en",
+        "How to become a lecturer on Hacademy?"
+      ],
+      [
+        "en",
+        "How to upload courses on Hacademy?"
+      ],
+      [
+        "en",
+        "Can I become a teacher on Hacademy?"
+      ],
+      [
+        "en",
+        "Can I teach my courses on Hacademy?"
+      ],
+      [
+        "en",
+        "I want to be a teacher on Hacademy"
+      ],
+      [
+        "en",
+        "be a teacher on Hacademy"
+      ],
+      [
+        "en",
+        "How to get teacher account?"
+      ],
+      [
+        "en",
+        "How to login as a teacher?"
+      ],
+      [
+        "en",
+        "How to login as a lecturer?"
+      ],
+      [
+        "en",
+        "How does Hacademy recruit lecturer?"
+      ],
+      [
+        "en",
+        "What is Hacademy?"
+      ],
+      [
+        "en",
+        "What is this website for?"
+      ],
+      [
+        "en",
+        "definition of Hacademy"
+      ],
+      [
+        "en",
+        "Why Hacademy?"
+      ],
+      [
+        "en",
+        "explain Hacademy"
+      ],
+      [
+        "en",
+        "What is this website?"
+      ],
+      [
+        "en",
+        "about Hacademy"
+      ],
+      [
+        "en",
+        "How to contact?"
+      ],
+      [
+        "en",
+        "contact when I have a problem using the website"
+      ],
+      [
+        "en",
+        "I've got into some troubles using the website"
+      ],
+      [
+        "en",
+        "Where to contact?"
+      ],
+      [
+        "en",
+        "contact section"
+      ],
+      [
+        "en",
+        "How can I comment?"
+      ],
+      [
+        "en",
+        "How can I ask something during the lesson?"
+      ],
+      [
+        "en",
+        "ask questions during the lesson"
+      ],
+      [
+        "en",
+        "questions during study"
+      ],
+      [
+        "en",
+        "comment on a lesson"
+      ],
+      [
+        "en",
+        "How many lessons does a course have?"
+      ],
+      [
+        "en",
+        "What does a lesson have?"
+      ],
+      [
+        "en",
+        "what in a lesson?"
+      ],
+      [
+        "en",
+        "How can I give feedback?"
+      ],
+      [
+        "en",
+        "feedback section?"
+      ],
+      [
+        "en",
+        "I want to give feedback for this course"
+      ],
+      [
+        "en",
+        "Where can I see the feedback?"
+      ],
+      [
+        "en",
+        "How can I create an account?"
+      ],
+      [
+        "en",
+        "Can I login with my facebook account?"
+      ],
+      [
+        "en",
+        "Can I login with my google account?"
+      ],
+      [
+        "en",
+        "I need an account?"
+      ],
+      [
+        "en",
+        "create an account on Hacademy"
+      ],
+      [
+        "en",
+        "create learner account"
+      ],
+      [
+        "en",
+        "create an account"
+      ],
+      [
+        "en",
+        "How can I login?"
+      ],
+      [
+        "en",
+        "how to login?"
+      ],
+      [
+        "en",
+        "learner login?"
+      ],
+      [
+        "en",
+        "How to login?"
+      ],
+      [
+        "en",
+        "login"
+      ],
+      [
+        "en",
+        "sign in"
+      ],
+      [
+        "en",
+        "I forgot my password"
+      ],
+      [
+        "en",
+        "How can a retrieve my password?"
+      ],
+      [
+        "en",
+        "forgot password"
+      ],
+      [
+        "en",
+        "I don't remember my password"
+      ],
+      [
+        "en",
+        "password retrieving"
+      ],
+      [
+        "en",
+        "I need my password back!"
+      ],
+      [
+        "en",
+        "I don't receive verification email"
+      ],
+      [
+        "en",
+        "How to verify my account?"
+      ],
+      [
+        "en",
+        "verify account"
+      ],
+      [
+        "en",
+        "resend verification email"
+      ],
+      [
+        "en",
+        "verification account"
+      ],
+      [
+        "en",
+        "How can I report a course?"
+      ],
+      [
+        "en",
+        "file a report"
+      ],
+      [
+        "en",
+        "report a course"
+      ],
+      [
+        "en",
+        "how to report?"
+      ],
+      [
+        "en",
+        "I need to report!"
+      ],
+      [
+        "en",
+        "how does reports take place?"
+      ]
+    ]
+  },
+  "ner": {
+    "settings": {
+      "tag": "ner",
+      "entityPreffix": "%",
+      "entitySuffix": "%"
+    },
+    "rules": {}
+  },
+  "nlgManager": {
+    "settings": {
+      "tag": "nlg-manager"
+    },
+    "responses": {
+      "en": {
+        "discount": [
+          {
+            "answer": "Of course, Hacademy have discount for a variety of courses"
+          },
+          {
+            "answer": "Hacademy does not have any free courses at the moment!"
+          },
+          {
+            "answer": "Hacademy occasionally has discount up to 100% off!"
+          },
+          {
+            "answer": "There are free courses at the moment on Hacademy website!"
+          },
+          {
+            "answer": "There are coupons for courses available at the moment on Hacademy website!"
+          }
+        ],
+        "course": [
+          {
+            "answer": "Hacademy has courses from a variety of subjects that you can find!"
+          },
+          {
+            "answer": "There are more than 10 subjects on Hacademy's site that you can check out!"
+          },
+          {
+            "answer": "Hacademy has more than 100 courses that worth checking out!"
+          },
+          {
+            "answer": "There are more than 10 courses available in this subject!"
+          }
+        ],
+        "payment": [
+          {
+            "answer": "Hacademy supports all kind of cards for online payment (VISA / MASTER / DISCOVER / AMERICAN EXPRESS Card)!"
+          },
+          {
+            "answer": "Hacademy integrates online payment for VISA / MASTER / DISCOVER / AMERICAN EXPRESS Card!"
+          },
+          {
+            "answer": "Hacademy does not support PayPal payment at the moment! Please try credit cards!"
+          }
+        ],
+        "subject": [
+          {
+            "answer": "Hacademy has more than 10 subjects throughout every educational levels!"
+          },
+          {
+            "answer": "More than 10 subjects and over 100 courses are available on Hacademy website!"
+          },
+          {
+            "answer": "There are more than 10 subjects and over 100 courses on Hacademy website"
+          }
+        ],
+        "lecturer": [
+          {
+            "answer": "1. You can create an account as a lecturer on Hacademy at https://cafocc.web.app/auth/register \n\n      2. As you register as a lecturer on Hacademy, Hacademy team will check your profile and decide wether or not you're eligible to become a lecturer on our website!\n\n      3. There is Partners Policies for anyone wants to be a lecturer on Hacademy website"
+          }
+        ],
+        "hacademy": [
+          {
+            "answer": "Hacademy is a website that provides online courses and we have been aggregating more than 10 subjects, over 100 online courses which includes 1000+ lessons throughout every educational levels! \nhttps://cafocc.web.app"
+          },
+          {
+            "answer": "Hacademy is a place that you can study AT HOME! Here we have everything you need for a course such as related video, files, lessons, feedback and you can also directly raise your question on a certain lesson! \nhttps://cafocc.web.app"
+          },
+          {
+            "answer": "Hacademy is not only for learners, we also recruit and have Partners Policies for who want to become a lecturer and upload your own lecture on Hacademy website! \nhttps://cafocc.web.app"
+          }
+        ],
+        "contact": [
+          {
+            "answer": "If you want to contact, please go to the Contact section we have on Hacademy website \nhttps://cafocc.web.app/contact"
+          },
+          {
+            "answer": "Hacademy contact information is included on its website in Contact section \nhttps://cafocc.web.app/contact"
+          },
+          {
+            "answer": "You can contact via this email (dhtc.kltn@gmail.com) for any supports! \nhttps://cafocc.web.app/contact"
+          }
+        ],
+        "comment": [
+          {
+            "answer": "You can raise your questions during every lesson and you can also see all comments from others who are learning that course!"
+          },
+          {
+            "answer": "Every lesson has a comment section for all learners in Hacademunity to raise questions and help each other from any struggling!"
+          },
+          {
+            "answer": "If you have problems during your study process, you can post comments so that anyone's studying that lesson can help you!"
+          }
+        ],
+        "lesson": [
+          {
+            "answer": "Each lesson will have a description about the contents of the lesson, a lecture video, comment section to ask questions and files which relate to the lesson if any!"
+          },
+          {
+            "answer": "The number of lessons will depend on the course, the lecturer will organize and set up the course in the most effective and suitable way for your learning path!"
+          }
+        ],
+        "feedback": [
+          {
+            "answer": "You can give feedback after you've finished the course!"
+          },
+          {
+            "answer": "Each courses you're taking will have a feedback section occasionally during your learning process!"
+          },
+          {
+            "answer": "All feedback from other learners who have been taking the course will be displayed for you to have a review and make a better decision!"
+          }
+        ],
+        "register": [
+          {
+            "answer": "• It's very simple, go to Hacademy website and click on Register to sign up (https://cafocc.web.app/auth/register) for an account if you don't have one! You can also use your Facebook/Google account to log into our site! \n• Registeration requires your email and a password for our site, after you've done signing up, a verification email will be sent to your inbox!"
+          }
+        ],
+        "login": [
+          {
+            "answer": "• Go to Login page: https://cafocc.web.app/auth/login \n• If you don't have account access Register page: https://cafocc.web.app/auth/register to sign up."
+          }
+        ],
+        "forgot_password": [
+          {
+            "answer": "Go to Forgot Password page: https://cafocc.web.app/auth/forgot-password on our site and fill in your email, Hacademy system will send you an email to change your password!"
+          }
+        ],
+        "verification": [
+          {
+            "answer": "• After you registered, you will have to verify your email and Hacademy will send you a link to do it! \n\n• Hacademy will send you an verification email, if you don't see it in your inbox, please double-check your Spams Folder! \n\n• Click on the link in the verification email, it will redirect you to Hacademy website and you will be done verifying!"
+          }
+        ],
+        "report": [
+          {
+            "answer": "You can report while you're giving feedback to that course! Hacademy Specialties Management team will always take a look on your reports and issue critical solution!"
+          },
+          {
+            "answer": "To report, you have to accept whenever the feedback section pops up! Hacademy Specialties Management team will always take a look on your reports and issue critical solution!"
+          }
+        ]
+      }
+    }
+  },
+  "actionManager": {
+    "settings": {
+      "tag": "action-manager"
+    },
+    "actions": {}
+  },
+  "slotManager": {}
+}

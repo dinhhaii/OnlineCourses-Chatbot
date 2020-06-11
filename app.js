@@ -7,8 +7,10 @@ const express = require("express"),
   config = require("./services/config"),
   app = express(),
   nlpRouter = require('./routes/nlp'),
-  indexRouter = require('./routes/index');
+  indexRouter = require('./routes/index'),
+  NLP = require('./services/nlp');
 
+// NLP.trainData();
 
 // Parse application/x-www-form-urlencoded
 app.use(

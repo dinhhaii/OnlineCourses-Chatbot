@@ -1,4 +1,4 @@
-[
+module.exports = [
   {
     tag: "discount",
     patterns: [
@@ -25,9 +25,11 @@
       "What courses does Hacademy have?",
       "I need some Computer Science courses",
       "I need a course",
+      "Could you tell me about Javascript Courses?",
       "Can you recommend me some courses?",
       "How many subjects does Hacademy have?",
       "How many courses does Hacademy?",
+      "course",
       "English courses",
       "Music courses"
     ],
@@ -64,9 +66,9 @@
     tag: "subject",
     patterns: [
       "What subject does Hacademy have?",
-      "english", "music", "mathematics", "biology",
+      "subject",
       "How many subjects on Hacademy?",
-      "information technology",
+      "Is there Design subject here?",
       "How many course on each subject?"
     ],
     responses: [
@@ -90,10 +92,9 @@
       "How does Hacademy recruit lecturer?"
     ],
     responses: [
-      "You can create an account as a lecturer on Hacademy.",
-      "Please read our Partners Policies before officially have your own courses on Hacademy website!",
-      "As you register as a lecturer on Hacademy, Hacademy team will check your profile and decide wether or not you're eligible to become a lecturer on our website!",
-      "There is Partners Policies for anyone wants to be a lecturer on Hacademy website"
+      "1. You can create an account as a lecturer on Hacademy at https://cafocc.web.app/auth/register \n\n\
+      2. As you register as a lecturer on Hacademy, Hacademy team will check your profile and decide wether or not you're eligible to become a lecturer on our website!\n\n\
+      3. There is Partners Policies for anyone wants to be a lecturer on Hacademy website"
     ]
   },
 
@@ -109,9 +110,9 @@
       "about Hacademy"
     ],
     responses: [
-      "Hacademy is a website that provides online courses and we have been aggregating more than 10 subjects, over 100 online courses which includes 1000+ lessons throughout every educational levels!",
-      "Hacademy is a place that you can study AT HOME! Here we have everything you need for a course such as related video, files, lessons, feedback and you can also directly raise your question on a certain lesson!",
-      "Hacademy is not only for learners, we also recruit and have Partners Policies for who want to become a lecturer and upload your own lecture on Hacademy website!"
+      "Hacademy is a website that provides online courses and we have been aggregating more than 10 subjects, over 100 online courses which includes 1000+ lessons throughout every educational levels! \nhttps://cafocc.web.app",
+      "Hacademy is a place that you can study AT HOME! Here we have everything you need for a course such as related video, files, lessons, feedback and you can also directly raise your question on a certain lesson! \nhttps://cafocc.web.app",
+      "Hacademy is not only for learners, we also recruit and have Partners Policies for who want to become a lecturer and upload your own lecture on Hacademy website! \nhttps://cafocc.web.app",
     ]
   },
 
@@ -125,9 +126,9 @@
       "contact section"
     ],
     responses: [
-      "If you want to contact, please go to the Contact section we have on Hacademy website!",
-      "Hacademy contact information is included on its website in Contact section!",
-      "You can contact via this email (dhtc.kltn@gmail.com) for any supports!"
+      "If you want to contact, please go to the Contact section we have on Hacademy website \nhttps://cafocc.web.app/contact",
+      "Hacademy contact information is included on its website in Contact section \nhttps://cafocc.web.app/contact",
+      "You can contact via this email (dhtc.kltn@gmail.com) for any supports! \nhttps://cafocc.web.app/contact"
     ]
   },
 
@@ -187,8 +188,7 @@
       "create an account"
     ],
     responses: [
-      "It's very simple, go to Hacademy website and click on Register to sign up for an account if you don't have one! You can also use your Facebook/Google account to log into our site!",
-      "Registeration requires your email and a password for our site, after you've done signing up, a verification email will be sent to your inbox!"
+      "• It's very simple, go to Hacademy website and click on Register to sign up (https://cafocc.web.app/auth/register) for an account if you don't have one! You can also use your Facebook/Google account to log into our site! \n• Registeration requires your email and a password for our site, after you've done signing up, a verification email will be sent to your inbox!"
     ]
   },
 
@@ -197,17 +197,18 @@
     patterns: [
       "How can I login?",
       "how to login?",
-      "learner login?"
+      "learner login?",
+      "How to login?",
+      "login",
+      "sign in",
     ],
     responses: [
-      "It's very simple, go to Hacademy website and click on Login, fill in your email and password, then you good to go!",
-      "Signing In is more easy! You can login with the account you created on our site or you can login with your Facebook/Google account!",
-      "After your account has been verified, you can login and become a learner on Hacedemy!"
+      "• Go to Login page: https://cafocc.web.app/auth/login \n• If you don't have account access Register page: https://cafocc.web.app/auth/register to sign up."
     ]
   },
 
   {
-    tag: "password",
+    tag: "forgot_password",
     patterns: [
       "I forgot my password",
       "How can a retrieve my password?",
@@ -217,9 +218,7 @@
       "I need my password back!"
     ],
     responses: [
-      "It's very simple, if you forgot your password, you can go to Forgot My Password page to retrieve it! All we need is your related email!",
-      "Go to Forgot My Password page on our site and fill in your email, Hacademy system will send you an email to change your password!",
-      "We have Forgot My Password page which supports you in case you don't remember your password!"
+      "Go to Forgot Password page: https://cafocc.web.app/auth/forgot-password on our site and fill in your email, Hacademy system will send you an email to change your password!"
     ]
   },
 
@@ -227,14 +226,13 @@
     tag: "verification",
     patterns: [
       "I don't receive verification email",
-      "How to verify my aacount?",
+      "How to verify my account?",
       "verify account",
-      "resend verification email"
+      "resend verification email",
+      "verification account"
     ],
     responses: [
-      "After you registered, you will have to verify your email and Hacademy will send you a link to do it!",
-      "Hacademy will send you an verification email, if you don't see it in your inbox, please double-check your Spams Folder!"
-      "Click on the link in the verification email, it will redirect you to Hacademy website and you will be done verifying!"
+      "• After you registered, you will have to verify your email and Hacademy will send you a link to do it! \n\n• Hacademy will send you an verification email, if you don't see it in your inbox, please double-check your Spams Folder! \n\n• Click on the link in the verification email, it will redirect you to Hacademy website and you will be done verifying!"
     ]
   },
 

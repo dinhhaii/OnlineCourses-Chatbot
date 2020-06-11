@@ -1,12 +1,13 @@
 "use strict";
 
-const Curation = require("./curation"),
-  Order = require("./order"),
+const FeatureService = require("./payload/feature"),
+  ProfileService = require('./payload/profile'),
+  CourseService = require('./payload/course'),
   Response = require("./response"),
-  Care = require("./care"),
-  Survey = require("./survey"),
   GraphAPi = require("./graph-api"),
-  i18n = require("../i18n.config");
+  i18n = require("../i18n.config"),
+  NLP = require("./nlp"),
+  { GET_START, MENU, FEATURE, COURSE, PROFILE } = require('../utils/constant');
 
 module.exports = class Receive {
   constructor(user, webhookEvent) {
@@ -14,9 +15,7 @@ module.exports = class Receive {
     this.webhookEvent = webhookEvent;
   }
 
-  // Check if the event is a message or postback and
-  // call the appropriate handler function
-  handleMessage() {
+  async handleMessage() {
     let event = this.webhookEvent;
 
     let responses;
@@ -26,21 +25,21 @@ module.exports = class Receive {
         let message = event.message;
 
         if (message.quick_reply) {
-          responses = this.handleQuickReply();
+          responses = await this.handleQuickReply();
         } else if (message.attachments) {
           responses = this.handleAttachmentMessage();
         } else if (message.text) {
-          responses = this.handleTextMessage();
+          responses = await this.handleTextMessage();
         }
       } else if (event.postback) {
-        responses = this.handlePostback();
+        responses = await this.handlePostback();
       } else if (event.referral) {
-        responses = this.handleReferral();
+        responses = await this.handleReferral();
       }
     } catch (error) {
       console.error(error);
       responses = {
-        text: `An error has occured: '${error}'. We have been notified and will fix the issue shortly!`
+        text: `An error has occured: '${error}'. We have been notified and will fix the issue shortly!`,
       };
     }
 
@@ -56,175 +55,152 @@ module.exports = class Receive {
   }
 
   // Handles messages events with text
-  handleTextMessage() {
-    console.log("Received text:",`${this.webhookEvent.message.text} for ${this.user.psid}`);
+  async handleTextMessage() {
+    let message = this.webhookEvent.message.text.trim().toLowerCase();
+    console.log("Message: ", message);
 
     let greeting = this.firstEntity(this.webhookEvent.message.nlp, "greetings");
-
-    let message = this.webhookEvent.message.text.trim().toLowerCase();
+    let bye = this.firstEntity(this.webhookEvent.message.nlp, "bye");
 
     let response;
 
-    if ((greeting && greeting.confidence > 0.8) || message.includes("start over")) {
-      response = Response.genNuxMessage(this.user);
-    } else if (Number(message)) {
-      response = Order.handlePayload("ORDER_NUMBER");
-    } else if (message.includes("#")) {
-      response = Survey.handlePayload("CSAT_SUGGESTION");
-    } else if (message.includes(i18n.__("care.help").toLowerCase())) {
-      let care = new Care(this.user, this.webhookEvent);
-      response = care.handlePayload("CARE_HELP");
+    const result = await NLP.process(message);
+    const { intent, answers } = result;
+    if (greeting && greeting.confidence > 0.8) {
+      response = Response.genGetStartedMessage(this.user);
+    } else if (bye && bye.confidence > 0.8) {
+      response = Response.genByeMessage(this.user);
+    } else if (intent !== "None") {
+      switch (intent) {
+        case "course":
+          return await this.handlePayload(COURSE.COURSES);
+        default:
+          const { answer } = answers[Math.floor(Math.random() * answers.length)];
+          response = Response.genText(answer);
+      }
     } else {
-      response = [
-        Response.genText(
-          i18n.__("fallback.any", {
-            message: this.webhookEvent.message.text
-          })
-        ),
-        Response.genText(i18n.__("get_started.guidance")),
-        Response.genQuickReply(i18n.__("get_started.help"), [
-          {
-            title: i18n.__("menu.suggestion"),
-            payload: "CURATION"
-          },
-          {
-            title: i18n.__("menu.help"),
-            payload: "CARE_HELP"
-          }
-        ])
-      ];
+      response = Response.genText(
+        i18n.__("fallback.any", { message: this.webhookEvent.message.text })
+      );
     }
-
+    console.log("handleTextMessage: ", response);
     return response;
   }
 
-  // Handles mesage events with attachments
   handleAttachmentMessage() {
     let response;
 
-    // Get the attachment
     let attachment = this.webhookEvent.message.attachments[0];
     console.log("Received attachment:", `${attachment} for ${this.user.psid}`);
 
     response = Response.genQuickReply(i18n.__("fallback.attachment"), [
       {
         title: i18n.__("menu.help"),
-        payload: "CARE_HELP"
+        payload: "CARE_HELP",
       },
       {
         title: i18n.__("menu.start_over"),
-        payload: "GET_STARTED"
-      }
+        payload: "GET_STARTED",
+      },
     ]);
 
     return response;
   }
 
   // Handles mesage events with quick replies
-  handleQuickReply() {
-    // Get the payload of the quick reply
+  async handleQuickReply() {
     let payload = this.webhookEvent.message.quick_reply.payload;
-
-    return this.handlePayload(payload);
+    return await this.handlePayload(payload);
   }
 
   // Handles postbacks events
-  handlePostback() {
+  async handlePostback() {
     let postback = this.webhookEvent.postback;
-    // Check for the special Get Starded with referral
+
     let payload;
     if (postback.referral && postback.referral.type == "OPEN_THREAD") {
       payload = postback.referral.ref;
     } else {
-      // Get the payload of the postback
       payload = postback.payload;
     }
-    return this.handlePayload(payload.toUpperCase());
+    return await this.handlePayload(payload);
   }
 
   // Handles referral events
-  handleReferral() {
-    // Get the payload of the postback
+  async handleReferral() {
     let payload = this.webhookEvent.referral.ref.toUpperCase();
-
-    return this.handlePayload(payload);
+    return await this.handlePayload(payload);
   }
 
-  handlePayload(payload) {
-    console.log("Received Payload:", `${payload} for ${this.user.psid}`);
+  async handlePayload(payload) {
+    console.log("Received Payload: ", `${payload}`);
 
-    // Log CTA event in FBA
     GraphAPi.callFBAEventsAPI(this.user.psid, payload);
 
-    let response;
-
-    // Set the response based on the payload
-    if (
-      payload === "GET_STARTED" ||
-      payload === "DEVDOCS" ||
-      payload === "GITHUB"
-    ) {
-      response = Response.genNuxMessage(this.user);
-    } else if (payload.includes("CURATION") || payload.includes("COUPON")) {
-      let curation = new Curation(this.user, this.webhookEvent);
-      response = curation.handlePayload(payload);
-    } else if (payload.includes("CARE")) {
-      let care = new Care(this.user, this.webhookEvent);
-      response = care.handlePayload(payload);
-    } else if (payload.includes("ORDER")) {
-      response = Order.handlePayload(payload);
-    } else if (payload.includes("CSAT")) {
-      response = Survey.handlePayload(payload);
-    } else if (payload.includes("CHAT-PLUGIN")) {
-      response = [
-        Response.genText(i18n.__("chat_plugin.prompt")),
-        Response.genText(i18n.__("get_started.guidance")),
-        Response.genQuickReply(i18n.__("get_started.help"), [
-          {
-            title: i18n.__("care.order"),
-            payload: "CARE_ORDER"
-          },
-          {
-            title: i18n.__("care.billing"),
-            payload: "CARE_BILLING"
-          },
-          {
-            title: i18n.__("care.other"),
-            payload: "CARE_OTHER"
-          }
-        ])
-      ];
+    if (payload === GET_START) {
+      return Response.genGetStartedMessage(this.user);
+    } else if (payload === MENU.WEBSITE) {
+      return Response.genText(i18n.__("website.home"));
+    } else if (payload.includes("FEATURE")) {
+      const feature = new FeatureService(this.user, this.webhookEvent);
+      return await feature.handlePayload(payload);
+    } else if (payload.includes("PROFILE")) {
+      const profile = new ProfileService(this.user, this.webhookEvent);
+      return await profile.handlePayload(payload);
+    } else if (payload.includes("COURSE")) {
+      const course = new CourseService(this.user, this.webhookEvent);
+      return await course.handlePayload(payload);
     } else {
-      response = {
-        text: `This is a default postback message for payload: ${payload}!`
-      };
+      return Response.genText(`This is a default postback message for payload: ${payload}!`);
     }
-
-    return response;
   }
 
-  handlePrivateReply(type,object_id) {
-    let welcomeMessage = i18n.__("get_started.welcome") + ". " + i18n.__("get_started.help");
+  handlePrivateReply(type, object_id) {
+    let welcomeMessage =
+      i18n.__("get_started.welcome") + ". " + i18n.__("get_started.help");
 
     let response = Response.genQuickReply(welcomeMessage, [
       {
         title: i18n.__("menu.suggestion"),
-        payload: "CURATION"
+        payload: "CURATION",
       },
       {
         title: i18n.__("menu.help"),
-        payload: "CARE_HELP"
-      }
+        payload: "CARE_HELP",
+      },
     ]);
 
     let requestBody = {
       recipient: {
-        [type]: object_id
+        [type]: object_id,
       },
-      message: response
+      message: response,
     };
 
     GraphAPi.callSendAPI(requestBody);
+  }
+
+  markSeen() {
+    let body = {
+      recipient: {
+        id: this.user.psid,
+      },
+      sender_action: "mark_seen",
+    };
+    GraphAPi.callSendAPI(body);
+  }
+
+  toggleTyping() {
+    let body = {
+      recipient: {
+        id: this.user.psid,
+      },
+    };
+    const typingOnBody = { ...body, sender_action: "typing_on" };
+    const typingOffBody = { ...body, sender_action: "typing_off" };
+
+    GraphAPi.callSendAPI(typingOnBody);
+    setTimeout(() => GraphAPi.callSendAPI(typingOffBody), 1500);
   }
 
   sendMessage(response, delay = 0) {
@@ -234,12 +210,11 @@ module.exports = class Receive {
       delete response["delay"];
     }
 
-    // Construct the message body
     let requestBody = {
       recipient: {
-        id: this.user.psid
+        id: this.user.psid,
       },
-      message: response
+      message: response,
     };
 
     // Check if there is persona id in the response
@@ -249,13 +224,15 @@ module.exports = class Receive {
 
       requestBody = {
         recipient: {
-          id: this.user.psid
+          id: this.user.psid,
         },
         message: response,
-        persona_id: persona_id
+        persona_id: persona_id,
       };
     }
 
+    this.markSeen();
+    this.toggleTyping();
     setTimeout(() => GraphAPi.callSendAPI(requestBody), delay);
   }
 

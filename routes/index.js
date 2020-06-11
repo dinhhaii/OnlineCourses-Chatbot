@@ -27,13 +27,13 @@ router.get("/webhook", (req, res) => {
   }
 });
 
-router.post("/webhook", (req, res) => {
+router.post("/webhook", async (req, res) => {
   let body = req.body;
 
   if (body.object === "page") {
     res.status(200).send("EVENT_RECEIVED");
 
-    body.entry.forEach(function(entry) {
+    for(let entry of body.entry) {
       if ("changes" in entry) {
         let receiveMessage = new Receive();
         if (entry.changes[0].field === "feed") {
@@ -61,7 +61,6 @@ router.post("/webhook", (req, res) => {
       // Gets the body of the webhook event
       let webhookEvent = entry.messaging[0];
 
-      // Discard uninteresting events
       if ("read" in webhookEvent) {
         // console.log("Got a read event");
         return;
@@ -81,23 +80,23 @@ router.post("/webhook", (req, res) => {
         GraphAPi.getUserProfile(senderPsid)
           .then((userProfile) => {
             console.log(userProfile);
-            user.setProfile(userProfile);
+            user.setProfileFacebook(userProfile);
           })
           .catch((error) => {
             console.log("Profile is unavailable:", error);
           })
-          .finally(() => {
+          .finally(async () => {
             users[senderPsid] = user;
-            // i18n.setLocale(user.locale);
+            i18n.setLocale("en_US");
             let receiveMessage = new Receive(users[senderPsid], webhookEvent);
-            return receiveMessage.handleMessage();
+            return await receiveMessage.handleMessage();
           });
       } else {
         // i18n.setLocale(users[senderPsid].locale);
         let receiveMessage = new Receive(users[senderPsid], webhookEvent);
-        return receiveMessage.handleMessage();
+        return await receiveMessage.handleMessage();
       }
-    });
+    };
   } else {
     res.sendStatus(404);
   }
@@ -154,11 +153,9 @@ router.get("/profile", (req, res) => {
       }
       res.status(200).end();
     } else {
-      // Responds with '403 Forbidden' if verify tokens do not match
       res.sendStatus(403);
     }
   } else {
-    // Returns a '404 Not Found' if mode or token are missing
     res.sendStatus(404);
   }
 });
