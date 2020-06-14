@@ -1,7 +1,7 @@
 "use strict";
 
 const i18n = require("../i18n.config"),
-  { MENU } = require('../utils/constant');
+  { MENU, FEATURE } = require('../utils/constant');
 
 module.exports = class Response {
   static genQuickReply(text, quickReplies) {
@@ -21,21 +21,24 @@ module.exports = class Response {
     return response;
   }
 
-  static genListElementTemplate(title, subtitle, image_url, buttons) {
-    return { title, subtitle, image_url, buttons }
+  static genListElementTemplate(title, subtitle, image_url, buttons, default_action) {
+    return { title, subtitle, image_url, buttons, default_action }
   }
 
   static genGenericElementTemplate(title, subtitle, image_url, buttons, default_action) {
-    return { title, subtitle, image_url, buttons, default_action}
+    return { title, subtitle, image_url, buttons, default_action }
   }
 
   static genListTemplate(elements, buttons) {
     let response = {
       attachment: {
-        template_type: "list",
-        top_element_style: "COMPACT",
-        elements: elements,
-        buttons: buttons,
+        type: "template",
+        payload: {
+          template_type: "list",
+          top_element_style: "compact",
+          elements: elements,
+          buttons: buttons
+        },
       },
     };
 
@@ -57,23 +60,16 @@ module.exports = class Response {
     return response;
   }
 
-  static genImageTemplate(image_url, title, subtitle = "") {
+  static genImageTemplate(url) {
     let response = {
       attachment: {
-        type: "template",
+        type: "image",
         payload: {
-          template_type: "generic",
-          elements: [
-            {
-              title: title,
-              subtitle: subtitle,
-              image_url: image_url,
-            },
-          ],
+          is_reusable: true,
+          url
         },
       },
     };
-
     return response;
   }
 
@@ -119,11 +115,12 @@ module.exports = class Response {
     return response;
   }
 
-  static genWebUrlButton(title, url) {
+  static genWebUrlButton(title, url, messenger_extensions) {
     let response = {
       type: "web_url",
-      title: title,
-      url: url,
+      title,
+      url,
+      messenger_extensions
     };
 
     return response;
@@ -132,9 +129,12 @@ module.exports = class Response {
   static genGetStartedMessage(user) {
     const buttons = [
       this.genPostbackButton(i18n.__("menu.website"), MENU.WEBSITE),
-      this.genPostbackButton(i18n.__("menu.features"), MENU.FEATURES),
-      this.genPostbackButton(i18n.__("menu.help"), MENU.HELP)
-    ]
+      user.userData.idFacebook
+        ? this.genPostbackButton(i18n.__("menu.features"), MENU.FEATURES)
+        : this.genPostbackButton(i18n.__("menu.login"), FEATURE.LOGIN),
+      this.genPostbackButton(i18n.__("menu.help"), MENU.HELP),
+    ];
+
     const elements = [
       this.genGenericElementTemplate(
         i18n.__("get_started.welcome", { firstName: user.firstName }),
@@ -143,7 +143,6 @@ module.exports = class Response {
         buttons
       )
     ];
-
     return this.genGenericTemplate(elements);
   }
 

@@ -15,7 +15,8 @@ module.exports = class CourseService {
   generateCourseElement(item) {
     if (item) {
       const buttons = [
-        Response.genWebUrlButton(i18n.__("course.detail"), `${config.shopUrl}/course-detail/${item._id}`)
+        Response.genWebUrlButton(i18n.__("course.detail"), `${config.shopUrl}/course-detail/${item._id}`),
+        Response.genPostbackButton(i18n.__("course.add_to_cart"), "TESTADDTOCART")
       ];
   
       return Response.genGenericElementTemplate(
@@ -54,7 +55,6 @@ module.exports = class CourseService {
       data.forEach(item => {
         elements.push(this.generateCourseElement(item));
       })
-      console.log(elements);
       if (data && data.length === 0) {
         return Response.genQuickReply(i18n.__("course.prompt-none"), quickReply);
       } else {
@@ -76,7 +76,6 @@ module.exports = class CourseService {
       case COURSE.COURSES:
         return await this.fetchCourse(message, false, 0, 3);
       case COURSE.POPULAR_COURSES: 
-        console.log('hi');
         return await this.fetchCourse('', true, 0, 3);
       case COURSE.LATEST_COURSES: 
         return await this.fetchCourse('', false, 0, 5);

@@ -3,9 +3,9 @@ const router = require("express").Router(),
   GraphAPi = require("../services/graph-api"),
   User = require("../services/user"),
   config = require("../services/config"),
-  i18n = require("../i18n.config");
-
-var users = {};
+  i18n = require("../i18n.config"),
+  { fetchUser, fetchCart } = require('../services/api'),
+  users = require('../app');
 
 router.get("/", function(_req, res) {
   res.render("index");
@@ -78,19 +78,16 @@ router.post("/webhook", async (req, res) => {
         let user = new User(senderPsid);
 
         GraphAPi.getUserProfile(senderPsid)
-          .then((userProfile) => {
-            console.log(userProfile);
-            user.setProfileFacebook(userProfile);
+          .then(async (userProfile) => {
+            i18n.setLocale("en_US");
+            const result = await user.setProfile(userProfile);
+            users[senderPsid] = result;
+            let receiveMessage = new Receive(users[senderPsid], webhookEvent);
+            return await receiveMessage.handleMessage();
           })
           .catch((error) => {
             console.log("Profile is unavailable:", error);
           })
-          .finally(async () => {
-            users[senderPsid] = user;
-            i18n.setLocale("en_US");
-            let receiveMessage = new Receive(users[senderPsid], webhookEvent);
-            return await receiveMessage.handleMessage();
-          });
       } else {
         // i18n.setLocale(users[senderPsid].locale);
         let receiveMessage = new Receive(users[senderPsid], webhookEvent);

@@ -3,7 +3,7 @@
 const Response = require("../response"),
   config = require("../config"),
   i18n = require("../../i18n.config"),
-  { FEATURE } = require('../../utils/constant');
+  { FEATURE, STATE } = require('../../utils/constant');
 
 module.exports = class FeatureService {
   constructor(user, webhookEvent) {
@@ -11,15 +11,22 @@ module.exports = class FeatureService {
     this.webhookEvent = webhookEvent;
   }
 
-  handlePayload(payload) {
+  async handlePayload(payload) {
     let response;
 
     switch (payload) {
-      case FEATURE.LOGIN: break;
-      case FEATURE.LOGOUT: break;
-      case FEATURE.SURVEY: break;
-      case FEATURE.SCHEDULE: break;
-      default: return [];
+      case FEATURE.LOGIN:
+        this.user.setState(STATE.CONNECT_FACEBOOK);
+        response = Response.genText(i18n.__("email.input"));
+        break;
+      case FEATURE.LOGOUT:
+        break;
+      case FEATURE.SURVEY:
+        break;
+      case FEATURE.SCHEDULE:
+        break;
+      default:
+        return [];
     }
 
     return response;

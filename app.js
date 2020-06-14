@@ -7,10 +7,12 @@ const express = require("express"),
   config = require("./services/config"),
   app = express(),
   nlpRouter = require('./routes/nlp'),
+  emailRouter = require('./routes/email'),
   indexRouter = require('./routes/index'),
   NLP = require('./services/nlp');
 
-// NLP.trainData();
+  // NLP.trainData();
+  const users = {};
 
 // Parse application/x-www-form-urlencoded
 app.use(
@@ -26,6 +28,7 @@ app.set("view engine", "ejs");
 
 app.use('/', indexRouter);
 app.use('/nlp', nlpRouter);
+app.use('/email', emailRouter);
 
 
 // Verify that the callback came from Facebook.
@@ -74,3 +77,5 @@ var listener = app.listen(config.port, function() {
     console.log("https://m.me/" + config.pageId);
   }
 });
+
+module.exports = users;

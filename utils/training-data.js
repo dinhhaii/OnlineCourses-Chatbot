@@ -27,11 +27,11 @@ module.exports = [
       "I need a course",
       "Could you tell me about Javascript Courses?",
       "Can you recommend me some courses?",
-      "How many subjects does Hacademy have?",
       "How many courses does Hacademy?",
       "course",
-      "English courses",
-      "Music courses"
+      "English course",
+      "Music course",
+      "javascript course",
     ],
     responses: [
       "Hacademy has courses from a variety of subjects that you can find!",
@@ -164,6 +164,7 @@ module.exports = [
   {
     tag: "feedback",
     patterns: [
+      "feedback",
       "How can I give feedback?",
       "feedback section?",
       "I want to give feedback for this course",

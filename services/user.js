@@ -1,4 +1,6 @@
 "use strict";
+const { fetchCart, fetchUser } = require('./api'),
+  { STATE } = require('../utils/constant');
 
 module.exports = class User {
   constructor(psid, userData) {
@@ -10,7 +12,7 @@ module.exports = class User {
     this.timezone = "";
     this.gender = "neutral";
     // Account user
-    this.isLogin = false;
+    this.state = STATE.NONE;
     this.updateUserData = {};
     this.userData = {
       _id: "",
@@ -20,8 +22,8 @@ module.exports = class User {
       firstName: "",
       lastName: "",
       role: "",
-      type: "",
       status: "",
+      idFacebook: "",
     };
     this.carts = [];
 
@@ -32,7 +34,7 @@ module.exports = class User {
 
   setUserData(userData) {
     if (userData) {
-      this.userData = { ...userData }
+      this.userData = { ...userData };
     }
   }
 
@@ -53,15 +55,15 @@ module.exports = class User {
   }
 
   setCart(carts) {
-    this.carts = [ ...carts ];
+    this.carts = [...carts];
   }
 
-  setLogin(value) {
-    this.isLogin = value;
+  setState(value) {
+    this.state = value;
   }
 
   checkUpdateUser() {
-    for(let key of Object.keys(this.userData)) {
+    for (let key of Object.keys(this.userData)) {
       if (this.userData[key] !== this.updateUserData[key]) {
         return false;
       }
@@ -69,4 +71,22 @@ module.exports = class User {
     return true;
   }
 
+  async setProfile(userProfile) {
+    const { id } = userProfile;
+    this.setProfileFacebook(userProfile);
+    if (id) {
+      const { data } = await fetchUser(id);
+      if (data) {
+        const response = await fetchCart(data._id);
+        this.setState(STATE.LOGED_IN);
+        this.setUserData(data);
+        this.setCart(response.data.items);
+      } else {
+        console.error("User not found");
+      }
+    } else {
+      console.error("Can't get profile user!");
+    }
+    return this;
+  }
 };
