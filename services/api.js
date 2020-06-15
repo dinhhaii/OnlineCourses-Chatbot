@@ -34,12 +34,11 @@ module.exports = {
         delete props.createdAt;
         delete props.updatedAt;
 
-        console.log(props);
         return axios.post(`${SERVER_URL}/user/update`, { ...props });
     },
 
     createUser: (props) => {
-        return axios.post(`${SERVER_URL}/user/create`, { ...props });
+        return axios.post(`${SERVER_URL}/user/register`, { ...props });
     },
 
     updateCart: (props) => {

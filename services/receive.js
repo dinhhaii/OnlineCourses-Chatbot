@@ -6,11 +6,13 @@ const FeatureService = require("./payload/feature"),
   SubjectService = require('./payload/subject'),
   Response = require("./response"),
   GraphAPi = require("./graph-api"),
+  config = require("./config"),
   i18n = require("../i18n.config"),
   NLP = require("./nlp"),
+  { validURL } = require("../utils/helper"),
   users = require('../app'),
   { fetchUserByEmail, sendEmail } = require("./api"),
-  { GET_STARTED, MENU, FEATURE, COURSE, PROFILE, IMAGES, SUBJECT, STATE, QUIT, CHATBOT_URL } = require('../utils/constant');
+  { GET_STARTED, MENU, FEATURE, COURSE, PROFILE, IMAGES, SUBJECT, STATE, QUIT, SERVER_URL, CHATBOT_URL, registerSteps } = require('../utils/constant');
 
 module.exports = class Receive {
   constructor(user, webhookEvent) {
@@ -29,7 +31,7 @@ module.exports = class Receive {
         if (message.quick_reply) {
           responses = await this.handleQuickReply();
         } else if (message.attachments) {
-          responses = this.handleAttachmentMessage();
+          responses = await this.handleAttachmentMessage();
         } else if (message.text) {
           responses = await this.handleTextMessage();
         }
@@ -60,15 +62,50 @@ module.exports = class Receive {
   async handleTextMessage() {
     let message = this.webhookEvent.message.text.trim();
     let response;
+
+    const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
+
     switch(this.user.state) {
+      case STATE.REGISTER:
+        const { step } = this.user;
+        const { userField } = registerSteps[step];
+        let quickReplies = [ quitQuickReply ];
+
+        switch(step) {
+          case 1: // email
+            const regex = /\S+@\S+\.\S+/;
+            const email = message.toLowerCase();
+            if (!regex.test(email)) {
+              return Response.genQuickReply(i18n.__("email.invalid"), [ quitQuickReply ]);
+            }
+            break;
+          case 4: // image
+            if (message == 0) {
+              message = `${SERVER_URL}/images/no-avatar.png`
+            } else if (!validURL(message)) {
+              return [
+                Response.genQuickReply(i18n.__("register.invalid_url"), [ quitQuickReply ]),
+                Response.genText(i18n.__("register.image_url"))
+              ]
+            } 
+            break;
+          case 5: // bio - nextStep: role
+            quickReplies = [ 
+              Response.genPostbackButton("Learner", FEATURE.REGISTER_ROLE_LEANER),
+              Response.genPostbackButton("Lecturer", FEATURE.REGISTER_ROLE_LECTURER),
+              quitQuickReply
+            ];
+        }
+
+        if (userField) {
+          this.user.setUpdateData({ [userField]: message });
+        }
+        this.user.setStep(step + 1);
+        
+        return Response.genQuickReply(i18n.__(registerSteps[step + 1].phrase), quickReplies);
       case STATE.CONNECT_FACEBOOK:
         const regex = /\S+@\S+\.\S+/;
         const email = message.toLowerCase();
-        const quitQuickReply = {
-          title: i18n.__("fallback.quit"),
-          payload: QUIT
-        };
-
         const registerQuickReply = { 
           title: i18n.__("email.register"),
           payload: FEATURE.REGISTER
@@ -137,23 +174,31 @@ module.exports = class Receive {
     
   }
 
-  handleAttachmentMessage() {
+  async handleAttachmentMessage() {
     let response;
 
     let attachment = this.webhookEvent.message.attachments[0];
-    console.log("Received attachment:", `${attachment} for ${this.user.psid}`);
+    const { payload, type } = attachment;
+    const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
 
-    response = Response.genQuickReply(i18n.__("fallback.attachment"), [
-      {
-        title: i18n.__("menu.help"),
-        payload: "CARE_HELP",
-      },
-      {
-        title: i18n.__("menu.start_over"),
-        payload: "GET_STARTED",
-      },
-    ]);
+    switch(this.user.state) {
+      case STATE.REGISTER:
+        const { step } = this.user;
 
+        if (step === 4) {
+          if (type !== "image") {
+            return [
+              Response.genQuickReply(i18n.__("register.invalid_attachment"), [ quitQuickReply ]),
+              Response.genText(i18n.__("register.image_url"))
+            ]
+          } 
+          this.user.setUpdateData({ imageURL: payload.url });
+        }
+
+        this.user.setStep(step + 1);
+        return Response.genQuickReply(i18n.__(registerSteps[step + 1].phrase), [ quitQuickReply ]);
+      default: response = Response.genText(i18n.__("fallback.attachment"));
+    }
     return response;
   }
 
@@ -187,7 +232,9 @@ module.exports = class Receive {
 
     GraphAPi.callFBAEventsAPI(this.user.psid, payload);
 
-    if (payload === GET_STARTED) {
+    if (payload === GET_STARTED || payload === QUIT) {
+      this.user.setStep(0);
+      this.user.setState(this.user.userData.idFacebook ? STATE.LOGED_IN : STATE.NONE);
       return Response.genGetStartedMessage(this.user);
     } else if (payload === MENU.WEBSITE) {
       return Response.genText(i18n.__("website.home"));

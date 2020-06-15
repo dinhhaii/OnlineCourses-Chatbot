@@ -13,6 +13,7 @@ module.exports = class User {
     this.gender = "neutral";
     // Account user
     this.state = STATE.NONE;
+    this.step = 0;
     this.updateUserData = {};
     this.userData = {
       _id: "",
@@ -60,6 +61,14 @@ module.exports = class User {
 
   setState(value) {
     this.state = value;
+  }
+
+  setStep(value) {
+    this.step = value;
+  }
+
+  resetUpdateData() {
+    this.updateUserData = {};
   }
 
   checkUpdateUser() {

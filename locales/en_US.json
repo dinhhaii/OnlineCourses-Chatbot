@@ -6,7 +6,12 @@
 		"website": "Website",
 		"login": "Login",
 		"help": "Help",
-		"features": "Features"
+		"features": "Features",
+		"support": "menu.support",
+		"order": "menu.order",
+		"suggestion": "menu.suggestion",
+		"shop": "menu.shop",
+		"start_over": "menu.start_over"
 	},
 	"get_started": {
 		"welcome": "Hi {{firstName}}! Welcome to Hacademy.",
@@ -19,6 +24,16 @@
 		"forgot_password": "Forgot password: https://cafocc.web.app/auth/forgot-password",
 		"change_password": "Change password: https://cafocc.web.app/profile",
 		"cart": "Check your item in cart: https://cafocc.web.app/cart"
+	},
+	"feature": {
+		"prompt": "What can I do to help?",
+		"login": "Login",
+		"register": "Register",
+		"schedule": "Schedule",
+		"update_profile": "Update Profile",
+		"survey": "Survey",
+		"forgot_password": "Forgot Password",
+		"change_password": "Change Password"
 	},
 	"course": {
 		"prompt_none": "Sorry, I can't find any course for you. Please find another course or you can refer to some courses bellow.",
@@ -39,10 +54,26 @@
 	"email": {
 		"connected": "Your facebook account is connected to user {{email}}.",
 		"confirm": "Please check your email {{email}} to verify your account.",
-		"invalid": "Your email is invalid. Please enter again or quit.",
+		"invalid": "Your email is invalid. Please enter again.",
 		"not_found": "We can't find any user with email {{email}}. Please enter again or create a new one?.",
 		"input": "Please enter your email to connect to Facebook.",
 		"register": "Register"
+	},
+	"register": {
+		"get_started": "Please follow each step to complete the account registration process. Type anything to continue.",
+		"email": "Thank you 😁!\nTell me your email",
+		"first_name": "Enter your first name",
+		"last_name": "and last name",
+		"image_url": "Send me your profile picture (attachment or url). Enter '0' to skip.",
+		"invalid_url": "Your URL is invalid. Please try again.",
+		"invalid_attachment": "Your attachment is not typeof 'image'. Please try again.",
+		"bio": "Your bio",
+		"role": "Choose role you want to apply.",
+		"confirm": "Are you sure you want to create this account?",
+		"info": "Your information:\n• Email: {{email}}\n• First name: {{firstName}}\n• Last name: {{lastName}}\n• Image: {{imageURL}}\n• Bio: {{bio}}\n• Role: {{role}}",
+		"success": "Thank you. Register successfully! Please click button to create a new password.",
+		"failed": "Sorry, an error occured. We can't create your account 😞. Please try again.",
+		"cancel": "Thank you. Hope to see you."
 	},
 	"chat_plugin": {
 		"prompt": "Thanks for visiting our store, be sure to check out all the great styles we have on the summer section."
@@ -51,5 +82,12 @@
 		"any": "Sorry, but I don’t recognize \"{{message}}\".",
 		"quit": "Quit",
 		"attachment": "Thanks for sending this attachment, we can connect you to an agent to review it or we can start over"
+	},
+	"confirm": {
+		"yes": "Yes",
+		"no": "No"
+	},
+	"resgister": {
+		"invalid_url": "resgister.invalid_url"
 	}
 }

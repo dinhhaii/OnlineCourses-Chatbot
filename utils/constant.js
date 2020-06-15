@@ -1,7 +1,9 @@
 module.exports = {
   SERVER_URL: "http://localhost:3000",
-  // SERVER_URL: "https://hacademy-api.herokuapp.com",
+  CLIENT_URL: "http://localhost:3001",
   CHATBOT_URL: "http://localhost:3003",
+  // SERVER_URL: "https://hacademy-api.herokuapp.com",
+  // CLIENT_URL: "https://cafocc.web.app",
   // CHATBOT_URL: "https://hacademy-chatbot.herokuapp.com",
   GET_STARTED: "GET_STARTED",
   QUIT: "QUIT",
@@ -13,6 +15,10 @@ module.exports = {
   FEATURE: {
     LOGIN: "FEATURE_LOGIN",
     REGISTER: "FEATURE_REGISTER",
+    REGISTER_CONFIRM_YES: "FEATURE_REGISTER_YES",
+    REGISTER_CONFIRM_NO: "FEATURE_REGISTER_NO",
+    REGISTER_ROLE_LEANER: "FEATURE_ROLE_LEANER",
+    REGISTER_ROLE_LECTURER: "FEATURE_ROLE_LECTURER",
     LOGOUT: "FEATURE_LOGOUT",
     SURVEY: "FEATURE_SURVEY",
     SCHEDULE: "FEATURE_SCHEDULE",
@@ -27,6 +33,7 @@ module.exports = {
     ALL_SUBJECTS: "ALL_SUBJECTS",
   },
   PROFILE: {
+    UPDATE: "UPDATE_PROFILE",
     CHECK_CART: "PROFILE_CHECK_CART",
     ADD_TO_CART: "PROFILE_ADD_TO_CART",
     PAYMENT: "PROFILE_PAYMENT",
@@ -47,5 +54,16 @@ module.exports = {
     UPDATE_USER: "UPDATE_USER",
     CONNECT_FACEBOOK: "CONNECT_FACEBOOK",
     NONE: "NONE",
-  }
+    REGISTER: "REGISTER"
+  },
+  registerSteps: [
+    { phrase: "register.get_started"},
+    { phrase: "register.email", userField: "email" },
+    { phrase: "register.first_name", userField: "firstName" },
+    { phrase: "register.last_name", userField: "lastName" },
+    { phrase: "register.image_url", userField: "imageURL" },
+    { phrase: "register.bio", userField: "bio" },
+    { phrase: "register.role"},
+    { phrase: "register.info"}
+  ]
 };
