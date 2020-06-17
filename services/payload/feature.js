@@ -5,8 +5,9 @@ const Response = require("../response"),
   i18n = require("../../i18n.config"),
   queryString = require('query-string'),
   { createUser } = require('../api'),
+  jwtExtension = require('jsonwebtoken'),
   generator = require('generate-password'),
-  { FEATURE, STATE, registerSteps, QUIT, MENU, PROFILE, CLIENT_URL } = require('../../utils/constant');
+  { FEATURE, STATE, registerSteps, QUIT, MENU, PROFILE, CLIENT_URL, JWT_SECRET } = require('../../utils/constant');
 
 module.exports = class FeatureService {
   constructor(user, webhookEvent) {
@@ -19,15 +20,16 @@ module.exports = class FeatureService {
     this.user.resetUpdateData();
     if (success) {
       this.user.setState(STATE.LOGED_IN);
-      const query = queryString.stringify(this.user.userData);
+      let query = queryString.stringify(this.user.userData);
+      query += "&previousPath=/profile?tab=change-password";
       return [
         Response.genText(text),
         Response.genButtonTemplate(i18n.__("register.change_password", { password }), [
-          Response.genWebUrlButton(i18n.__("feature.access_page"),`${CLIENT_URL}/auth/login?${query}`),
+          Response.genWebUrlButton(i18n.__("feature.change_password"),`${CLIENT_URL}/auth/login?${query}`),
         ]),
       ];
     } 
-    this.user.setState(STATE.LOGED_IN);
+    this.user.setState(STATE.NONE);
     return Response.genQuickReply(text, [ 
       Response.genPostbackButton(i18n.__("feature.register"), FEATURE.REGISTER),
       Response.genPostbackButton(i18n.__("feature.login"), FEATURE.LOGIN),
@@ -73,9 +75,10 @@ module.exports = class FeatureService {
         switch(this.user.state) {
           case STATE.NONE: 
             this.user.setState(STATE.CONNECT_FACEBOOK);
-            return Response.genText(i18n.__("email.input"));
+            return Response.genQuickReply(i18n.__("email.input"), [ quitQuickReply ]);
           case STATE.LOGED_IN: 
-            const query = queryString.stringify(this.user.userData);
+            let loginData = { ...this.user.userData, token: jwtExtension.sign(JSON.stringify(this.user.userData), JWT_SECRET) };
+            let query = queryString.stringify(loginData);
             return Response.genButtonTemplate(i18n.__("login.quick_login"), [
               Response.genWebUrlButton(i18n.__("feature.access_page"),`${CLIENT_URL}/auth/login?${query}`),
             ])

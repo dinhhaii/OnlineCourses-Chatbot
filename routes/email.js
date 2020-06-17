@@ -5,7 +5,7 @@ const router = require("express").Router(),
   i18n = require("../i18n.config"),
   nodemailer = require("nodemailer"),
   { updateUser } = require("../services/api"),
-  { USERNAME_EMAIL, PASSWORD_EMAIL } = require("../utils/constant"),
+  { USERNAME_EMAIL, PASSWORD_EMAIL, STATE } = require("../utils/constant"),
   users = require("../app");
 
 router.get("/send", function(req, res) {
@@ -45,15 +45,16 @@ router.get("/send", function(req, res) {
 
 router.get("/confirm", async (req, res) => {
   const { email, idFacebook } = req.query;
-  console.log('hi');
   try {
     if (Object.keys(users).includes(idFacebook.toString())) {
-      console.log(1,users[idFacebook]);
-      users[idFacebook].setUpdateData({ idFacebook: idFacebook.toString() });
-      updateUser(users[idFacebook].updateUserData).then(({data}) => {
-        console.log(2,data);
+      const updatedData = {
+        idFacebook: idFacebook.toString(),
+        _id: users[idFacebook].updateUserData._id
+      }
+      updateUser(updatedData).then(({data}) => {
         if (!data.error) {
           users[idFacebook].setUserData(data);
+          users[idFacebook].setState(STATE.LOGED_IN);
           const requestBody = {
             recipient: {
               id: idFacebook,

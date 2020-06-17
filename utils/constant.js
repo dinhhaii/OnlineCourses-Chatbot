@@ -5,6 +5,7 @@ module.exports = {
   // SERVER_URL: "https://hacademy-api.herokuapp.com",
   // CLIENT_URL: "https://cafocc.web.app",
   // CHATBOT_URL: "https://hacademy-chatbot.herokuapp.com",
+  JWT_SECRET: "jwt_secret",
   GET_STARTED: "GET_STARTED",
   QUIT: "QUIT",
   MENU: {
@@ -34,6 +35,8 @@ module.exports = {
   },
   PROFILE: {
     UPDATE: "UPDATE_PROFILE",
+    UPDATE_CONFIRM_YES: "PROFILE_UPDATE_YES",
+    UPDATE_CONFIRM_NO: "PROFILE_UPDATE_NO",
     CHECK_CART: "PROFILE_CHECK_CART",
     ADD_TO_CART: "PROFILE_ADD_TO_CART",
     PAYMENT: "PROFILE_PAYMENT",
@@ -65,5 +68,14 @@ module.exports = {
     { phrase: "register.bio", userField: "bio" },
     { phrase: "register.role"},
     { phrase: "register.info"}
+  ],
+  updateProfileSteps: [
+    { phrase: "update.get_started"},
+    { phrase: "update.email", userField: "email" },
+    { phrase: "update.first_name", userField: "firstName" },
+    { phrase: "update.last_name", userField: "lastName" },
+    { phrase: "update.image_url", userField: "imageURL" },
+    { phrase: "update.bio", userField: "bio" },
+    { phrase: "update.info"}
   ]
 };

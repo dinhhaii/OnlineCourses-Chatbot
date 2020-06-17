@@ -30,7 +30,8 @@
 		"forgot_password": "Forgot Password",
 		"change_password": "Change Password",
 		"access_page": "Access Page",
-		"quick_login": "Quick Login"
+		"quick_login": "Quick Login",
+		"connect_facebook": "Connect Facebook"
 	},
 	"course": {
 		"prompt_none": "Sorry, I can't find any course for you. Please find another course or you can refer to some courses bellow.",
@@ -73,6 +74,24 @@
 		"failed": "Sorry, an error occured '{{error}}'. We can't create your account 😞. Please try again.",
 		"cancel": "Thank you. Hope to see you."
 	},
+	"update": {
+		"get_started": "Please follow each step to complete the process. Type anything to continue.",
+		"email": "Thank you 😁!\nTell me your email",
+		"first_name": "Enter your first name",
+		"last_name": "and last name",
+		"image_url": "Send me your profile picture (attachment or url). Enter '0' to skip.",
+		"invalid_url": "Your URL is invalid. Please try again.",
+		"invalid_attachment": "Your attachment is not typeof 'image'. Please try again.",
+		"bio": "Your bio",
+		"confirm": "Are you sure you want to update this account?",
+		"info": "Your information:\n• Email: {{email}}\n• First name: {{firstName}}\n• Last name: {{lastName}}\n• Bio: {{bio}}\n• Role: {{role}}",
+		"access_page": "Access page to quick login 😁.",
+		"success": "Thank you. Updated successfully!",
+		"failed": "Sorry, an error occured '{{error}}'. We can't update your account 😞. Please try again.",
+		"cancel": "Thank you. Hope to see you.",
+		"change_password": "1. Login page: https://cafocc.web.app/auth/login\n2. Profile -> Change Password\n\nIf your account is connected to facebook. Click button bellow.",
+		"change_password_failed": "Your account is not connected to facebook."
+	},
 	"login": {
 		"quick_login": "Your account is connected to Facebook. Click 'Quick Login' to access page."
 	},
@@ -87,5 +106,8 @@
 	"confirm": {
 		"yes": "Yes",
 		"no": "No"
+	},
+	"udpate": {
+		"confirm": "udpate.confirm"
 	}
 }

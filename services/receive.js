@@ -1,18 +1,32 @@
 "use strict";
 
 const FeatureService = require("./payload/feature"),
-  ProfileService = require('./payload/profile'),
-  CourseService = require('./payload/course'),
-  SubjectService = require('./payload/subject'),
+  ProfileService = require("./payload/profile"),
+  CourseService = require("./payload/course"),
+  SubjectService = require("./payload/subject"),
   Response = require("./response"),
   GraphAPi = require("./graph-api"),
   config = require("./config"),
   i18n = require("../i18n.config"),
   NLP = require("./nlp"),
   { validURL } = require("../utils/helper"),
-  users = require('../app'),
+  users = require("../app"),
   { fetchUserByEmail, sendEmail } = require("./api"),
-  { GET_STARTED, MENU, FEATURE, COURSE, PROFILE, IMAGES, SUBJECT, STATE, QUIT, SERVER_URL, CHATBOT_URL, registerSteps } = require('../utils/constant');
+  {
+    GET_STARTED,
+    MENU,
+    FEATURE,
+    COURSE,
+    PROFILE,
+    IMAGES,
+    SUBJECT,
+    STATE,
+    QUIT,
+    SERVER_URL,
+    CHATBOT_URL,
+    updateProfileSteps,
+    registerSteps,
+  } = require("../utils/constant");
 
 module.exports = class Receive {
   constructor(user, webhookEvent) {
@@ -64,13 +78,52 @@ module.exports = class Receive {
     let response;
 
     const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
+    const { step } = this.user;
+    const { userField } = registerSteps[step];
+    let quickReplies = [ quitQuickReply ];
 
     switch(this.user.state) {
-      case STATE.REGISTER:
-        const { step } = this.user;
-        const { userField } = registerSteps[step];
-        let quickReplies = [ quitQuickReply ];
+      case STATE.UPDATE_USER:
 
+        switch(step) {
+          case 1: // email
+            const regex = /\S+@\S+\.\S+/;
+            const email = message.toLowerCase();
+            if (!regex.test(email)) {
+              return Response.genQuickReply(i18n.__("email.invalid"), [ quitQuickReply ]);
+            }
+            break;
+          case 4: // image
+            if (message == 0) {
+              this.user.setStep(step + 1);
+              return Response.genQuickReply(i18n.__(updateProfileSteps[step + 1].phrase), quickReplies);
+
+            } else if (!validURL(message)) {
+              return [
+                Response.genQuickReply(i18n.__("update.invalid_url"), [ quitQuickReply ]),
+                Response.genText(i18n.__("update.image_url"))
+              ]
+            }
+          case 5: // bio - nextStep: confirm
+            this.user.setStep(step + 1);
+            this.user.setUpdateData({ [userField]: message });
+            return [
+              Response.genText(i18n.__(updateProfileSteps[step + 1].phrase, { ...this.user.updateUserData })),
+              Response.genQuickReply(i18n.__("update.confirm"), [ 
+                Response.genPostbackButton(i18n.__("confirm.yes"), PROFILE.UPDATE_CONFIRM_YES),
+                Response.genPostbackButton(i18n.__("confirm.no"), PROFILE.UPDATE_CONFIRM_NO),
+                Response.genPostbackButton(i18n.__("fallback.quit"), QUIT)
+              ])
+            ]
+        }
+
+        if (userField) {
+          this.user.setUpdateData({ [userField]: message });
+        }
+        this.user.setStep(step + 1);
+        
+        return Response.genQuickReply(i18n.__(updateProfileSteps[step + 1].phrase), quickReplies);
+      case STATE.REGISTER:
         switch(step) {
           case 1: // email
             const regex = /\S+@\S+\.\S+/;
@@ -117,9 +170,8 @@ module.exports = class Receive {
           if (!data.error) {
             const responseSendEmail = await sendEmail(email, this.user.psid);
             if (!responseSendEmail.data.error) {
-              this.user.setState(STATE.NONE);
               this.user.setUpdateData(data);
-              console.log('recieve', users[this.user.psid]);
+              this.user.setState(STATE.NONE);
               return Response.genText(i18n.__("email.confirm", { email }));
             }
             return Response.genText(`An error has occured: '${responseSendEmail.data.error}'. We have been notified and will fix the issue shortly!`);
@@ -180,11 +232,11 @@ module.exports = class Receive {
 
     let attachment = this.webhookEvent.message.attachments[0];
     const { payload, type } = attachment;
+    const { step } = this.user;
     const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
 
     switch(this.user.state) {
       case STATE.REGISTER:
-        const { step } = this.user;
 
         if (step === 4) {
           if (type !== "image") {
@@ -198,6 +250,19 @@ module.exports = class Receive {
 
         this.user.setStep(step + 1);
         return Response.genQuickReply(i18n.__(registerSteps[step + 1].phrase), [ quitQuickReply ]);
+      case STATE.UPDATE_USER:
+        if (step === 4) {
+          if (type !== "image") {
+            return [
+              Response.genQuickReply(i18n.__("update.invalid_attachment"), [ quitQuickReply ]),
+              Response.genText(i18n.__("update.image_url"))
+            ]
+          } 
+          this.user.setUpdateData({ imageURL: payload.url });
+        }
+
+        this.user.setStep(step + 1);
+        return Response.genQuickReply(i18n.__(updateProfileSteps[step + 1].phrase), [ quitQuickReply ]);
       default: response = Response.genText(i18n.__("fallback.attachment"));
     }
     return response;
@@ -236,6 +301,7 @@ module.exports = class Receive {
     if (payload === GET_STARTED || payload === QUIT) {
       this.user.setStep(0);
       this.user.setState(this.user.userData.idFacebook ? STATE.LOGED_IN : STATE.NONE);
+      console.log('getstart', this.user.state);
       return Response.genGetStartedMessage(this.user);
     } else if (payload === MENU.WEBSITE) {
       return Response.genText(i18n.__("website.home"));
