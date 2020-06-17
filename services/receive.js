@@ -95,6 +95,7 @@ module.exports = class Receive {
               Response.genPostbackButton("Lecturer", FEATURE.REGISTER_ROLE_LECTURER),
               quitQuickReply
             ];
+            break;
         }
 
         if (userField) {

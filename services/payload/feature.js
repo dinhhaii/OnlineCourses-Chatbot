@@ -2,9 +2,11 @@
 
 const Response = require("../response"),
   config = require("../config"), 
-  { createUser } = require('../api'),
   i18n = require("../../i18n.config"),
-  { FEATURE, STATE, registerSteps, QUIT, MENU, PROFILE } = require('../../utils/constant');
+  queryString = require('query-string'),
+  { createUser } = require('../api'),
+  generator = require('generate-password'),
+  { FEATURE, STATE, registerSteps, QUIT, MENU, PROFILE, CLIENT_URL } = require('../../utils/constant');
 
 module.exports = class FeatureService {
   constructor(user, webhookEvent) {
@@ -12,15 +14,20 @@ module.exports = class FeatureService {
     this.webhookEvent = webhookEvent;
   }
 
-  handleConfirmCreateUser(success, text) {
+  handleConfirmCreateUser(success, text, password) {
     this.user.setStep(0);
     this.user.resetUpdateData();
     if (success) {
-      this.user.setState(this.user.userData.idFacebook ? STATE.LOGED_IN : STATE.NONE);
-      return Response.genQuickReply(text, [ 
-        Response.genPostbackButton(i18n.__("feature.change_password"), `${config.appUrl}`) 
-      ]);
+      this.user.setState(STATE.LOGED_IN);
+      const query = queryString.stringify(this.user.userData);
+      return [
+        Response.genText(text),
+        Response.genButtonTemplate(i18n.__("register.change_password", { password }), [
+          Response.genWebUrlButton(i18n.__("feature.access_page"),`${CLIENT_URL}/auth/login?${query}`),
+        ]),
+      ];
     } 
+    this.user.setState(STATE.LOGED_IN);
     return Response.genQuickReply(text, [ 
       Response.genPostbackButton(i18n.__("feature.register"), FEATURE.REGISTER),
       Response.genPostbackButton(i18n.__("feature.login"), FEATURE.LOGIN),
@@ -50,7 +57,7 @@ module.exports = class FeatureService {
 
     switch (payload) {
       case MENU.FEATURES:
-        const buttons = this.user.userData._id
+        const buttons = !this.user.userData._id
           ? [
               Response.genPostbackButton(i18n.__("feature.login"), FEATURE.LOGIN),
               Response.genPostbackButton(i18n.__("feature.register"),FEATURE.REGISTER),
@@ -63,24 +70,35 @@ module.exports = class FeatureService {
             ];
         return Response.genButtonTemplate(i18n.__("feature.prompt"), buttons);
       case FEATURE.LOGIN:
-        this.user.setState(STATE.CONNECT_FACEBOOK);
-        return Response.genText(i18n.__("email.input"));
+        switch(this.user.state) {
+          case STATE.NONE: 
+            this.user.setState(STATE.CONNECT_FACEBOOK);
+            return Response.genText(i18n.__("email.input"));
+          case STATE.LOGED_IN: 
+            const query = queryString.stringify(this.user.userData);
+            return Response.genButtonTemplate(i18n.__("login.quick_login"), [
+              Response.genWebUrlButton(i18n.__("feature.access_page"),`${CLIENT_URL}/auth/login?${query}`),
+            ])
+        }
       case FEATURE.REGISTER:
         this.user.setState(STATE.REGISTER);
         this.user.setStep(0);
         return Response.genQuickReply(i18n.__(registerSteps[0].phrase), [ quitQuickReply ]);
       case FEATURE.REGISTER_CONFIRM_YES:
+        const password = generator.generate({ length: 8 });
+
         const newUser = {
           ...this.user.updateUserData,
           idFacebook: this.user.psid,
-          password: '',
+          password,
+          status: 'verified'
         }
         const { data } = await createUser(newUser);
         if (!data.error) {
-          return this.handleConfirmCreateUser(true, i18n.__("register.success"));
+          this.user.setUserData(data);
+          return this.handleConfirmCreateUser(true, i18n.__("register.success"), password);
         }
-        console.log(data.error);
-        return this.handleConfirmCreateUser(false, i18n.__("register.failed"));
+        return this.handleConfirmCreateUser(false, i18n.__("register.failed", { error: data.error }));
       case FEATURE.REGISTER_CONFIRM_NO:
         return this.handleConfirmCreateUser(false, i18n.__("register.cancel"));
       case FEATURE.REGISTER_ROLE_LEANER:

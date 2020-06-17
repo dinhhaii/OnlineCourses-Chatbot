@@ -1,7 +1,7 @@
 "use strict";
 
 const i18n = require("../i18n.config"),
-  { MENU, FEATURE } = require('../utils/constant');
+  { MENU, FEATURE, STATE } = require('../utils/constant');
 
 module.exports = class Response {
   static genQuickReply(text, quickReplies) {
@@ -129,9 +129,7 @@ module.exports = class Response {
   static genGetStartedMessage(user) {
     const buttons = [
       this.genPostbackButton(i18n.__("menu.website"), MENU.WEBSITE),
-      user.userData.idFacebook
-        ? this.genPostbackButton(i18n.__("menu.features"), MENU.FEATURES)
-        : this.genPostbackButton(i18n.__("menu.login"), FEATURE.LOGIN),
+      this.genPostbackButton(i18n.__("menu.features"), MENU.FEATURES),
       this.genPostbackButton(i18n.__("menu.help"), MENU.HELP),
     ];
 
@@ -143,7 +141,9 @@ module.exports = class Response {
         buttons
       )
     ];
-    return this.genGenericTemplate(elements);
+
+    const quickReply = this.genQuickReply('', [ this.genPostbackButton(i18n.__("feature.quick_login"), FEATURE.LOGIN )])
+    return user.state === STATE.LOGED_IN ? [ this.genGenericTemplate(elements), quickReply ] : this.genGenericTemplate(elements);
   }
 
   static genByeMessage(user) {

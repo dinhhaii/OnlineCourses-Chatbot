@@ -6,12 +6,7 @@
 		"website": "Website",
 		"login": "Login",
 		"help": "Help",
-		"features": "Features",
-		"support": "menu.support",
-		"order": "menu.order",
-		"suggestion": "menu.suggestion",
-		"shop": "menu.shop",
-		"start_over": "menu.start_over"
+		"features": "Features"
 	},
 	"get_started": {
 		"welcome": "Hi {{firstName}}! Welcome to Hacademy.",
@@ -33,7 +28,9 @@
 		"update_profile": "Update Profile",
 		"survey": "Survey",
 		"forgot_password": "Forgot Password",
-		"change_password": "Change Password"
+		"change_password": "Change Password",
+		"access_page": "Access Page",
+		"quick_login": "Quick Login"
 	},
 	"course": {
 		"prompt_none": "Sorry, I can't find any course for you. Please find another course or you can refer to some courses bellow.",
@@ -70,10 +67,14 @@
 		"bio": "Your bio",
 		"role": "Choose role you want to apply.",
 		"confirm": "Are you sure you want to create this account?",
-		"info": "Your information:\n• Email: {{email}}\n• First name: {{firstName}}\n• Last name: {{lastName}}\n• Image: {{imageURL}}\n• Bio: {{bio}}\n• Role: {{role}}",
-		"success": "Thank you. Register successfully! Please click button to create a new password.",
-		"failed": "Sorry, an error occured. We can't create your account 😞. Please try again.",
+		"info": "Your information:\n• Email: {{email}}\n• First name: {{firstName}}\n• Last name: {{lastName}}\n• Bio: {{bio}}\n• Role: {{role}}",
+		"success": "Thank you. Register successfully!",
+		"change_password": "Your password is: {{password}}\nAccess page to quick login and change password now 😁.",
+		"failed": "Sorry, an error occured '{{error}}'. We can't create your account 😞. Please try again.",
 		"cancel": "Thank you. Hope to see you."
+	},
+	"login": {
+		"quick_login": "Your account is connected to Facebook. Click 'Quick Login' to access page."
 	},
 	"chat_plugin": {
 		"prompt": "Thanks for visiting our store, be sure to check out all the great styles we have on the summer section."
@@ -86,8 +87,5 @@
 	"confirm": {
 		"yes": "Yes",
 		"no": "No"
-	},
-	"resgister": {
-		"invalid_url": "resgister.invalid_url"
 	}
 }
