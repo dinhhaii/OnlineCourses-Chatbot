@@ -55,6 +55,8 @@ router.get("/confirm", async (req, res) => {
         if (!data.error) {
           users[idFacebook].setUserData(data);
           users[idFacebook].setState(STATE.LOGED_IN);
+          users[idFacebook].resetUpdateData();
+          
           const requestBody = {
             recipient: {
               id: idFacebook,

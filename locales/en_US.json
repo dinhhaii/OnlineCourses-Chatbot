@@ -6,7 +6,11 @@
 		"website": "Website",
 		"login": "Login",
 		"help": "Help",
-		"features": "Features"
+		"features": "Features",
+		"support": "menu.support",
+		"order": "menu.order",
+		"suggestion": "menu.suggestion",
+		"shop": "menu.shop"
 	},
 	"get_started": {
 		"welcome": "Hi {{firstName}}! Welcome to Hacademy.",
@@ -22,6 +26,7 @@
 	},
 	"feature": {
 		"prompt": "What can I do to help?",
+		"get_more_feature": "Do you want to get more features?",
 		"login": "Login",
 		"register": "Register",
 		"schedule": "Schedule",
@@ -31,7 +36,13 @@
 		"change_password": "Change Password",
 		"access_page": "Access Page",
 		"quick_login": "Quick Login",
-		"connect_facebook": "Connect Facebook"
+		"connect_facebook": "Connect Facebook",
+		"check_cart": "Check Cart",
+		"add_coupon": "Add Coupon",
+		"more_feature": "More features",
+		"cart": "Cart",
+		"profile": "Profile",
+		"payment": "Payment"
 	},
 	"course": {
 		"prompt_none": "Sorry, I can't find any course for you. Please find another course or you can refer to some courses bellow.",
@@ -93,7 +104,7 @@
 		"change_password_failed": "Your account is not connected to facebook."
 	},
 	"login": {
-		"quick_login": "Your account is connected to Facebook. Click 'Quick Login' to access page."
+		"quick_login": "Your account is connected to Facebook. Click 'Access Page' to quick login."
 	},
 	"chat_plugin": {
 		"prompt": "Thanks for visiting our store, be sure to check out all the great styles we have on the summer section."
@@ -101,13 +112,19 @@
 	"fallback": {
 		"any": "Sorry, but I don’t recognize \"{{message}}\".",
 		"quit": "Quit",
+		"error": "Sorry, an error occured '{{error}}'. Please try again.",
 		"attachment": "Thanks for sending this attachment, we can connect you to an agent to review it or we can start over"
 	},
 	"confirm": {
 		"yes": "Yes",
 		"no": "No"
 	},
-	"udpate": {
-		"confirm": "udpate.confirm"
+	"cart": {
+		"prevent": "Sorry, your account need to be connected to facebook.",
+		"not_found": "Sorry, your cart not found.",
+		"payment": "Do you want to pay now?",
+		"add_code": "Please send me your CODE.",
+		"error_code": "The CODE was used or entered incorrectly.",
+		"add_code_success": "Your code was added successfully. Check your cart again."
 	}
 }

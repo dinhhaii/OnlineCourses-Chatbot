@@ -21,6 +21,34 @@ module.exports = class Response {
     return response;
   }
 
+  static genReceiptElementTemplate(title, subtitle, quantity, price, image_url) {
+    return { title, subtitle, quantity, price, image_url, currency: "USD"};
+  }
+
+  static genReceiptSummary(subtotal, total_cost, shipping_cost, total_tax) {
+    return { subtotal, shipping_cost, total_tax, total_cost };
+  }
+
+  static genReceiptTemplate(recipient_name, order_number, summary, elements, adjustments) {
+    let response = {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "receipt",
+          recipient_name,
+          order_number,
+          currency: "USD",
+          payment_method: "Visa/MasterCard",
+          summary,
+          elements,
+          adjustments
+        },
+      },
+    };
+
+    return response;
+  }
+
   static genListElementTemplate(title, subtitle, image_url, buttons, default_action) {
     return { title, subtitle, image_url, buttons, default_action }
   }

@@ -4,6 +4,7 @@ const FeatureService = require("./payload/feature"),
   ProfileService = require("./payload/profile"),
   CourseService = require("./payload/course"),
   SubjectService = require("./payload/subject"),
+  CartService = require("./payload/cart"),
   Response = require("./response"),
   GraphAPi = require("./graph-api"),
   config = require("./config"),
@@ -11,7 +12,7 @@ const FeatureService = require("./payload/feature"),
   NLP = require("./nlp"),
   { validURL } = require("../utils/helper"),
   users = require("../app"),
-  { fetchUserByEmail, sendEmail } = require("./api"),
+  { fetchUserByEmail, sendEmail, addCoupon } = require("./api"),
   {
     GET_STARTED,
     MENU,
@@ -23,7 +24,7 @@ const FeatureService = require("./payload/feature"),
     STATE,
     QUIT,
     SERVER_URL,
-    CHATBOT_URL,
+    CART,
     updateProfileSteps,
     registerSteps,
   } = require("../utils/constant");
@@ -72,7 +73,6 @@ module.exports = class Receive {
     }
   }
 
-  // Handles messages events with text
   async handleTextMessage() {
     let message = this.webhookEvent.message.text.trim();
     let response;
@@ -83,8 +83,20 @@ module.exports = class Receive {
     let quickReplies = [ quitQuickReply ];
 
     switch(this.user.state) {
+      case STATE.ADD_COUPON:
+        const { data } = await addCoupon(this.user.userData._id, message);
+        if (!data.error) {
+          if (data.isUpdated) {
+            this.user.setState(STATE.LOGED_IN);
+            return Response.genQuickReply(i18n.__("cart.add_code_success"), [
+              Response.genPostbackButton(i18n.__("feature.check_cart"), CART.CHECK_CART)
+            ])
+          } else {
+            return Response.genQuickReply(i18n.__("cart.error_code"), quickReplies);
+          }
+        }
+        return Response.genQuickReply(i18n.__("fallback.error", { error: data.error }), quickReplies);
       case STATE.UPDATE_USER:
-
         switch(step) {
           case 1: // email
             const regex = /\S+@\S+\.\S+/;
@@ -268,13 +280,11 @@ module.exports = class Receive {
     return response;
   }
 
-  // Handles mesage events with quick replies
   async handleQuickReply() {
     let payload = this.webhookEvent.message.quick_reply.payload;
     return await this.handlePayload(payload);
   }
 
-  // Handles postbacks events
   async handlePostback() {
     let postback = this.webhookEvent.postback;
 
@@ -301,7 +311,7 @@ module.exports = class Receive {
     if (payload === GET_STARTED || payload === QUIT) {
       this.user.setStep(0);
       this.user.setState(this.user.userData.idFacebook ? STATE.LOGED_IN : STATE.NONE);
-      console.log('getstart', this.user.state);
+
       return Response.genGetStartedMessage(this.user);
     } else if (payload === MENU.WEBSITE) {
       return Response.genText(i18n.__("website.home"));
@@ -317,6 +327,9 @@ module.exports = class Receive {
     } else if (payload.includes("SUBJECT")) {
       const subject = new SubjectService(this.user, this.webhookEvent);
       return await subject.handlePayload(payload);
+    } else if (payload.includes("CART")) {
+      const cart = new CartService(this.user, this.webhookEvent);
+      return await cart.handlePayload(payload);
     } else {
       return Response.genText(`This is a default postback message for payload: ${payload}!`);
     }

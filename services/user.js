@@ -56,7 +56,7 @@ module.exports = class User {
   }
 
   setCart(carts) {
-    this.carts = [...carts];
+    this.carts = carts;
   }
 
   setState(value) {

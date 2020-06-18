@@ -55,5 +55,9 @@ module.exports = {
 
     sendEmail: (email, idFacebook) => {
         return axios.get(`${CHATBOT_URL}/email/send?email=${email}&idFacebook=${idFacebook}`);
-    }
+    },
+
+    addCoupon: (idUser, code) => {
+        return axios.post(`${SERVER_URL}/cart/add-coupon`, { idUser, code });
+    },
 }

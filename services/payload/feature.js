@@ -7,7 +7,7 @@ const Response = require("../response"),
   { createUser } = require('../api'),
   jwtExtension = require('jsonwebtoken'),
   generator = require('generate-password'),
-  { FEATURE, STATE, registerSteps, QUIT, MENU, PROFILE, CLIENT_URL, JWT_SECRET } = require('../../utils/constant');
+  { FEATURE, STATE, registerSteps, QUIT, MENU, PROFILE, CLIENT_URL, JWT_SECRET, CART } = require('../../utils/constant');
 
 module.exports = class FeatureService {
   constructor(user, webhookEvent) {
@@ -59,18 +59,18 @@ module.exports = class FeatureService {
 
     switch (payload) {
       case MENU.FEATURES:
-        const buttons = !this.user.userData._id
-          ? [
-              Response.genPostbackButton(i18n.__("feature.login"), FEATURE.LOGIN),
-              Response.genPostbackButton(i18n.__("feature.register"),FEATURE.REGISTER),
-              Response.genPostbackButton(i18n.__("feature.survey"),FEATURE.SURVEY),
-            ]
-          : [ 
-              Response.genPostbackButton(i18n.__("feature.update_profile"),PROFILE.UPDATE),
-              Response.genPostbackButton(i18n.__("feature.schedule"),FEATURE.SCHEDULE),
-              Response.genPostbackButton(i18n.__("feature.survey"),FEATURE.SURVEY),
-            ];
-        return Response.genButtonTemplate(i18n.__("feature.prompt"), buttons);
+        return !this.user.userData._id ? Response.genButtonTemplate(i18n.__("feature.prompt"), [
+          Response.genPostbackButton(i18n.__("feature.login"), FEATURE.LOGIN),
+          Response.genPostbackButton(i18n.__("feature.register"),FEATURE.REGISTER),
+          Response.genPostbackButton(i18n.__("feature.survey"),FEATURE.SURVEY),
+        ]) : [
+          Response.genButtonTemplate(i18n.__("feature.prompt"), [ 
+            Response.genPostbackButton(i18n.__("feature.update_profile"),PROFILE.UPDATE),
+            Response.genPostbackButton(i18n.__("feature.schedule"),FEATURE.SCHEDULE),
+            Response.genPostbackButton(i18n.__("feature.survey"),FEATURE.SURVEY),
+          ]),
+          Response.genQuickReply(i18n.__("feature.get_more_feature"), [Response.genPostbackButton(i18n.__("feature.more_feature"), FEATURE.MORE_FEATURE)])
+        ];
       case FEATURE.LOGIN:
         switch(this.user.state) {
           case STATE.NONE: 
@@ -108,6 +108,19 @@ module.exports = class FeatureService {
         return this.handleChooseRole("learner");
       case FEATURE.REGISTER_ROLE_LECTURER:
         return this.handleChooseRole("lecturer");
+      case FEATURE.MORE_FEATURE: 
+        return [
+          Response.genButtonTemplate(i18n.__("feature.cart"), [
+            Response.genPostbackButton(i18n.__("feature.check_cart"), CART.CHECK_CART),
+            Response.genPostbackButton(i18n.__("feature.add_coupon"), CART.ADD_COUPON),
+            Response.genPostbackButton(i18n.__("feature.payment"), CART.PAYMENT),
+          ]),
+          Response.genButtonTemplate(i18n.__("feature.profile"), [
+            Response.genPostbackButton(i18n.__("feature.quick_login"), FEATURE.LOGIN),
+            Response.genPostbackButton(i18n.__("feature.change_password"), PROFILE.CHANGE_PASSWORD),
+            Response.genPostbackButton(i18n.__("feature.forgot_password"), PROFILE.FORGOT_PASSWORD),
+          ])
+        ]
       case FEATURE.SURVEY:
         break;
       case FEATURE.SCHEDULE:
