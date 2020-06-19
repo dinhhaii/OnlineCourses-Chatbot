@@ -68,4 +68,8 @@ module.exports = {
     removeCourseFromCart: (idUser, _idCourse) => {
         return axios.post(`${SERVER_URL}/cart/remove-course`, { idUser, _idCourse });
     },
+
+    forgotPassword: (email) => {
+        return axios.post(`${SERVER_URL}/user/forgot-password`, { email });
+    }
 }

@@ -81,6 +81,8 @@ module.exports = class Receive {
     const { step } = this.user;
     const { userField } = registerSteps[step];
     let quickReplies = [ quitQuickReply ];
+    const regex = /\S+@\S+\.\S+/;
+    const email = message.toLowerCase();
 
     switch(this.user.state) {
       case STATE.ADD_COUPON:
@@ -99,8 +101,6 @@ module.exports = class Receive {
       case STATE.UPDATE_USER:
         switch(step) {
           case 1: // email
-            const regex = /\S+@\S+\.\S+/;
-            const email = message.toLowerCase();
             if (!regex.test(email)) {
               return Response.genQuickReply(i18n.__("email.invalid"), [ quitQuickReply ]);
             }
@@ -138,7 +138,6 @@ module.exports = class Receive {
       case STATE.REGISTER:
         switch(step) {
           case 1: // email
-            const regex = /\S+@\S+\.\S+/;
             const email = message.toLowerCase();
             if (!regex.test(email)) {
               return Response.genQuickReply(i18n.__("email.invalid"), [ quitQuickReply ]);
@@ -170,8 +169,6 @@ module.exports = class Receive {
         
         return Response.genQuickReply(i18n.__(registerSteps[step + 1].phrase), quickReplies);
       case STATE.CONNECT_FACEBOOK:
-        const regex = /\S+@\S+\.\S+/;
-        const email = message.toLowerCase();
         const registerQuickReply = { 
           title: i18n.__("email.register"),
           payload: FEATURE.REGISTER

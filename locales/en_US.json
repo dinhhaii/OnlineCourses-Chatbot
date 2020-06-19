@@ -106,7 +106,8 @@
 		"change_password_failed": "Your account is not connected to facebook."
 	},
 	"login": {
-		"quick_login": "Your account is connected to Facebook. Click 'Access Page' to quick login."
+		"quick_login": "Your account is connected to Facebook. Click 'Access Page' to quick login.",
+		"forgot_password": "Please enter your email to get confirmation."
 	},
 	"chat_plugin": {
 		"prompt": "Thanks for visiting our store, be sure to check out all the great styles we have on the summer section."
@@ -119,7 +120,8 @@
 	},
 	"confirm": {
 		"yes": "Yes",
-		"no": "No"
+		"no": "No",
+		"email": "Email has been sent to {{email}}. If you don't see the mail, please check your spam inbox. Thank you."
 	},
 	"cart": {
 		"prevent": "Sorry, your account need to be connected to facebook.",

@@ -4,7 +4,7 @@ const Response = require("../response"),
   config = require("../config"), 
   i18n = require("../../i18n.config"),
   queryString = require('query-string'),
-  { updateUser } = require('../api'),
+  { updateUser, forgotPassword } = require('../api'),
   jwtExtension = require('jsonwebtoken'),
   { FEATURE, STATE, QUIT, MENU, PROFILE, CLIENT_URL, JWT_SECRET, updateProfileSteps } = require('../../utils/constant');
 
@@ -40,6 +40,8 @@ module.exports = class ProfileService {
     let response;
 
     const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
+    let loginData = { ...this.user.userData, token: jwtExtension.sign(JSON.stringify(this.user.userData), JWT_SECRET) };
+    let query = queryString.stringify(loginData);
 
     switch (payload) {
       case PROFILE.UPDATE:
@@ -52,7 +54,7 @@ module.exports = class ProfileService {
           _idUser: this.user.userData._id
         }
 
-        const { data } = await updateUser(newUser);
+        let { data } = await updateUser(newUser);
         if (!data.error) {
           this.user.setUserData(data);
           return this.handleConfirmUpdateUser(true, i18n.__("update.success"));
@@ -61,8 +63,6 @@ module.exports = class ProfileService {
       case PROFILE.UPDATE_CONFIRM_NO:
         return this.handleConfirmUpdateUser(false, i18n.__("update.cancel"));
       case PROFILE.CHANGE_PASSWORD:
-        let loginData = { ...this.user.userData, token: jwtExtension.sign(JSON.stringify(this.user.userData), JWT_SECRET) };
-        let query = queryString.stringify(loginData);
         query += "&previousPath=/profile?tab=change-password";
         if (!this.user.userData.idFacebook) {
           return Response.genQuickReply(i18n.__("update.change_password_failed"), [
@@ -72,6 +72,15 @@ module.exports = class ProfileService {
         return Response.genButtonTemplate(i18n.__("update.change_password"), [
           Response.genWebUrlButton(i18n.__("feature.change_password"), `${CLIENT_URL}/auth/login?${query}`)
         ])
+      case PROFILE.FORGOT_PASSWORD:
+        let response = await forgotPassword(this.user.userData.email);
+        if (!response.data.error) {
+          return Response.genQuickReply(i18n.__("confirm.email", { email: this.user.userData.email }), [
+            Response.genPostbackButton(i18n.__("feature.quick_login"), FEATURE.LOGIN),
+            Response.genPostbackButton(i18n.__("feature.change_password"), PROFILE.CHANGE_PASSWORD)
+          ])
+        }
+        return Response.genQuickReply(i18n.__("fallback.error", { error: response.data.error }));
       default:
         return [];
     }
