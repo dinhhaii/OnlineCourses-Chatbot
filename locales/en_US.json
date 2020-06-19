@@ -42,7 +42,9 @@
 		"more_feature": "More features",
 		"cart": "Cart",
 		"profile": "Profile",
-		"payment": "Payment"
+		"payment": "Payment",
+		"remove": "🗑 Remove",
+		"edit_cart": "Edit Cart"
 	},
 	"course": {
 		"prompt_none": "Sorry, I can't find any course for you. Please find another course or you can refer to some courses bellow.",
@@ -125,6 +127,8 @@
 		"payment": "Do you want to pay now?",
 		"add_code": "Please send me your CODE.",
 		"error_code": "The CODE was used or entered incorrectly.",
-		"add_code_success": "Your code was added successfully. Check your cart again."
+		"add_code_success": "Your code was added successfully. Check your cart again.",
+		"add_course_success": "Your code was added successfully. Check your cart again.",
+		"remove_course_success": "Your course has been deleted in your cart."
 	}
 }

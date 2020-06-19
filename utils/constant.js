@@ -1,10 +1,10 @@
 module.exports = {
-  // SERVER_URL: "http://localhost:3000",
-  // CLIENT_URL: "http://localhost:3001",
-  // CHATBOT_URL: "http://localhost:3003",
-  SERVER_URL: "https://hacademy-api.herokuapp.com",
-  CLIENT_URL: "https://cafocc.web.app",
-  CHATBOT_URL: "https://hacademy-chatbot.herokuapp.com",
+  SERVER_URL: "http://localhost:3000",
+  CLIENT_URL: "http://localhost:3001",
+  CHATBOT_URL: "http://localhost:3003",
+  // SERVER_URL: "https://hacademy-api.herokuapp.com",
+  // CLIENT_URL: "https://cafocc.web.app",
+  // CHATBOT_URL: "https://hacademy-chatbot.herokuapp.com",
   JWT_SECRET: "jwt_secret",
   GET_STARTED: "GET_STARTED",
   QUIT: "QUIT",
@@ -46,7 +46,8 @@ module.exports = {
     ADD_TO_CART: "ADD_TO_CART",
     UPDATE_CART: "UPDATE_CART",
     ADD_COUPON: "ADD_COUPON_CART",
-    PAYMENT: "CART_PAYMENT"
+    PAYMENT: "CART_PAYMENT",
+    REMOVE_COURSE: "CART_REMOVE",
   },
   IMAGES: {
     FEEDBACK:

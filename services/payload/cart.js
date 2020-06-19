@@ -4,7 +4,7 @@ const Response = require("../response"),
   config = require("../config"), 
   i18n = require("../../i18n.config"),
   queryString = require('query-string'),
-  { fetchCart } = require('../api'),
+  { fetchCart, addCourseToCart, removeCourseFromCart } = require('../api'),
   jwtExtension = require('jsonwebtoken'),
   { CART, STATE, QUIT, PROFILE, CLIENT_URL, JWT_SECRET, updateProfileSteps } = require('../../utils/constant');
 
@@ -13,6 +13,32 @@ module.exports = class CartService {
     this.user = user;
     this.webhookEvent = webhookEvent;
   }
+
+  generateCourseElement(item) {
+    const { course, discount } = item;
+
+    if (course) {
+      const buttons = [
+        Response.genWebUrlButton(i18n.__("course.detail"), `${config.shopUrl}/course-detail/${course._id}`),
+        Response.genPostbackButton(i18n.__("feature.remove"), `${CART.REMOVE_COURSE}_${course._id}`)
+      ];
+  
+      return Response.genGenericElementTemplate(
+        course.name,
+        discount ? `Discount: -${discount.percentage}% (${discount.code})` : 'Discount: -0%',
+        course.imageURL,
+        buttons,
+        {
+          type: "web_url",
+          url: `${config.shopUrl}/course-detail/${course._id}`,
+          messenger_extensions: true,
+          webview_height_ratio: "tall",
+          fallback_url: `${config.shopUrl}`
+        }
+      );
+    }
+    return;
+  };
 
   async handlePayload(payload) {
     let loginData = { ...this.user.userData, token: jwtExtension.sign(JSON.stringify(this.user.userData), JWT_SECRET) };
@@ -41,8 +67,9 @@ module.exports = class CartService {
                 return [
                     Response.genReceiptTemplate(`${this.user.userData.firstName} ${this.user.userData.lastName}`, data._id, summary, elements, adjustments),
                     Response.genButtonTemplate(i18n.__("cart.payment"), [ 
-                        Response.genWebUrlButton(i18n.__("feature.payment"), `${CLIENT_URL}/auth/login?${query}`)
-                    ])  
+                        Response.genWebUrlButton(i18n.__("feature.payment"), `${CLIENT_URL}/auth/login?${query}`),
+                        Response.genPostbackButton(i18n.__("feature.edit_cart"), CART.REMOVE_COURSE)
+                    ])
                 ]
             }
             return Response.genText(i18n.__("cart.not_found"));
@@ -54,9 +81,34 @@ module.exports = class CartService {
             ])
         } else if (payload === CART.ADD_COUPON) {
             this.user.setState(STATE.ADD_COUPON);
-            return Response.genText(i18n.__("cart.add_code"));
+            return Response.genQuickReply(i18n.__("cart.add_code"), [ quitQuickReply ]);
         } else if (payload.includes(CART.ADD_TO_CART)) {
-    
+            const idCourse = payload.substr(12, payload.length - 12);
+            const { data } = await addCourseToCart(this.user.userData._id, idCourse);
+            if (!data.error) {
+                return Response.genQuickReply(i18n.__("cart.add_course_success"), [
+                    Response.genPostbackButton(i18n.__("feature.check_cart"), CART.CHECK_CART)
+                ])
+            }
+            return Response.genText(i18n.__("fallback.error", { error: data.error }));
+        } else if (payload.includes(CART.REMOVE_COURSE)) {
+            if (payload === CART.REMOVE_COURSE) {
+                const { data } = await fetchCart(this.user.userData._id);
+                if (!data.error) {
+                    const elements = data.items.map(item => this.generateCourseElement(item));
+                    return Response.genGenericTemplate(elements);
+                }
+                return Response.genText(i18n.__("fallback.error", { error: data.error }));
+            }
+
+            const idCourse = payload.substr(11, payload.length - 11);
+            const { data } = await removeCourseFromCart(this.user.userData._id, idCourse);
+            if (!data.error) {
+                return Response.genQuickReply(i18n.__("cart.remove_course_success"), [
+                    Response.genPostbackButton(i18n.__("feature.check_cart"), CART.CHECK_CART)
+                ])
+            }
+            return Response.genText(i18n.__("fallback.error", { error: data.error }));
         }
     }
 

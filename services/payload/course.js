@@ -4,7 +4,7 @@ const Response = require("../response"),
   config = require("../config"),
   i18n = require("../../i18n.config"),
   api = require("../api"),
-  { COURSE } = require('../../utils/constant');
+  { COURSE, CART } = require('../../utils/constant');
 
 module.exports = class CourseService {
   constructor(user, webhookEvent) {
@@ -16,7 +16,7 @@ module.exports = class CourseService {
     if (item) {
       const buttons = [
         Response.genWebUrlButton(i18n.__("course.detail"), `${config.shopUrl}/course-detail/${item._id}`),
-        Response.genPostbackButton(i18n.__("course.add_to_cart"), "TESTADDTOCART")
+        Response.genPostbackButton(i18n.__("course.add_to_cart"), `${CART.ADD_TO_CART}_${item._id}`)
       ];
   
       return Response.genGenericElementTemplate(

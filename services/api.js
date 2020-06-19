@@ -60,4 +60,12 @@ module.exports = {
     addCoupon: (idUser, code) => {
         return axios.post(`${SERVER_URL}/cart/add-coupon`, { idUser, code });
     },
+
+    addCourseToCart: (idUser, _idCourse) => {
+        return axios.post(`${SERVER_URL}/cart/add-course`, { idUser, _idCourse });
+    },
+
+    removeCourseFromCart: (idUser, _idCourse) => {
+        return axios.post(`${SERVER_URL}/cart/remove-course`, { idUser, _idCourse });
+    },
 }
