@@ -122,7 +122,12 @@ module.exports = class FeatureService {
           ])
         ]
       case FEATURE.SURVEY:
-        break;
+        this.user.setState(STATE.CONDUCT_SURVEYS);
+        this.user.setStep(0);
+        return [
+          Response.genText(i18n.__("survey.prompt")),
+          Response.genQuickReply(i18n.__("survey.content"), [ quitQuickReply ])
+        ]
       case FEATURE.SCHEDULE:
         break;
       default:

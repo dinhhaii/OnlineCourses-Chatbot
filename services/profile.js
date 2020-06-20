@@ -4,7 +4,8 @@
 const GraphAPi = require("./graph-api"),
   i18n = require("../i18n.config"),
   config = require("./config"),
-  locales = i18n.getLocales();
+  locales = i18n.getLocales(),
+  constant = require('../utils/constant');
 
 module.exports = class Profile {
   // SET
@@ -102,9 +103,7 @@ module.exports = class Profile {
       greetings.push(this.getGreetingText(locale));
     }
 
-    return {
-      greeting: greetings
-    };
+    return { greeting: greetings };
   }
 
   getPersistentMenu() {
@@ -114,9 +113,7 @@ module.exports = class Profile {
       menuItems.push(this.getMenuItems(locale));
     }
 
-    return {
-      persistent_menu: menuItems
-    };
+    return { persistent_menu: menuItems };
   }
 
   getGreetingText(locale) {
@@ -126,12 +123,9 @@ module.exports = class Profile {
 
     let localizedGreeting = {
       locale: param,
-      text: i18n.__("profile.greeting", {
-        user_first_name: "{{user_first_name}}"
-      })
+      text: i18n.__("profile.greeting", { user_first_name: "{{user_first_name}}" })
     };
 
-    console.log(localizedGreeting);
     return localizedGreeting;
   }
 
@@ -145,36 +139,35 @@ module.exports = class Profile {
       composer_input_disabled: false,
       call_to_actions: [
         {
-          title: i18n.__("menu.support"),
+          title: i18n.__("menu.features"),
           type: "nested",
           call_to_actions: [
             {
-              title: i18n.__("menu.order"),
+              title: i18n.__("feature.login"),
               type: "postback",
-              payload: "TRACK_ORDER"
+              payload: constant.FEATURE.LOGIN
             },
             {
-              title: i18n.__("menu.help"),
+              title: i18n.__("feature.register"),
               type: "postback",
-              payload: "CARE_HELP"
+              payload: constant.FEATURE.REGISTER
             }
           ]
         },
         {
-          title: i18n.__("menu.suggestion"),
+          title: i18n.__("menu.help"),
           type: "postback",
-          payload: "CURATION"
+          payload: constant.FEATURE.HELP
         },
         {
+          title: i18n.__("menu.website"),
           type: "web_url",
-          title: i18n.__("menu.shop"),
-          url: config.shopUrl,
+          url: config.clientUrl,
           webview_height_ratio: "full"
         }
       ]
     };
 
-    console.log(localizedMenu);
     return localizedMenu;
   }
 
@@ -183,7 +176,6 @@ module.exports = class Profile {
       whitelisted_domains: config.whitelistedDomains
     };
 
-    console.log(whitelistedDomains);
     return whitelistedDomains;
   }
 };

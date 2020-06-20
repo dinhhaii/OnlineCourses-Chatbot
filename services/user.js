@@ -8,9 +8,10 @@ module.exports = class User {
     this.psid = psid;
     this.firstName = "";
     this.lastName = "";
-    this.locale = "";
-    this.timezone = "";
+    this.timezone = 7;
+    this.locale = "en_US";
     this.gender = "neutral";
+    
     // Account user
     this.state = STATE.NONE;
     this.step = 0;
@@ -26,7 +27,8 @@ module.exports = class User {
       status: "",
       idFacebook: "",
     };
-    this.carts = [];
+    this.carts = {};
+    this.survey = {};
 
     if (userData) {
       this.userData = { ...userData };
@@ -67,6 +69,14 @@ module.exports = class User {
     this.step = value;
   }
 
+  setSurvey(survey) {
+    this.survey = { ...this.survey, survey };
+  }
+
+  resetSurvey() {
+    this.survey = {};
+  }
+
   resetUpdateData() {
     this.updateUserData = {};
   }
@@ -85,11 +95,9 @@ module.exports = class User {
     this.setProfileFacebook(userProfile);
     if (id) {
       const { data } = await fetchUser(id);
-      if (data) {
-        const response = await fetchCart(data._id);
+      if (!data.error) {
         this.setState(STATE.LOGED_IN);
         this.setUserData(data);
-        this.setCart(response.data.items);
       } else {
         console.error("User not found");
       }

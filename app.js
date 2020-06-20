@@ -9,10 +9,11 @@ const express = require("express"),
   nlpRouter = require('./routes/nlp'),
   emailRouter = require('./routes/email'),
   indexRouter = require('./routes/index'),
+  constant = require('./utils/constant'),
   NLP = require('./services/nlp');
 
-  // NLP.trainData();
-  const users = {};
+// NLP.trainData();
+const users = {};
 
 // Parse application/x-www-form-urlencoded
 app.use(
@@ -57,25 +58,15 @@ config.checkEnvVariables();
 var listener = app.listen(config.port, function() {
   console.log("Your app is listening on port " + listener.address().port);
 
-  if (
-    Object.keys(config.personas).length == 0 &&
-    config.appUrl &&
-    config.verifyToken
-  ) {
-    console.log(
-      "Is this the first time running?\n" +
-        "Make sure to set the both the Messenger profile, persona " +
-        "and webhook by visiting:\n" +
-        config.appUrl +
-        "/profile?mode=all&verify_token=" +
-        config.verifyToken
-    );
+  if (Object.keys(config.personas).length == 0 && config.appUrl && config.verifyToken) {
+    console.log(`CONFIG: ${config.appUrl}/profile?mode=all&verify_token=${config.verifyToken}`);
   }
+  console.log(`NLP: ${config.appUrl}/nlp`)
+  console.log("MESSENGER: https://m.me/" + config.pageId);
+  console.log(`SERVER URL: ${constant.SERVER_URL}`);
+  console.log(`CLIENT URL: ${constant.CLIENT_URL}`);
+  console.log(`ADMIN URL: ${constant.ADMIN_URL}`);
 
-  if (config.pageId) {
-    console.log("Test your app by messaging:");
-    console.log("https://m.me/" + config.pageId);
-  }
 });
 
 module.exports = users;

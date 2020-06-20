@@ -132,5 +132,12 @@
 		"add_code_success": "Your code was added successfully. Check your cart again.",
 		"add_course_success": "Your code was added successfully. Check your cart again.",
 		"remove_course_success": "Your course has been deleted in your cart."
+	},
+	"survey": {
+		"prompt": "Hi, the survey only takes about 1 minute. We will always hear from you and keep improving in the future. Thank you!",
+		"rate": "Your satisfaction level about our application [1-5]:",
+		"content": "Do you think Chatbot is useful? Do you want us to improve or modify any feature?",
+		"thanks": "Thank you. Your survey has completed",
+		"rate_warn": "Sorry, your rate must be from 1 to 5. Please try again"
 	}
 }

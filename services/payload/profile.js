@@ -6,7 +6,7 @@ const Response = require("../response"),
   queryString = require('query-string'),
   { updateUser, forgotPassword } = require('../api'),
   jwtExtension = require('jsonwebtoken'),
-  { FEATURE, STATE, QUIT, MENU, PROFILE, CLIENT_URL, JWT_SECRET, updateProfileSteps } = require('../../utils/constant');
+  { FEATURE, STATE, QUIT, PROFILE, CLIENT_URL, JWT_SECRET, updateProfileSteps } = require('../../utils/constant');
 
 module.exports = class ProfileService {
   constructor(user, webhookEvent) {

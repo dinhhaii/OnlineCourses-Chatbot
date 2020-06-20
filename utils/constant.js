@@ -1,10 +1,10 @@
 module.exports = {
-  // SERVER_URL: "http://localhost:3000",
-  // CLIENT_URL: "http://localhost:3001",
-  // CHATBOT_URL: "http://localhost:3003",
-  SERVER_URL: "https://hacademy-api.herokuapp.com",
-  CLIENT_URL: "https://cafocc.web.app",
-  CHATBOT_URL: "https://hacademy-chatbot.herokuapp.com",
+  SERVER_URL: "http://localhost:3000",
+  CLIENT_URL: "http://localhost:3001",
+  ADMIN_URL: "http://locahost:3002",
+  // SERVER_URL: "https://hacademy-api.herokuapp.com",
+  // CLIENT_URL: "https://cafocc.web.app",
+  // ADMIN_URL: "https://cafocc-cms.web.app",
   JWT_SECRET: "jwt_secret",
   GET_STARTED: "GET_STARTED",
   QUIT: "QUIT",
@@ -24,6 +24,7 @@ module.exports = {
     SURVEY: "FEATURE_SURVEY",
     SCHEDULE: "FEATURE_SCHEDULE",
     MORE_FEATURE: "MORE_FEATURE",
+    HELP: "FEATURE_HELP"
   },
   COURSE: {
     COURSES: "COURSES",
@@ -61,7 +62,8 @@ module.exports = {
     CONNECT_FACEBOOK: "CONNECT_FACEBOOK",
     NONE: "NONE",
     ADD_COUPON: "ADD_COUPON",
-    REGISTER: "REGISTER"
+    REGISTER: "REGISTER",
+    CONDUCT_SURVEYS: "CONDUCT_SURVEYS"
   },
   registerSteps: [
     { phrase: "register.get_started"},
@@ -81,5 +83,9 @@ module.exports = {
     { phrase: "update.image_url", userField: "imageURL" },
     { phrase: "update.bio", userField: "bio" },
     { phrase: "update.info"}
+  ],
+  surveySteps: [
+    { phrase: "survey.content", field: "content" },
+    { phrase: "survey.rate", field: "rate" },
   ]
 };

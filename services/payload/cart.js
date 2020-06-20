@@ -6,7 +6,7 @@ const Response = require("../response"),
   queryString = require('query-string'),
   { fetchCart, addCourseToCart, removeCourseFromCart } = require('../api'),
   jwtExtension = require('jsonwebtoken'),
-  { CART, STATE, QUIT, PROFILE, CLIENT_URL, JWT_SECRET, updateProfileSteps } = require('../../utils/constant');
+  { CART, STATE, QUIT, CLIENT_URL, JWT_SECRET } = require('../../utils/constant');
 
 module.exports = class CartService {
   constructor(user, webhookEvent) {

@@ -12,7 +12,7 @@ const FeatureService = require("./payload/feature"),
   NLP = require("./nlp"),
   { validURL } = require("../utils/helper"),
   users = require("../app"),
-  { fetchUserByEmail, sendEmail, addCoupon } = require("./api"),
+  { fetchUserByEmail, sendEmail, addCoupon, createSurvey } = require("./api"),
   {
     GET_STARTED,
     MENU,
@@ -80,84 +80,144 @@ module.exports = class Receive {
     const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
     const { step } = this.user;
     const { userField } = registerSteps[step];
-    let quickReplies = [ quitQuickReply ];
     const regex = /\S+@\S+\.\S+/;
     const email = message.toLowerCase();
+    let quickReplies = [ quitQuickReply ];
 
-    switch(this.user.state) {
+    switch (this.user.state) {
+      case STATE.CONDUCT_SURVEYS:
+        if (step === 0) {
+          this.user.setSurvey({ content: message });
+          this.user.setStep(step + 1);
+          return Response.genQuickReply(i18n.__("survey.rate"), [ quitQuickReply ]);
+        }
+        const rate = parseInt(message);
+        if (rate >= 1 && rate <= 5) {
+          this.user.setSurvey({ rate });
+          const response = await createSurvey(this.user.userData._id, this.user.survey.rate, this.user.survey.content);
+          if (!response.data.error) {
+            this.user.setState(this.user.userData.idFacebook ? STATE.LOGED_IN : STATE.NONE);
+            this.user.setStep(0);
+            this.user.resetSurvey();
+            return Response.genText(i18n.__("survey.thanks"));
+          }
+          return Response.genQuickReply(
+            i18n.__("fallback.error", { error: response.data.error }),
+            [quitQuickReply]
+          );
+        }
+        return Response.genQuickReply(i18n.__("survey.rate_warn"), [ quitQuickReply ]);
       case STATE.ADD_COUPON:
         const { data } = await addCoupon(this.user.userData._id, message);
         if (!data.error) {
           if (data.isUpdated) {
             this.user.setState(STATE.LOGED_IN);
             return Response.genQuickReply(i18n.__("cart.add_code_success"), [
-              Response.genPostbackButton(i18n.__("feature.check_cart"), CART.CHECK_CART)
-            ])
+              Response.genPostbackButton(
+                i18n.__("feature.check_cart"),
+                CART.CHECK_CART
+              ),
+            ]);
           } else {
-            return Response.genQuickReply(i18n.__("cart.error_code"), quickReplies);
+            return Response.genQuickReply(
+              i18n.__("cart.error_code"),
+              quickReplies
+            );
           }
         }
-        return Response.genQuickReply(i18n.__("fallback.error", { error: data.error }), quickReplies);
+        return Response.genQuickReply(
+          i18n.__("fallback.error", { error: data.error }),
+          quickReplies
+        );
       case STATE.UPDATE_USER:
-        switch(step) {
+        switch (step) {
           case 1: // email
             if (!regex.test(email)) {
-              return Response.genQuickReply(i18n.__("email.invalid"), [ quitQuickReply ]);
+              return Response.genQuickReply(i18n.__("email.invalid"), [
+                quitQuickReply,
+              ]);
             }
             break;
           case 4: // image
             if (message == 0) {
               this.user.setStep(step + 1);
-              return Response.genQuickReply(i18n.__(updateProfileSteps[step + 1].phrase), quickReplies);
-
+              return Response.genQuickReply(
+                i18n.__(updateProfileSteps[step + 1].phrase),
+                quickReplies
+              );
             } else if (!validURL(message)) {
               return [
-                Response.genQuickReply(i18n.__("update.invalid_url"), [ quitQuickReply ]),
-                Response.genText(i18n.__("update.image_url"))
-              ]
+                Response.genQuickReply(i18n.__("update.invalid_url"), [
+                  quitQuickReply,
+                ]),
+                Response.genText(i18n.__("update.image_url")),
+              ];
             }
           case 5: // bio - nextStep: confirm
             this.user.setStep(step + 1);
             this.user.setUpdateData({ [userField]: message });
             return [
-              Response.genText(i18n.__(updateProfileSteps[step + 1].phrase, { ...this.user.updateUserData })),
-              Response.genQuickReply(i18n.__("update.confirm"), [ 
-                Response.genPostbackButton(i18n.__("confirm.yes"), PROFILE.UPDATE_CONFIRM_YES),
-                Response.genPostbackButton(i18n.__("confirm.no"), PROFILE.UPDATE_CONFIRM_NO),
-                Response.genPostbackButton(i18n.__("fallback.quit"), QUIT)
-              ])
-            ]
+              Response.genText(
+                i18n.__(updateProfileSteps[step + 1].phrase, {
+                  ...this.user.updateUserData,
+                })
+              ),
+              Response.genQuickReply(i18n.__("update.confirm"), [
+                Response.genPostbackButton(
+                  i18n.__("confirm.yes"),
+                  PROFILE.UPDATE_CONFIRM_YES
+                ),
+                Response.genPostbackButton(
+                  i18n.__("confirm.no"),
+                  PROFILE.UPDATE_CONFIRM_NO
+                ),
+                Response.genPostbackButton(i18n.__("fallback.quit"), QUIT),
+              ]),
+            ];
         }
 
         if (userField) {
           this.user.setUpdateData({ [userField]: message });
         }
         this.user.setStep(step + 1);
-        
-        return Response.genQuickReply(i18n.__(updateProfileSteps[step + 1].phrase), quickReplies);
+
+        return Response.genQuickReply(
+          i18n.__(updateProfileSteps[step + 1].phrase),
+          quickReplies
+        );
       case STATE.REGISTER:
-        switch(step) {
+        switch (step) {
           case 1: // email
             const email = message.toLowerCase();
             if (!regex.test(email)) {
-              return Response.genQuickReply(i18n.__("email.invalid"), [ quitQuickReply ]);
+              return Response.genQuickReply(i18n.__("email.invalid"), [
+                quitQuickReply,
+              ]);
             }
             break;
           case 4: // image
             if (message == 0) {
-              message = `${SERVER_URL}/images/no-avatar.png`
+              message = `${SERVER_URL}/images/no-avatar.png`;
             } else if (!validURL(message)) {
               return [
-                Response.genQuickReply(i18n.__("register.invalid_url"), [ quitQuickReply ]),
-                Response.genText(i18n.__("register.image_url"))
-              ]
-            } 
+                Response.genQuickReply(i18n.__("register.invalid_url"), [
+                  quitQuickReply,
+                ]),
+                Response.genText(i18n.__("register.image_url")),
+              ];
+            }
             break;
           case 5: // bio - nextStep: role
-            quickReplies = [ 
-              Response.genPostbackButton("Learner", FEATURE.REGISTER_ROLE_LEANER),
-              Response.genPostbackButton("Lecturer", FEATURE.REGISTER_ROLE_LECTURER),
-              quitQuickReply
+            quickReplies = [
+              Response.genPostbackButton(
+                "Learner",
+                FEATURE.REGISTER_ROLE_LEANER
+              ),
+              Response.genPostbackButton(
+                "Lecturer",
+                FEATURE.REGISTER_ROLE_LECTURER
+              ),
+              quitQuickReply,
             ];
             break;
         }
@@ -166,13 +226,16 @@ module.exports = class Receive {
           this.user.setUpdateData({ [userField]: message });
         }
         this.user.setStep(step + 1);
-        
-        return Response.genQuickReply(i18n.__(registerSteps[step + 1].phrase), quickReplies);
+
+        return Response.genQuickReply(
+          i18n.__(registerSteps[step + 1].phrase),
+          quickReplies
+        );
       case STATE.CONNECT_FACEBOOK:
-        const registerQuickReply = { 
+        const registerQuickReply = {
           title: i18n.__("email.register"),
-          payload: FEATURE.REGISTER
-        }
+          payload: FEATURE.REGISTER,
+        };
 
         if (regex.test(email)) {
           const { data } = await fetchUserByEmail(email);
@@ -183,47 +246,62 @@ module.exports = class Receive {
               this.user.setState(STATE.NONE);
               return Response.genText(i18n.__("email.confirm", { email }));
             }
-            return Response.genText(`An error has occured: '${responseSendEmail.data.error}'. We have been notified and will fix the issue shortly!`);
+            return Response.genText(
+              `An error has occured: '${responseSendEmail.data.error}'. We have been notified and will fix the issue shortly!`
+            );
           } else {
-            return Response.genQuickReply(i18n.__("email.not_found", { email }), [registerQuickReply, quitQuickReply])
+            return Response.genQuickReply(
+              i18n.__("email.not_found", { email }),
+              [registerQuickReply, quitQuickReply]
+            );
           }
         } else {
-          return Response.genQuickReply(i18n.__("email.invalid"), [quitQuickReply])
+          return Response.genQuickReply(i18n.__("email.invalid"), [
+            quitQuickReply,
+          ]);
         }
       default:
-        let greeting = this.firstEntity(this.webhookEvent.message.nlp, "greetings");
+        let greeting = this.firstEntity(
+          this.webhookEvent.message.nlp,
+          "greetings"
+        );
         let bye = this.firstEntity(this.webhookEvent.message.nlp, "bye");
         const result = await NLP.process(message.toLowerCase());
         const { intent, answers } = result;
         console.log("Message: ", message, " - Intent: ", intent);
-    
-        
+
         if (greeting && greeting.confidence > 0.8) {
           response = Response.genGetStartedMessage(this.user);
         } else if (bye && bye.confidence > 0.8) {
           response = Response.genByeMessage(this.user);
         } else if (intent !== "None") {
           switch (intent) {
-            case "course": 
+            case "course":
               response = await this.handlePayload(COURSE.COURSES);
               break;
-            case "subject": 
+            case "subject":
               response = await this.handlePayload(SUBJECT.SUBJECTS);
               break;
             case "feedback":
               response = [
-                Response.genText(answers[Math.floor(Math.random() * answers.length)].answer),
-                Response.genImageTemplate(IMAGES.FEEDBACK)
-              ]
+                Response.genText(
+                  answers[Math.floor(Math.random() * answers.length)].answer
+                ),
+                Response.genImageTemplate(IMAGES.FEEDBACK),
+              ];
               break;
             case "report":
               response = [
-                Response.genText(answers[Math.floor(Math.random() * answers.length)].answer),
-                Response.genImageTemplate(IMAGES.REPORT)
-              ]
+                Response.genText(
+                  answers[Math.floor(Math.random() * answers.length)].answer
+                ),
+                Response.genImageTemplate(IMAGES.REPORT),
+              ];
               break;
             default:
-              const { answer } = answers[Math.floor(Math.random() * answers.length)];
+              const { answer } = answers[
+                Math.floor(Math.random() * answers.length)
+              ];
               response = Response.genText(answer);
           }
         } else {

@@ -4,7 +4,6 @@ const router = require("express").Router(),
   User = require("../services/user"),
   config = require("../services/config"),
   i18n = require("../i18n.config"),
-  { fetchUser, fetchCart } = require('../services/api'),
   users = require('../app');
 
 router.get("/", function(_req, res) {
@@ -89,7 +88,7 @@ router.post("/webhook", async (req, res) => {
             console.log("Profile is unavailable:", error);
           })
       } else {
-        // i18n.setLocale(users[senderPsid].locale);
+        i18n.setLocale("en_US");
         let receiveMessage = new Receive(users[senderPsid], webhookEvent);
         return await receiveMessage.handleMessage();
       }
@@ -114,9 +113,7 @@ router.get("/profile", (req, res) => {
     if (token === config.verifyToken) {
       if (mode == "webhook" || mode == "all") {
         Profile.setWebhook();
-        res.write(
-          `<p>Set app ${config.appId} call to ${config.webhookUrl}</p>`
-        );
+        res.write(`<p>Set app ${config.appId} call to ${config.webhookUrl}</p>`);
       }
       if (mode == "profile" || mode == "all") {
         Profile.setThread();
@@ -130,10 +127,8 @@ router.get("/profile", (req, res) => {
             to your environment variables:</p>"
         );
         res.write("<ul>");
-        res.write(`<li>PERSONA_BILLING = ${config.personaBilling.id}</li>`);
+        res.write(`<li>PERSONA_TECHNICAL = ${config.personaTechnical.id}</li>`);
         res.write(`<li>PERSONA_CARE = ${config.personaCare.id}</li>`);
-        res.write(`<li>PERSONA_ORDER = ${config.personaOrder.id}</li>`);
-        res.write(`<li>PERSONA_SALES = ${config.personaSales.id}</li>`);
         res.write("</ul>");
       }
       if (mode == "nlp" || mode == "all") {

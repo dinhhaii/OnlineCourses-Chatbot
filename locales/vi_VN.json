@@ -72,5 +72,9 @@
 	"fallback": {
 		"any": "Rất tiếc, nhưng tôi không nhận ra tin nhắn \"{{message}}\".",
 		"attachment": "Cảm ơn bạn đã gửi file đính kèm. Chúng tôi có thể kết nối bạn với nhân viên để xem lại file này hoặc chúng ta có thể bắt đầu lại."
+	},
+	"feature": {
+		"login": "feature.login",
+		"register": "feature.register"
 	}
 }
