@@ -90,6 +90,8 @@ module.exports = class FeatureService {
 
   async handlePayload(payload) {
     const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
+    const scheduleFeature = Response.genPostbackButton(i18n.__("feature.schedule"), FEATURE.SCHEDULE);
+
     let response;
 
     switch (payload) {
@@ -173,14 +175,42 @@ module.exports = class FeatureService {
           const elements = data.map(element => {
             return this.generateCourseElementForSchedule(element.course, element.invoice, element.timer);
           })
+
+
+          let sliceElement = elements.length > 10 ? elements.slice(0, 10) : elements;
           
           return [
-            Response.genText(i18n.__("schedule.course", { count: response.data.length })),
-            Response.genGenericTemplate(elements),
-            Response.genText(i18n.__("schedule.get_started"))
+            Response.genText(i18n.__("schedule.get_started")),
+            Response.genGenericTemplate(sliceElement),
+            elements.length > 10
+              ? Response.genQuickReply(i18n.__("schedule.course", { count: elements.length }), [
+                  Response.genPostbackButton(i18n.__("schedule.view_all"), FEATURE.ALL_INVOICE)
+                ])
+              : Response.genText(i18n.__("schedule.course", { count: elements.length }))
           ]
         }
         return Response.genQuickReply(i18n.__("fallback.error", { error: response.data.error }));
+      case FEATURE.ALL_INVOICE:
+        response = await fetchInvoices(this.user.userData._id);
+        if (!response.data.error) {
+          const data = response.data.filter(e => !e.course.isDelete && e.invoice.status !== 'canceled' && e.invoice.status !== 'reported');
+          if (data.length === 0) {
+            return Response.genText(i18n.__("schedule.no_course"));
+          }
+          let elements = data.map(element => {
+            return this.generateCourseElementForSchedule(element.course, element.invoice, element.timer);
+          })
+          let index = 0;
+          let allElements = [];
+          while(elements.length > index) {
+            allElements.push(elements.slice(index, index + 10));
+            index += 10;
+          }
+          return [
+            ...allElements.map(item => Response.genGenericTemplate(item)),
+            Response.genText(i18n.__("schedule.course", { count: elements.length }))
+          ]
+        }
       case FEATURE.SCHEDULE_CONFIRM_YES:
         const { _idInvoice, time, days } = this.user.schedule;
         response = await createTimer(this.user.userData._id, _idInvoice, time, days);
@@ -202,7 +232,7 @@ module.exports = class FeatureService {
     }
 
     if (payload.includes(FEATURE.REMOVE_SCHEDULE)) {
-      const _idInvoice = payload.substr(21, payload.length - 21);
+      const _idInvoice = payload.substr(24, payload.length - 24);
       this.user.setSchedule({ _idInvoice });
       response = await updateTimer(this.user.userData._id, _idInvoice, undefined , undefined, 'canceled');
       if (!response.data.error) {
@@ -210,7 +240,9 @@ module.exports = class FeatureService {
           Response.genPostbackButton(i18n.__("feature.schedule"), FEATURE.SCHEDULE)
         ]);
       }
-      return Response.genText(i18n.__("fallback.error", { error: response.data.error }))
+      return Response.genQuickReply(i18n.__("fallback.error", { error: response.data.error }), [
+        Response.genPostbackButton(i18n.__("feature.schedule"), FEATURE.SCHEDULE)
+      ])
     }
 
     return [];

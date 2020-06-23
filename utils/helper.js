@@ -61,7 +61,7 @@ module.exports = {
     const tokens = days.split(',').map(value => value.toLowerCase().trim());
     const result = [];
 
-    if (tokens.indexOf("daily") !== -1) {
+    if (tokens.indexOf("daily") !== -1 || tokens.indexOf("everyday") !== -1) {
       return [0,1,2,3,4,5,6];
     }
 
