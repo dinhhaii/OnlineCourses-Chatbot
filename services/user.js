@@ -29,6 +29,7 @@ module.exports = class User {
     };
     this.carts = {};
     this.survey = {};
+    this.schedule = {};
 
     if (userData) {
       this.userData = { ...userData };
@@ -43,6 +44,10 @@ module.exports = class User {
 
   setUpdateData(data) {
     this.updateUserData = { ...this.updateUserData, ...data };
+  }
+
+  setSchedule(data) {
+    this.schedule = { ...this.schedule, ...data };
   }
 
   setProfileFacebook(profile) {
@@ -70,7 +75,7 @@ module.exports = class User {
   }
 
   setSurvey(survey) {
-    this.survey = { ...this.survey, survey };
+    this.survey = { ...this.survey, ...survey };
   }
 
   resetSurvey() {
@@ -81,13 +86,8 @@ module.exports = class User {
     this.updateUserData = {};
   }
 
-  checkUpdateUser() {
-    for (let key of Object.keys(this.userData)) {
-      if (this.userData[key] !== this.updateUserData[key]) {
-        return false;
-      }
-    }
-    return true;
+  resetSchedule() {
+    this.schedule = {};
   }
 
   async setProfile(userProfile) {

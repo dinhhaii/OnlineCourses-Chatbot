@@ -1,10 +1,10 @@
 module.exports = {
-  // SERVER_URL: "http://localhost:3000",
-  // CLIENT_URL: "http://localhost:3001",
-  // ADMIN_URL: "http://locahost:3002",
-  SERVER_URL: "https://hacademy-api.herokuapp.com",
-  CLIENT_URL: "https://cafocc.web.app",
-  ADMIN_URL: "https://cafocc-cms.web.app",
+  SERVER_URL: "http://localhost:3000",
+  CLIENT_URL: "http://localhost:3001",
+  ADMIN_URL: "http://locahost:3002",
+  // SERVER_URL: "https://hacademy-api.herokuapp.com",
+  // CLIENT_URL: "https://cafocc.web.app",
+  // ADMIN_URL: "https://cafocc-cms.web.app",
   JWT_SECRET: "jwt_secret",
   GET_STARTED: "GET_STARTED",
   QUIT: "QUIT",
@@ -23,6 +23,10 @@ module.exports = {
     LOGOUT: "FEATURE_LOGOUT",
     SURVEY: "FEATURE_SURVEY",
     SCHEDULE: "FEATURE_SCHEDULE",
+    SCHEDULE_CONFIRM_YES: "FEATURE_SCHEDULE_YES",
+    SCHEDULE_CONFIRM_NO: "FEATURE_SCHEDULE_NO",
+    ADD_SCHEDULE: "ADD_SCHEDULE_FEATURE",
+    REMOVE_SCHEDULE: "REMOVE_SCHEDULE_FEATURE",
     MORE_FEATURE: "MORE_FEATURE",
     HELP: "FEATURE_HELP"
   },
@@ -63,7 +67,8 @@ module.exports = {
     NONE: "NONE",
     ADD_COUPON: "ADD_COUPON",
     REGISTER: "REGISTER",
-    CONDUCT_SURVEYS: "CONDUCT_SURVEYS"
+    CONDUCT_SURVEYS: "CONDUCT_SURVEYS",
+    SCHEDULE: "SCHEDULE"
   },
   registerSteps: [
     { phrase: "register.get_started"},
@@ -83,5 +88,10 @@ module.exports = {
     { phrase: "update.image_url", userField: "imageURL" },
     { phrase: "update.bio", userField: "bio" },
     { phrase: "update.info"}
+  ],
+  scheduleSteps: [
+    { phrase: "schedule.time", field: "time" },
+    { phrase: "schedule.days", field: "days" },
+    { phrase: "schedule.info" }
   ]
 };

@@ -15,7 +15,7 @@ module.exports = class SubjectService {
   generateSubjectElement(item) {
     if (item) {
       const buttons = [
-        Response.genWebUrlButton(i18n.__("subject.detail"), `${config.shopUrl}/courses?subject=${item.name}`)
+        Response.genWebUrlButton(i18n.__("subject.detail"), `${config.clientUrl}/courses?subject=${item.name}`)
       ];
       
       return Response.genGenericElementTemplate(
@@ -25,10 +25,10 @@ module.exports = class SubjectService {
         buttons,
         {
           type: "web_url",
-          url: `${config.shopUrl}/courses?subject=${item.name}`,
+          url: `${config.clientUrl}/courses?subject=${item.name}`,
           messenger_extensions: true,
           webview_height_ratio: "tall",
-          fallback_url: `${config.shopUrl}/courses`,
+          fallback_url: `${config.clientUrl}/courses`,
         }
       );
     }

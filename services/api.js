@@ -76,6 +76,18 @@ module.exports = {
     },
 
     createSurvey: (_idUser, rate, content) => {
-        return instance.post(`${SERVER_URL}/survey/create`, { _idUser, rate, content })
+        return instance.post(`${SERVER_URL}/survey/create`, { _idUser, rate, content });
+    },
+
+    createTimer: (_idUser, _idInvoice, time, days) => {
+        return instance.post(`${SERVER_URL}/notification/create-timer`, { _idUser, _idInvoice, time, days });
+    },
+
+    updateTimer: (_idUser, _idInvoice, time, days, status) => {
+        return instance.post(`${SERVER_URL}/notification/update-timer`, { _idUser, _idInvoice, status, time, days });
+    },
+
+    fetchInvoices: (_idUser) => {
+        return instance.get(`${SERVER_URL}/course/${_idUser}/enrolled`);
     }
 }

@@ -139,5 +139,22 @@
 		"content": "Do you think Chatbot is useful? Do you want us to improve or modify any feature?",
 		"thanks": "Thank you. Your survey has completed",
 		"rate_warn": "Sorry, your rate must be from 1 to 5. Please try again"
+	}, 
+	"schedule": {
+		"add_notification": "Notification",
+		"remove_notification": "Unsubcribe",
+		"get_started": "Press the 'Notification' to receive learning reminder or 'Unsubcribe' to remove reminder.",
+		"course": "There are {{count}} courses you enrolled.",
+		"no_course": "You haven't paid for any courses",
+		"time": "Enter your time you want to get reminder in 24 hours format (hh:mm)",
+		"days": "Enter your days in week (Eg: 'monday, wednesday, friday' or 'daily' if you want to get notification everyday)",
+		"info": "Your information:\n• Time: {{time}}\n• Days: {{days}}",
+		"invalid_time": "Your time is invalid. The time in 24 hours format (Eg: '20:30', '15:10', ...)",
+		"invalid_days": "Your days is invalid. We accept values: [sunday - saturday] / [0 - 6] / 'daily', separated by commas.",
+		"success": "Thank you. Your reminder was created successfully!",
+		"failed": "Sorry, something wrong when we create your reminder. Please try again.",
+		"confirm": "Are you sure you want to create reminder?",
+		"course_detail": "Course Detail",
+		"cancel_success": "Turn off notification successfully."
 	}
 }

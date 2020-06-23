@@ -7,10 +7,11 @@ const FeatureService = require("./payload/feature"),
   CartService = require("./payload/cart"),
   Response = require("./response"),
   GraphAPi = require("./graph-api"),
-  config = require("./config"),
+  queryString = require('query-string'),
+  jwtExtension = require('jsonwebtoken'),
   i18n = require("../i18n.config"),
   NLP = require("./nlp"),
-  { validURL } = require("../utils/helper"),
+  { validURL, validDays, validTime, getDayString } = require("../utils/helper"),
   users = require("../app"),
   { fetchUserByEmail, sendEmail, addCoupon, createSurvey } = require("./api"),
   {
@@ -27,6 +28,9 @@ const FeatureService = require("./payload/feature"),
     CART,
     updateProfileSteps,
     registerSteps,
+    scheduleSteps,
+    JWT_SECRET,
+    CLIENT_URL
   } = require("../utils/constant");
 
 module.exports = class Receive {
@@ -80,11 +84,45 @@ module.exports = class Receive {
     const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
     const { step } = this.user;
     const { userField } = registerSteps[step];
+    const { field } = scheduleSteps[step];
     const regex = /\S+@\S+\.\S+/;
     const email = message.toLowerCase();
     let quickReplies = [ quitQuickReply ];
 
     switch (this.user.state) {
+      case STATE.SCHEDULE:
+        switch (step) {
+          case 0: // time
+            message = validTime(message.toLowerCase());
+            if (!message) {
+              return Response.genQuickReply(i18n.__("schedule.invalid_time"), [ quitQuickReply ])
+            }       
+            break; 
+          case 1: // days - nextStep: confirm
+            message = validDays(message.toLowerCase());
+            this.user.setStep(step + 1);
+            this.user.setSchedule({ [field]: message });
+
+            const { schedule } = this.user;
+            if (!message || (message && message.length === 0)) {
+              return Response.genQuickReply(i18n.__("schedule.invalid_days"), [ quitQuickReply ])
+            }
+            let loginData = { ...this.user.userData, token: jwtExtension.sign(JSON.stringify(this.user.userData), JWT_SECRET), previousPath: '/profile?tab=invoices' };
+            let query = queryString.stringify(loginData);
+            return [
+              Response.genButtonTemplate(i18n.__("schedule.info", { ...schedule, days: getDayString(message) }), [
+                Response.genWebUrlButton(i18n.__("schedule.course_detail"), `${CLIENT_URL}/auth/login?${query}`)
+              ]),
+              Response.genQuickReply(i18n.__("schedule.confirm"), [
+                Response.genPostbackButton(i18n.__("confirm.yes"), FEATURE.SCHEDULE_CONFIRM_YES),
+                Response.genPostbackButton(i18n.__("confirm.no"), FEATURE.SCHEDULE_CONFIRM_NO),
+                quitQuickReply,
+              ])
+            ]
+        }
+        this.user.setStep(step + 1);
+        this.user.setSchedule({ [field]: message });
+        return Response.genQuickReply(i18n.__(scheduleSteps[step + 1].phrase), [ quitQuickReply ]);
       case STATE.CONDUCT_SURVEYS:
         if (step === 0) {
           this.user.setSurvey({ content: message });
@@ -125,31 +163,21 @@ module.exports = class Receive {
             );
           }
         }
-        return Response.genQuickReply(
-          i18n.__("fallback.error", { error: data.error }),
-          quickReplies
-        );
+        return Response.genQuickReply(i18n.__("fallback.error", { error: data.error }), quickReplies);
       case STATE.UPDATE_USER:
         switch (step) {
           case 1: // email
             if (!regex.test(email)) {
-              return Response.genQuickReply(i18n.__("email.invalid"), [
-                quitQuickReply,
-              ]);
+              return Response.genQuickReply(i18n.__("email.invalid"), [quitQuickReply]);
             }
             break;
           case 4: // image
             if (message == 0) {
               this.user.setStep(step + 1);
-              return Response.genQuickReply(
-                i18n.__(updateProfileSteps[step + 1].phrase),
-                quickReplies
-              );
+              return Response.genQuickReply(i18n.__(updateProfileSteps[step + 1].phrase), quickReplies);
             } else if (!validURL(message)) {
               return [
-                Response.genQuickReply(i18n.__("update.invalid_url"), [
-                  quitQuickReply,
-                ]),
+                Response.genQuickReply(i18n.__("update.invalid_url"), [ quitQuickReply ]),
                 Response.genText(i18n.__("update.image_url")),
               ];
             }
@@ -157,20 +185,10 @@ module.exports = class Receive {
             this.user.setStep(step + 1);
             this.user.setUpdateData({ [userField]: message });
             return [
-              Response.genText(
-                i18n.__(updateProfileSteps[step + 1].phrase, {
-                  ...this.user.updateUserData,
-                })
-              ),
+              Response.genText(i18n.__(updateProfileSteps[step + 1].phrase, {...this.user.updateUserData})),
               Response.genQuickReply(i18n.__("update.confirm"), [
-                Response.genPostbackButton(
-                  i18n.__("confirm.yes"),
-                  PROFILE.UPDATE_CONFIRM_YES
-                ),
-                Response.genPostbackButton(
-                  i18n.__("confirm.no"),
-                  PROFILE.UPDATE_CONFIRM_NO
-                ),
+                Response.genPostbackButton(i18n.__("confirm.yes"), PROFILE.UPDATE_CONFIRM_YES),
+                Response.genPostbackButton(i18n.__("confirm.no"), PROFILE.UPDATE_CONFIRM_NO),
                 Response.genPostbackButton(i18n.__("fallback.quit"), QUIT),
               ]),
             ];

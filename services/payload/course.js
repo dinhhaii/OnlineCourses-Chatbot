@@ -15,7 +15,7 @@ module.exports = class CourseService {
   generateCourseElement(item) {
     if (item) {
       const buttons = [
-        Response.genWebUrlButton(i18n.__("course.detail"), `${config.shopUrl}/course-detail/${item._id}`),
+        Response.genWebUrlButton(i18n.__("course.detail"), `${config.clientUrl}/course-detail/${item._id}`),
         Response.genPostbackButton(i18n.__("course.add_to_cart"), `${CART.ADD_TO_CART}_${item._id}`)
       ];
   
@@ -26,10 +26,10 @@ module.exports = class CourseService {
         buttons,
         {
           type: "web_url",
-          url: `${config.shopUrl}/course-detail/${item._id}`,
+          url: `${config.clientUrl}/course-detail/${item._id}`,
           messenger_extensions: true,
           webview_height_ratio: "tall",
-          fallback_url: `${config.shopUrl}`
+          fallback_url: `${config.clientUrl}`
         }
       );
     }

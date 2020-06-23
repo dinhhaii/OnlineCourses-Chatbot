@@ -46,11 +46,11 @@ module.exports = {
     return [
       {
         name: "Hai",
-        picture: `${this.appUrl}/personas/sales.jpg`
+        picture: "https://firebasestorage.googleapis.com/v0/b/cafocc.appspot.com/o/images%2F20160220_165544000_iOS.jpg?alt=media&token=ddf78779-f500-4169-a2ad-3d7f8faf8b8c"
       },
       {
         name: "Tom",
-        picture: `${this.appUrl}/personas/billing.jpg`
+        picture: "https://firebasestorage.googleapis.com/v0/b/cafocc.appspot.com/o/images%2FIMG_4053.PNG?alt=media&token=1d11d813-cebb-4f13-a8f8-f10d6d78030c"
       }
     ];
   },
@@ -60,7 +60,7 @@ module.exports = {
   },
 
   get personaTechnical() {
-    let id = this.personas["Hai"] || process.env.PERSONA_TECHNICAL;
+    let id = process.env.PERSONA_TECHNICAL;
     return {
       name: "Hai",
       id
@@ -68,7 +68,7 @@ module.exports = {
   },
 
   get personaCare() {
-    let id = this.personas["Tom"] || process.env.PERSONA_CARE;
+    let id = process.env.PERSONA_CARE;
     return {
       name: "Tom",
       id

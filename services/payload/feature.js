@@ -4,10 +4,10 @@ const Response = require("../response"),
   config = require("../config"), 
   i18n = require("../../i18n.config"),
   queryString = require('query-string'),
-  { createUser } = require('../api'),
+  { createUser, createTimer, fetchInvoices, updateTimer } = require('../api'),
   jwtExtension = require('jsonwebtoken'),
   generator = require('generate-password'),
-  { FEATURE, STATE, registerSteps, QUIT, MENU, PROFILE, CLIENT_URL, JWT_SECRET, CART } = require('../../utils/constant');
+  { FEATURE, STATE, registerSteps, scheduleSteps, QUIT, MENU, PROFILE, CLIENT_URL, JWT_SECRET, CART } = require('../../utils/constant');
 
 module.exports = class FeatureService {
   constructor(user, webhookEvent) {
@@ -36,6 +36,19 @@ module.exports = class FeatureService {
     ]);
   }
 
+  handleConfirmCreateTimer(success) {
+    const scheduleFeature = Response.genPostbackButton(i18n.__("feature.schedule"), FEATURE.SCHEDULE);
+    
+    this.user.setStep(0);
+    this.user.resetSchedule();
+    this.user.setState(STATE.LOGED_IN);
+
+    if (success) {
+      return Response.genQuickReply(i18n.__("schedule.success"), [ scheduleFeature ]);
+    } 
+    return Response.genQuickReply(i18n.__("schedule.failed"), [ scheduleFeature ]);
+  }
+
   handleChooseRole(role) {
     this.user.setUpdateData({ role });
     this.user.setStep(this.user.step + 1);
@@ -49,13 +62,35 @@ module.exports = class FeatureService {
     ]
   }
 
-  async handlePayload(payload) {
-    let response;
+  generateCourseElementForSchedule(item, invoice, timer) {
+    if (item) {
+      const buttons = [
+        Response.genWebUrlButton(i18n.__("course.detail"), `${config.clientUrl}/course-detail/${item._id}`),
+        !timer || (timer && timer.status === 'canceled')
+          ? Response.genPostbackButton(i18n.__("schedule.add_notification"), `${FEATURE.ADD_SCHEDULE}_${invoice._id}`)
+          : Response.genPostbackButton(i18n.__("schedule.remove_notification"), `${FEATURE.REMOVE_SCHEDULE}_${invoice._id}`)
+      ];
 
-    const quitQuickReply = {
-      title: i18n.__("fallback.quit"),
-      payload: QUIT
-    };
+      return Response.genGenericElementTemplate(
+        item.name,
+        `Price: $${item.price} - Total: $${invoice.totalPrice}`,
+        item.imageURL,
+        buttons,
+        {
+          type: "web_url",
+          url: `${config.clientUrl}/course-detail/${item._id}`,
+          messenger_extensions: true,
+          webview_height_ratio: "tall",
+          fallback_url: `${config.clientUrl}`
+        }
+      );
+    }
+    return null;
+  };
+
+  async handlePayload(payload) {
+    const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
+    let response;
 
     switch (payload) {
       case MENU.FEATURES:
@@ -129,11 +164,55 @@ module.exports = class FeatureService {
           Response.genQuickReply(i18n.__("survey.content"), [ quitQuickReply ])
         ]
       case FEATURE.SCHEDULE:
-        break;
-      default:
-        return [];
+        response = await fetchInvoices(this.user.userData._id);
+        if (!response.data.error) {
+          const data = response.data.filter(e => !e.course.isDelete && e.invoice.status !== 'canceled' && e.invoice.status !== 'reported');
+          if (data.length === 0) {
+            return Response.genText(i18n.__("schedule.no_course"));
+          }
+          const elements = data.map(element => {
+            return this.generateCourseElementForSchedule(element.course, element.invoice, element.timer);
+          })
+          
+          return [
+            Response.genText(i18n.__("schedule.course", { count: response.data.length })),
+            Response.genGenericTemplate(elements),
+            Response.genText(i18n.__("schedule.get_started"))
+          ]
+        }
+        return Response.genQuickReply(i18n.__("fallback.error", { error: response.data.error }));
+      case FEATURE.SCHEDULE_CONFIRM_YES:
+        const { _idInvoice, time, days } = this.user.schedule;
+        response = await createTimer(this.user.userData._id, _idInvoice, time, days);
+        if (!response.data.error) {
+          return this.handleConfirmCreateTimer(true);
+        }
+        return Response.genQuickReply(i18n.__("fallback.error", { error: response.data.error }), [ scheduleFeature, quitQuickReply ]);
+      case FEATURE.SCHEDULE_CONFIRM_NO:
+        return this.handleConfirmCreateTimer(false);
+
     }
 
-    return response;
+    if (payload.includes(FEATURE.ADD_SCHEDULE)) {
+      const _idInvoice = payload.substr(21, payload.length - 21);
+      this.user.setSchedule({ _idInvoice });
+      this.user.setState(STATE.SCHEDULE);
+      this.user.setStep(0);
+      return Response.genQuickReply(i18n.__(scheduleSteps[0].phrase), [ quitQuickReply ]);
+    }
+
+    if (payload.includes(FEATURE.REMOVE_SCHEDULE)) {
+      const _idInvoice = payload.substr(21, payload.length - 21);
+      this.user.setSchedule({ _idInvoice });
+      response = await updateTimer(this.user.userData._id, _idInvoice, undefined , undefined, 'canceled');
+      if (!response.data.error) {
+        return Response.genQuickReply(i18n.__("schedule.cancel_success"), [
+          Response.genPostbackButton(i18n.__("feature.schedule"), FEATURE.SCHEDULE)
+        ]);
+      }
+      return Response.genText(i18n.__("fallback.error", { error: response.data.error }))
+    }
+
+    return [];
   }
 };

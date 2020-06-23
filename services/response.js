@@ -136,8 +136,8 @@ module.exports = class Response {
   static genPostbackButton(title, payload) {
     let response = {
       type: "postback",
-      title: title,
-      payload: payload,
+      title,
+      payload,
     };
 
     return response;
