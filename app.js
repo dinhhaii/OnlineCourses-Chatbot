@@ -12,7 +12,7 @@ const express = require("express"),
   constant = require('./utils/constant'),
   NLP = require('./services/nlp');
 
-// NLP.trainData();
+NLP.trainData();
 const users = {};
 
 // Parse application/x-www-form-urlencoded

@@ -100,13 +100,14 @@ module.exports = class Receive {
             break; 
           case 1: // days - nextStep: confirm
             message = validDays(message.toLowerCase());
-            this.user.setStep(step + 1);
-            this.user.setSchedule({ [field]: message });
-
+            
             const { schedule } = this.user;
             if (!message || (message && message.length === 0)) {
               return Response.genQuickReply(i18n.__("schedule.invalid_days"), [ quitQuickReply ])
             }
+            
+            this.user.setStep(step + 1);
+            this.user.setSchedule({ [field]: message });
             let loginData = { ...this.user.userData, token: jwtExtension.sign(JSON.stringify(this.user.userData), JWT_SECRET), previousPath: '/profile?tab=invoices' };
             let query = queryString.stringify(loginData);
             return [

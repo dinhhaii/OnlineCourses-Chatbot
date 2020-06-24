@@ -74,11 +74,11 @@ module.exports = class CourseService {
 
     switch (payload) {
       case COURSE.COURSES:
-        return await this.fetchCourse(message, false, 0, 3);
+        return await this.fetchCourse(message, false, 0, 5);
       case COURSE.POPULAR_COURSES: 
-        return await this.fetchCourse('', true, 0, 3);
+        return await this.fetchCourse('', true, 0, 10);
       case COURSE.LATEST_COURSES: 
-        return await this.fetchCourse('', false, 0, 5);
+        return await this.fetchCourse('', false, 0, 10);
       default: return [];
     }
   }

@@ -46,11 +46,11 @@ module.exports = {
     return [
       {
         name: "Hai",
-        picture: "https://firebasestorage.googleapis.com/v0/b/cafocc.appspot.com/o/images%2F20160220_165544000_iOS.jpg?alt=media&token=ddf78779-f500-4169-a2ad-3d7f8faf8b8c"
+        picture: `${this.appUrl}/personas/technical.jpg`
       },
       {
         name: "Tom",
-        picture: "https://firebasestorage.googleapis.com/v0/b/cafocc.appspot.com/o/images%2FIMG_4053.PNG?alt=media&token=1d11d813-cebb-4f13-a8f8-f10d6d78030c"
+        picture: `${this.appUrl}/personas/care.png`
       }
     ];
   },

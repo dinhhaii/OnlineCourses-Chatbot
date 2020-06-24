@@ -130,8 +130,10 @@
 		"add_code": "Please send me your CODE.",
 		"error_code": "The CODE was used or entered incorrectly.",
 		"add_code_success": "Your code was added successfully. Check your cart again.",
-		"add_course_success": "Your code was added successfully. Check your cart again.",
-		"remove_course_success": "Your course has been deleted in your cart."
+		"add_course_success": "Your course was added successfully. Check your cart again.",
+		"remove_course_success": "Your course has been deleted in your cart.",
+		"no_items": "There is no item in your cart. We have some suggestions for you.",
+		"items": "There are {{count}} items in your cart."
 	},
 	"survey": {
 		"prompt": "Hi, the survey only takes about 1 minute. We will always hear from you and keep improving in the future. Thank you!",

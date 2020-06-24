@@ -197,9 +197,6 @@ module.exports = class GraphAPi {
     let body = [];
 
     return new Promise(function(resolve, reject) {
-      // Send the POST request to the Personas API
-      console.log(`Creating a Persona for app ${config.appId}`);
-
       let requestBody = {
         name: name,
         profile_picture_url: profile_picture_url
@@ -214,7 +211,6 @@ module.exports = class GraphAPi {
         json: requestBody
       })
         .on("response", function(response) {
-          // console.log(response.statusCode);
           if (response.statusCode !== 200) {
             reject(Error(response.statusCode));
           }

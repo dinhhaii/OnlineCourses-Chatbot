@@ -146,18 +146,29 @@ module.exports = class FeatureService {
       case FEATURE.REGISTER_ROLE_LECTURER:
         return this.handleChooseRole("lecturer");
       case FEATURE.MORE_FEATURE: 
-        return [
-          Response.genButtonTemplate(i18n.__("feature.cart"), [
-            Response.genPostbackButton(i18n.__("feature.check_cart"), CART.CHECK_CART),
-            Response.genPostbackButton(i18n.__("feature.add_coupon"), CART.ADD_COUPON),
-            Response.genPostbackButton(i18n.__("feature.payment"), CART.PAYMENT),
-          ]),
-          Response.genButtonTemplate(i18n.__("feature.profile"), [
-            Response.genPostbackButton(i18n.__("feature.quick_login"), FEATURE.LOGIN),
-            Response.genPostbackButton(i18n.__("feature.change_password"), PROFILE.CHANGE_PASSWORD),
-            Response.genPostbackButton(i18n.__("feature.forgot_password"), PROFILE.FORGOT_PASSWORD),
-          ])
-        ]
+        if (this.user.userData.role === "learner") {
+          return [
+            Response.genButtonTemplate(i18n.__("feature.cart"), [
+              Response.genPostbackButton(i18n.__("feature.check_cart"), CART.CHECK_CART),
+              Response.genPostbackButton(i18n.__("feature.add_coupon"), CART.ADD_COUPON),
+              Response.genPostbackButton(i18n.__("feature.payment"), CART.PAYMENT),
+            ]),
+            Response.genButtonTemplate(i18n.__("feature.profile"), [
+              Response.genPostbackButton(i18n.__("feature.quick_login"), FEATURE.LOGIN),
+              Response.genPostbackButton(i18n.__("feature.change_password"), PROFILE.CHANGE_PASSWORD),
+              Response.genPostbackButton(i18n.__("feature.forgot_password"), PROFILE.FORGOT_PASSWORD),
+            ])
+          ]
+        } else {
+          return [
+            Response.genButtonTemplate(i18n.__("feature.profile"), [
+              Response.genPostbackButton(i18n.__("feature.quick_login"), FEATURE.LOGIN),
+              Response.genPostbackButton(i18n.__("feature.change_password"), PROFILE.CHANGE_PASSWORD),
+              Response.genPostbackButton(i18n.__("feature.forgot_password"), PROFILE.FORGOT_PASSWORD),
+            ])
+          ]
+        }
+        
       case FEATURE.SURVEY:
         this.user.setState(STATE.CONDUCT_SURVEYS);
         this.user.setStep(0);
@@ -175,7 +186,6 @@ module.exports = class FeatureService {
           const elements = data.map(element => {
             return this.generateCourseElementForSchedule(element.course, element.invoice, element.timer);
           })
-
 
           let sliceElement = elements.length > 10 ? elements.slice(0, 10) : elements;
           

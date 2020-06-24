@@ -6,7 +6,7 @@ const Response = require("../response"),
   queryString = require('query-string'),
   { fetchCart, addCourseToCart, removeCourseFromCart } = require('../api'),
   jwtExtension = require('jsonwebtoken'),
-  { CART, STATE, QUIT, CLIENT_URL, JWT_SECRET } = require('../../utils/constant');
+  { CART, STATE, QUIT, CLIENT_URL, JWT_SECRET, COURSE } = require('../../utils/constant');
 
 module.exports = class CartService {
   constructor(user, webhookEvent) {
@@ -19,7 +19,7 @@ module.exports = class CartService {
 
     if (course) {
       const buttons = [
-        Response.genWebUrlButton(i18n.__("course.detail"), `${config.shopUrl}/course-detail/${course._id}`),
+        Response.genWebUrlButton(i18n.__("course.detail"), `${config.clientUrl}/course-detail/${course._id}`),
         Response.genPostbackButton(i18n.__("feature.remove"), `${CART.REMOVE_COURSE}_${course._id}`)
       ];
   
@@ -30,10 +30,10 @@ module.exports = class CartService {
         buttons,
         {
           type: "web_url",
-          url: `${config.shopUrl}/course-detail/${course._id}`,
+          url: `${config.clientUrl}/course-detail/${course._id}`,
           messenger_extensions: true,
           webview_height_ratio: "tall",
-          fallback_url: `${config.shopUrl}`
+          fallback_url: `${config.clientUrl}`
         }
       );
     }
@@ -49,6 +49,12 @@ module.exports = class CartService {
         if (payload === CART.CHECK_CART) {
             const { data } = await fetchCart(this.user.userData._id);
             if (!data.error) {
+                if (data.items.length === 0) {
+                  return Response.genQuickReply(i18n.__("cart.no_items"), [
+                    Response.genPostbackButton(i18n.__("course.popular_courses"), COURSE.POPULAR_COURSES),
+                    Response.genPostbackButton(i18n.__("course.latest_courses"), COURSE.LATEST_COURSES)
+                  ]);
+                }
                 this.user.setCart(data);
                 query += "&previousPath=/cart";
                 const { items } = data;
@@ -96,7 +102,12 @@ module.exports = class CartService {
                 const { data } = await fetchCart(this.user.userData._id);
                 if (!data.error) {
                     const elements = data.items.map(item => this.generateCourseElement(item));
-                    return Response.genGenericTemplate(elements);
+                    return [
+                      Response.genGenericTemplate(elements),
+                      Response.genQuickReply(i18n.__("cart.items", { count: data.items.length }), [
+                        Response.genPostbackButton(i18n.__("feature.payment"), CART.PAYMENT)
+                      ])
+                    ]
                 }
                 return Response.genText(i18n.__("fallback.error", { error: data.error }));
             }
