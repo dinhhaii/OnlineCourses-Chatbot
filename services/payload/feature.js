@@ -4,6 +4,7 @@ const Response = require("../response"),
   config = require("../config"), 
   i18n = require("../../i18n.config"),
   queryString = require('query-string'),
+  { getDayString } = require('../../utils/helper'),
   { createUser, createTimer, fetchInvoices, updateTimer } = require('../api'),
   jwtExtension = require('jsonwebtoken'),
   generator = require('generate-password'),
@@ -96,18 +97,23 @@ module.exports = class FeatureService {
 
     switch (payload) {
       case MENU.FEATURES:
-        return !this.user.userData._id ? Response.genButtonTemplate(i18n.__("feature.prompt"), [
-          Response.genPostbackButton(i18n.__("feature.login"), FEATURE.LOGIN),
-          Response.genPostbackButton(i18n.__("feature.register"),FEATURE.REGISTER),
-          Response.genPostbackButton(i18n.__("feature.survey"),FEATURE.SURVEY),
-        ]) : [
-          Response.genButtonTemplate(i18n.__("feature.prompt"), [ 
-            Response.genPostbackButton(i18n.__("feature.update_profile"),PROFILE.UPDATE),
-            Response.genPostbackButton(i18n.__("feature.schedule"),FEATURE.SCHEDULE),
+        const buttons = !this.user.userData._id ? [
+            Response.genPostbackButton(i18n.__("feature.login"), FEATURE.LOGIN),
+            Response.genPostbackButton(i18n.__("feature.register"),FEATURE.REGISTER),
             Response.genPostbackButton(i18n.__("feature.survey"),FEATURE.SURVEY),
-          ]),
-          Response.genQuickReply(i18n.__("feature.get_more_feature"), [Response.genPostbackButton(i18n.__("feature.more_feature"), FEATURE.MORE_FEATURE)])
-        ];
+          ] : [ 
+            Response.genPostbackButton(i18n.__("feature.update_profile"),PROFILE.UPDATE),
+            Response.genPostbackButton(i18n.__("feature.survey"),FEATURE.SURVEY),
+          ];
+        
+        if (this.user.userData.role === 'learner') {
+          buttons.push(Response.genPostbackButton(i18n.__("feature.schedule"),FEATURE.SCHEDULE))
+        }
+
+        response = [ Response.genButtonTemplate(i18n.__("feature.prompt"), buttons) ]
+        return !this.user.userData._id 
+          ? response
+          : [ ...response, Response.genQuickReply(i18n.__("feature.get_more_feature"), [Response.genPostbackButton(i18n.__("feature.more_feature"), FEATURE.MORE_FEATURE)])];
       case FEATURE.LOGIN:
         switch(this.user.state) {
           case STATE.NONE: 
@@ -237,6 +243,23 @@ module.exports = class FeatureService {
       const _idInvoice = payload.substr(21, payload.length - 21);
       this.user.setSchedule({ _idInvoice });
       this.user.setState(STATE.SCHEDULE);
+      const { time, days } = this.user.schedule;
+      if (time && days) {
+        const { schedule } = this.user;
+        this.user.setStep(2);
+        let loginData = { ...this.user.userData, token: jwtExtension.sign(JSON.stringify(this.user.userData), JWT_SECRET), previousPath: '/profile?tab=invoices' };
+        let query = queryString.stringify(loginData);
+        return [
+          Response.genButtonTemplate(i18n.__("schedule.info", { ...schedule, days: getDayString(days) }), [
+            Response.genWebUrlButton(i18n.__("schedule.course_detail"), `${CLIENT_URL}/auth/login?${query}`)
+          ]),
+          Response.genQuickReply(i18n.__("schedule.confirm"), [
+            Response.genPostbackButton(i18n.__("confirm.yes"), FEATURE.SCHEDULE_CONFIRM_YES),
+            Response.genPostbackButton(i18n.__("confirm.no"), FEATURE.SCHEDULE_CONFIRM_NO),
+            quitQuickReply,
+          ])
+        ]
+      }
       this.user.setStep(0);
       return Response.genQuickReply(i18n.__(scheduleSteps[0].phrase), [ quitQuickReply ]);
     }

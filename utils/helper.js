@@ -98,6 +98,90 @@ module.exports = {
         case 6: return 'Saturday';
       }
     }).join(', ');
+  },
+
+  findTimeAndDays: function(message) {
+    const result = [];
+    
+    // Time
+    const regex24hourFormat = /(0?[0-9]|1[0-9]|2[0-3])\s*:\s*([0-5][0-9]|[0-9])/g; // 13:30
+    const regex24hourFormatWithMinHour = /(0?[0-9]|1[0-9]|2[0-3])\s*[hH]\s*([0-5][0-9]|[0-9])?\s*[mM]?/g; // 13h30m
+    const regex12hourFormat = /(0?[0-9]|1?[0-2])\s*:\s*([0-9]|[0-5][0-9])\s*([AaPp][Mm])/g; // 1:30pm
+    const regex12hourFormatWithMinHour = /(0?[0-9]|1?[0-2])\s*[hH]?\s*([0-9]|[0-5][0-9])?\s*[mM]?\s*([AaPp][Mm])/g; // 1h30m pm
+
+    let executor12hourFormat = regex12hourFormat.exec(message);
+    let executor12hourFormatWithMinHour = regex12hourFormatWithMinHour.exec(message);
+    let executor24hourFormat = regex24hourFormat.exec(message);
+    let executor24hourFormatWithMinHour = regex24hourFormatWithMinHour.exec(message);
+    
+    if (executor12hourFormat) {
+      const meridiem = executor12hourFormat[3];
+      let hour = parseInt(executor12hourFormat[1]);
+      if (meridiem === 'pm' && hour != 12) {
+        hour = hour + 12;
+      }
+      if (meridiem === 'am' && hour == 12) {
+        hour = 0;
+      }
+      result.push(`${hour}:${executor12hourFormat[2]}`); 
+    } else if (executor12hourFormatWithMinHour) {
+      const meridiem = executor12hourFormatWithMinHour[3];
+      let hour = parseInt(executor12hourFormatWithMinHour[1]);
+      console.log(hour);
+      let min = executor12hourFormatWithMinHour[2] ? parseInt(executor12hourFormatWithMinHour[2]) : '00';
+      if (meridiem === 'pm' && hour != 12) {
+        hour = hour + 12;
+      }
+      if (meridiem === 'am' && hour == 12) {
+        hour = 0;
+      }
+      result.push(`${hour}:${min}`);
+    } else if (executor24hourFormat) {
+      result.push(`${executor24hourFormat[1]}:${executor24hourFormat[2]}`); 
+    } else if (executor24hourFormatWithMinHour) {
+      let min = executor24hourFormatWithMinHour[2] ? parseInt(executor24hourFormatWithMinHour[2]) : '00';
+      result.push(`${executor24hourFormatWithMinHour[1]}:${min}`); 
+    }
+
+    // Days
+    const days = [];
+    const regexDays = /((every|mon|tues|wed(nes)?|thur(s)?|fri|sat(ur)?|sun)(day)?(s)?)\b/ig;
+    while ((executorDays = regexDays.exec(message.toLowerCase())) !== null) {
+      if (executorDays.index === regexDays.lastIndex) {
+        regexDays.lastIndex++;
+      }
+      if (executorDays[0]) {
+        let value = executorDays[0];
+        value = value[value.length - 1] === 's' ? value.substr(0, value.length - 1) : value;
+        switch(value) {
+          case "sun":
+          case "sunday": days.push(0); break;
+          case "mon":
+          case "monday": days.push(1); break;
+          case "tues":
+          case "tuesday": days.push(2); break;
+          case "wed":
+          case "wednesday": days.push(3); break;
+          case "thur":
+          case "thursday": days.push(4); break;
+          case "fri":
+          case "friday": days.push(5); break;
+          case "sat":
+          case "saturday": days.push(6); break;
+          case "everyday":
+          case "daily": days = [0,1,2,3,4,5,6]; break;
+        }
+      }
+    }
+    if (days.length !== 0) {
+      result.push(days);
+    }
+    
+    if (result.length === 0 || result.length === 1) {
+      return [];
+    }
+    return result[0] && result[1] ? result : [];
+    
   }
 };
 

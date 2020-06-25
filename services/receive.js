@@ -11,7 +11,7 @@ const FeatureService = require("./payload/feature"),
   jwtExtension = require('jsonwebtoken'),
   i18n = require("../i18n.config"),
   NLP = require("./nlp"),
-  { validURL, validDays, validTime, getDayString } = require("../utils/helper"),
+  { validURL, validDays, validTime, getDayString, findTimeAndDays } = require("../utils/helper"),
   users = require("../app"),
   { fetchUserByEmail, sendEmail, addCoupon, createSurvey } = require("./api"),
   {
@@ -32,6 +32,7 @@ const FeatureService = require("./payload/feature"),
     JWT_SECRET,
     CLIENT_URL
   } = require("../utils/constant");
+const { find } = require("../utils/training-data");
 
 module.exports = class Receive {
   constructor(user, webhookEvent) {
@@ -280,10 +281,7 @@ module.exports = class Receive {
           ]);
         }
       default:
-        let greeting = this.firstEntity(
-          this.webhookEvent.message.nlp,
-          "greetings"
-        );
+        let greeting = this.firstEntity(this.webhookEvent.message.nlp, "greetings");
         let bye = this.firstEntity(this.webhookEvent.message.nlp, "bye");
         const result = await NLP.process(message.toLowerCase());
         const { intent, answers } = result;
@@ -295,32 +293,38 @@ module.exports = class Receive {
           response = Response.genByeMessage(this.user);
         } else if (intent !== "None") {
           switch (intent) {
-            case "course":
-              response = await this.handlePayload(COURSE.COURSES);
-              break;
-            case "subject":
-              response = await this.handlePayload(SUBJECT.SUBJECTS);
-              break;
+            case "schedule": 
+              const result = findTimeAndDays(message.toLowerCase());
+              if (result.length !== 0) {
+                this.user.setSchedule({
+                  time: result[0],
+                  days: result[1]
+                });
+              }
+              return await this.handlePayload(FEATURE.SCHEDULE); 
+            case "survey": response = await this.handlePayload(FEATURE.SURVEY); break;
+            case "add_coupon": response = await this.handlePayload(CART.ADD_COUPON); break;
+            case "payment": response = await this.handlePayload(CART.PAYMENT); break;
+            case "update_profile": response = await this.handlePayload(PROFILE.UPDATE); break;
+            case "check_cart": response = await this.handlePayload(CART.CHECK_CART); break;
+            case "popular_courses": response = await this.handlePayload(COURSE.POPULAR_COURSES); break;
+            case "latest_courses": response = await this.handlePayload(COURSE.LATEST_COURSES); break;
+            case "course": response = await this.handlePayload(COURSE.COURSES); break;
+            case "subject": response = await this.handlePayload(SUBJECT.SUBJECTS); break;
             case "feedback":
               response = [
-                Response.genText(
-                  answers[Math.floor(Math.random() * answers.length)].answer
-                ),
+                Response.genText(answers[Math.floor(Math.random() * answers.length)].answer),
                 Response.genImageTemplate(IMAGES.FEEDBACK),
               ];
               break;
             case "report":
               response = [
-                Response.genText(
-                  answers[Math.floor(Math.random() * answers.length)].answer
-                ),
+                Response.genText(answers[Math.floor(Math.random() * answers.length)].answer),
                 Response.genImageTemplate(IMAGES.REPORT),
               ];
               break;
             default:
-              const { answer } = answers[
-                Math.floor(Math.random() * answers.length)
-              ];
+              const { answer } = answers[Math.floor(Math.random() * answers.length)];
               response = Response.genText(answer);
           }
         } else {

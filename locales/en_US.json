@@ -146,7 +146,7 @@
 		"add_notification": "Notification",
 		"remove_notification": "Unsubcribe",
 		"view_all": "View all",
-		"get_started": "Press 'Notification' to receive learning reminder or 'Unsubcribe' to remove reminder.",
+		"get_started": "Choose your course you want to get reminders.",
 		"course": "There are {{count}} courses you enrolled.",
 		"no_course": "You haven't paid for any courses",
 		"time": "Enter your time (hh:mm)",
