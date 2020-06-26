@@ -47,7 +47,10 @@ module.exports = class FeatureService {
     if (success) {
       return Response.genQuickReply(i18n.__("schedule.success"), [ scheduleFeature ]);
     } 
-    return Response.genQuickReply(i18n.__("schedule.failed"), [ scheduleFeature ]);
+    return Response.genQuickReply(i18n.__("schedule.failed"), [
+      scheduleFeature,
+      Response.genPostbackButton(i18n.__("menu.features", MENU.FEATURES))
+    ]);
   }
 
   handleChooseRole(role) {

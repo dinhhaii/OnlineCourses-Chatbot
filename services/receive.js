@@ -292,21 +292,25 @@ module.exports = class Receive {
         } else if (bye && bye.confidence > 0.8) {
           response = Response.genByeMessage(this.user);
         } else if (intent !== "None") {
+          if (this.user.state === STATE.LOGED_IN) {
+            switch (intent) {
+              case "schedule": 
+                const result = findTimeAndDays(message.toLowerCase());
+                if (result.length !== 0) {
+                  this.user.setSchedule({
+                    time: result[0],
+                    days: result[1]
+                  });
+                }
+                return await this.handlePayload(FEATURE.SCHEDULE); 
+              case "survey": response = await this.handlePayload(FEATURE.SURVEY); break;
+              case "add_coupon": response = await this.handlePayload(CART.ADD_COUPON); break;
+              case "payment": response = await this.handlePayload(CART.PAYMENT); break;
+              case "update_profile": response = await this.handlePayload(PROFILE.UPDATE); break;
+              case "check_cart": response = await this.handlePayload(CART.CHECK_CART); break;
+            }
+          }
           switch (intent) {
-            case "schedule": 
-              const result = findTimeAndDays(message.toLowerCase());
-              if (result.length !== 0) {
-                this.user.setSchedule({
-                  time: result[0],
-                  days: result[1]
-                });
-              }
-              return await this.handlePayload(FEATURE.SCHEDULE); 
-            case "survey": response = await this.handlePayload(FEATURE.SURVEY); break;
-            case "add_coupon": response = await this.handlePayload(CART.ADD_COUPON); break;
-            case "payment": response = await this.handlePayload(CART.PAYMENT); break;
-            case "update_profile": response = await this.handlePayload(PROFILE.UPDATE); break;
-            case "check_cart": response = await this.handlePayload(CART.CHECK_CART); break;
             case "popular_courses": response = await this.handlePayload(COURSE.POPULAR_COURSES); break;
             case "latest_courses": response = await this.handlePayload(COURSE.LATEST_COURSES); break;
             case "course": response = await this.handlePayload(COURSE.COURSES); break;

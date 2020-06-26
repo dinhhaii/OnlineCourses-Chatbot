@@ -155,7 +155,7 @@
 		"invalid_time": "Your time is invalid. Eg: '20:30', '15h10', 2:30 pm, ...",
 		"invalid_days": "Your days is invalid. We accept values: [sunday - saturday] / [0 - 6] / 'daily', separated by commas.",
 		"success": "Thank you. Your reminder was created successfully!",
-		"failed": "Sorry, something wrong when we create your reminder. Please try again.",
+		"failed": "Thank you 😁. Do you want to use another features?",
 		"confirm": "Are you sure you want to create reminder?",
 		"course_detail": "Course Detail",
 		"cancel_success": "Turn off notification successfully."

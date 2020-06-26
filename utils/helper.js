@@ -144,7 +144,7 @@ module.exports = {
     }
 
     // Days
-    const days = [];
+    let days = [];
     const regexDays = /((every|mon|tues|wed(nes)?|thur(s)?|fri|sat(ur)?|sun)(day)?(s)?)\b/ig;
     while ((executorDays = regexDays.exec(message.toLowerCase())) !== null) {
       if (executorDays.index === regexDays.lastIndex) {
