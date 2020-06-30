@@ -85,13 +85,13 @@ module.exports = class Receive {
     const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
     const { step } = this.user;
     const { userField } = registerSteps[step];
-    const { field } = scheduleSteps[step];
     const regex = /\S+@\S+\.\S+/;
     const email = message.toLowerCase();
     let quickReplies = [ quitQuickReply ];
 
     switch (this.user.state) {
       case STATE.SCHEDULE:
+        const { field } = scheduleSteps[step];
         switch (step) {
           case 0: // time
             message = validTime(message.toLowerCase());
@@ -293,7 +293,9 @@ module.exports = class Receive {
           response = Response.genByeMessage(this.user);
         } else if (intent !== "None") {
           if (this.user.state === STATE.LOGED_IN) {
+            console.log('helloooooo');
             switch (intent) {
+              case "forgot_password": response = await this.handlePayload(PROFILE.FORGOT_PASSWORD); break;
               case "schedule": 
                 const result = findTimeAndDays(message.toLowerCase());
                 if (result.length !== 0) {
@@ -311,6 +313,8 @@ module.exports = class Receive {
             }
           }
           switch (intent) {
+            case "register": response = await this.handlePayload(FEATURE.REGISTER); break;
+            case "login": response = await this.handlePayload(FEATURE.LOGIN); break;
             case "popular_courses": response = await this.handlePayload(COURSE.POPULAR_COURSES); break;
             case "latest_courses": response = await this.handlePayload(COURSE.LATEST_COURSES); break;
             case "course": response = await this.handlePayload(COURSE.COURSES); break;
@@ -328,13 +332,13 @@ module.exports = class Receive {
               ];
               break;
             default:
-              const { answer } = answers[Math.floor(Math.random() * answers.length)];
-              response = Response.genText(answer);
+              if (!response) {
+                const { answer } = answers[Math.floor(Math.random() * answers.length)];
+                response = Response.genText(answer);
+              }
           }
         } else {
-          response = Response.genText(
-            i18n.__("fallback.any", { message: this.webhookEvent.message.text })
-          );
+          response = Response.genText(i18n.__("fallback.any", { message: this.webhookEvent.message.text }));
         }
         return response;
     }

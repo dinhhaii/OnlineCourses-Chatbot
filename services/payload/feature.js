@@ -134,12 +134,12 @@ module.exports = class FeatureService {
         this.user.setStep(0);
         return Response.genQuickReply(i18n.__(registerSteps[0].phrase), [ quitQuickReply ]);
       case FEATURE.REGISTER_CONFIRM_YES:
-        const password = generator.generate({ length: 8 });
+        const password = generator.generate({ length: 8, uppercase: false });
 
         const newUser = {
           ...this.user.updateUserData,
           idFacebook: this.user.psid,
-          password,
+          password: password,
           status: 'verified'
         }
         const { data } = await createUser(newUser);

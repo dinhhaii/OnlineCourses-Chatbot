@@ -131,8 +131,7 @@ module.exports = class GraphAPi {
       request({
         uri: `${config.mPlatfom}/${senderPsid}`,
         qs: {
-          access_token: config.pageAccesToken,
-          fields: "first_name, last_name, gender, locale, timezone"
+          access_token: config.pageAccesToken
         },
         method: "GET"
       })

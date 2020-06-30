@@ -194,6 +194,8 @@ module.exports = [
       "create an account on Hacademy",
       "create learner account",
       "create an account",
+      "register",
+      "I want to register"
     ],
     responses: [
       "• It's very simple, go to Hacademy website and click on Register to sign up (https://cafocc.web.app/auth/register) for an account if you don't have one! You can also use your Facebook/Google account to log into our site! \n• Registeration requires your email and a password for our site, after you've done signing up, a verification email will be sent to your inbox!",
@@ -209,6 +211,8 @@ module.exports = [
       "How to login?",
       "login",
       "sign in",
+      "connect facebook",
+      "How can I connect to facebook?"
     ],
     responses: [
       "• Go to Login page: https://cafocc.web.app/auth/login \n• If you don't have account access Register page: https://cafocc.web.app/auth/register to sign up.",
@@ -224,6 +228,7 @@ module.exports = [
       "I don't remember my password",
       "password retrieving",
       "I need my password back!",
+      "I have forgotten password"
     ],
     responses: [
       "Go to Forgot Password page: https://cafocc.web.app/auth/forgot-password on our site and fill in your email, Hacademy system will send you an email to change your password!",

@@ -97,7 +97,7 @@
 		"invalid_attachment": "Your attachment is not typeof 'image'. Please try again.",
 		"bio": "Your bio",
 		"confirm": "Are you sure you want to update this account?",
-		"info": "Your information:\n• Email: {{email}}\n• First name: {{firstName}}\n• Last name: {{lastName}}\n• Bio: {{bio}}\n• Role: {{role}}",
+		"info": "Your information:\n• Email: {{email}}\n• First name: {{firstName}}\n• Last name: {{lastName}}\n• Bio: {{bio}}\n",
 		"access_page": "Access page to quick login 😁.",
 		"success": "Thank you. Updated successfully!",
 		"failed": "Sorry, an error occured '{{error}}'. We can't update your account 😞. Please try again.",

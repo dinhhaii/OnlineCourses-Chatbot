@@ -93,17 +93,22 @@ module.exports = class User {
   async setProfile(userProfile) {
     const { id } = userProfile;
     this.setProfileFacebook(userProfile);
-    if (id) {
-      const { data } = await fetchUser(id);
-      if (!data.error) {
-        this.setState(STATE.LOGED_IN);
-        this.setUserData(data);
+    try {
+      if (id) {
+        const { data } = await fetchUser(id);
+        if (data && !data.error) {
+          this.setState(STATE.LOGED_IN);
+          this.setUserData(data);
+        } else {
+          console.error("User not found");
+        }
       } else {
-        console.error("User not found");
+        console.error("Can't get profile user!");
       }
-    } else {
-      console.error("Can't get profile user!");
+    } catch(e) {
+      console.log(e);
     }
+    
     return this;
   }
 };
