@@ -195,7 +195,8 @@ module.exports = [
       "create learner account",
       "create an account",
       "register",
-      "I want to register"
+      "I want to register",
+      "create user"
     ],
     responses: [
       "• It's very simple, go to Hacademy website and click on Register to sign up (https://cafocc.web.app/auth/register) for an account if you don't have one! You can also use your Facebook/Google account to log into our site! \n• Registeration requires your email and a password for our site, after you've done signing up, a verification email will be sent to your inbox!",

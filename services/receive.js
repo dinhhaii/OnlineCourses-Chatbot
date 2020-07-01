@@ -295,7 +295,7 @@ module.exports = class Receive {
           if (this.user.state === STATE.LOGED_IN) {
             console.log('helloooooo');
             switch (intent) {
-              case "forgot_password": response = await this.handlePayload(PROFILE.FORGOT_PASSWORD); break;
+              case "forgot_password": return await this.handlePayload(PROFILE.FORGOT_PASSWORD); break;
               case "schedule": 
                 const result = findTimeAndDays(message.toLowerCase());
                 if (result.length !== 0) {
@@ -305,32 +305,30 @@ module.exports = class Receive {
                   });
                 }
                 return await this.handlePayload(FEATURE.SCHEDULE); 
-              case "survey": response = await this.handlePayload(FEATURE.SURVEY); break;
-              case "add_coupon": response = await this.handlePayload(CART.ADD_COUPON); break;
-              case "payment": response = await this.handlePayload(CART.PAYMENT); break;
-              case "update_profile": response = await this.handlePayload(PROFILE.UPDATE); break;
-              case "check_cart": response = await this.handlePayload(CART.CHECK_CART); break;
+              case "survey": return await this.handlePayload(FEATURE.SURVEY); break;
+              case "add_coupon": return await this.handlePayload(CART.ADD_COUPON); break;
+              case "payment": return await this.handlePayload(CART.PAYMENT); break;
+              case "update_profile": return await this.handlePayload(PROFILE.UPDATE); break;
+              case "check_cart": return await this.handlePayload(CART.CHECK_CART); break;
             }
           }
           switch (intent) {
-            case "register": response = await this.handlePayload(FEATURE.REGISTER); break;
-            case "login": response = await this.handlePayload(FEATURE.LOGIN); break;
-            case "popular_courses": response = await this.handlePayload(COURSE.POPULAR_COURSES); break;
-            case "latest_courses": response = await this.handlePayload(COURSE.LATEST_COURSES); break;
-            case "course": response = await this.handlePayload(COURSE.COURSES); break;
-            case "subject": response = await this.handlePayload(SUBJECT.SUBJECTS); break;
+            case "register": return await this.handlePayload(FEATURE.REGISTER); break;
+            case "login": return await this.handlePayload(FEATURE.LOGIN); break;
+            case "popular_course": return await this.handlePayload(COURSE.POPULAR_COURSES); break;
+            case "latest_course": return await this.handlePayload(COURSE.LATEST_COURSES); break;
+            case "course": return await this.handlePayload(COURSE.COURSES); break;
+            case "subject": return await this.handlePayload(SUBJECT.SUBJECTS); break;
             case "feedback":
-              response = [
+              return [
                 Response.genText(answers[Math.floor(Math.random() * answers.length)].answer),
                 Response.genImageTemplate(IMAGES.FEEDBACK),
               ];
-              break;
             case "report":
-              response = [
+              return [
                 Response.genText(answers[Math.floor(Math.random() * answers.length)].answer),
                 Response.genImageTemplate(IMAGES.REPORT),
               ];
-              break;
             default:
               if (!response) {
                 const { answer } = answers[Math.floor(Math.random() * answers.length)];

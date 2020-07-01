@@ -51,7 +51,7 @@ module.exports = class SubjectService {
       });
       
       if (data && data.length === 0) {
-        return Response.genQuickReply(i18n.__("subject.prompt-none"), quickReply);
+        return Response.genQuickReply(i18n.__("subject.prompt_none"), quickReply);
       } else {
         return [
           Response.genGenericTemplate(elements),
@@ -69,7 +69,7 @@ module.exports = class SubjectService {
 
     switch (payload) {
       case SUBJECT.ALL_SUBJECTS:
-        return await this.fetchSubjects('', 0, 4);
+        return await this.fetchSubjects('', 0, 10);
       case SUBJECT.SUBJECTS: 
         return await this.fetchSubjects(message, 0, 4);
       default: return [];
