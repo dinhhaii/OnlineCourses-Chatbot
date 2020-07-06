@@ -7,6 +7,8 @@
 		"login": "Login",
 		"help": "Help",
 		"features": "Features",
+		"corona": "COVID-19",
+		"get_started": "Get Started",
 		"support": "menu.support",
 		"order": "menu.order",
 		"suggestion": "menu.suggestion",
@@ -44,7 +46,9 @@
 		"profile": "Profile",
 		"payment": "Payment",
 		"remove": "🗑 Remove",
-		"edit_cart": "Edit Cart"
+		"edit_cart": "Edit Cart",
+		"vietnam": "Viet Nam",
+		"world": "World"
 	},
 	"course": {
 		"prompt_none": "Sorry, I can't find any course for you. Please find another course or you can refer to some courses bellow.",
@@ -159,5 +163,17 @@
 		"confirm": "Are you sure you want to create reminder?",
 		"course_detail": "Course Detail",
 		"cancel_success": "Turn off notification successfully."
+	},
+	"help": {
+		"support_0": "• Your account (belong to https://cafocc.web.app) needs to be connected to facebook to fully use the features.",
+		"support_1": "• You can ask anything for Chatbot. Eg: 'How to connect to my Facebook account', 'I want to receive reminders for the course every 5h pm on Monday, Wednesday, Friday', 'Can I check my cart?', ...",
+		"support_2": "• If you are not already connected to facebook, you can:\n - Login (Connect account with facebook)\n - Sign up (Create a new account connected to your existing facebook account)\n - Survey (Give feedback to the developer)",
+		"support_3": "• If you are already connected to your Facebook account:\n - Update Profile\n - Change Password\n - Forgot Password\n - Check Your Cart\n - Add Coupon\n - Schedule (Plan for courses that have been purchased, receive notifications (messages / emails) within the scheduled time)\n - Survey",
+		"prompt": "Wanna try it now? 😁"
+	},
+	"corona": {
+		"prompt": "• Confirm: {{confirmed}}\n• Deaths: {{deaths}}\n• Recovered: {{recovered}}\n• Updated: {{date}}",
+		"world": "A summary of total cases updated daily in the world.",
+		"vietnam": "Do you want to get summary of Viet Nam?"
 	}
 }

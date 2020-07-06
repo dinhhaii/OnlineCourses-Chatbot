@@ -89,5 +89,13 @@ module.exports = {
 
     fetchInvoices: (_idUser) => {
         return instance.get(`${SERVER_URL}/course/${_idUser}/enrolled`);
+    },
+
+    fetchCoronaSummary: () => {
+        return instance.get('https://api.covid19api.com/summary');
+    },
+
+    fetchCoronaSummaryWorldAndVietNam: () => {
+        return instance.get('https://ncov-data.herokuapp.com/api/corona');
     }
 }

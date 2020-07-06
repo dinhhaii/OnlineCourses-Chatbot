@@ -1,10 +1,10 @@
 module.exports = {
-  // SERVER_URL: "http://localhost:3000",
-  // CLIENT_URL: "https://localhost:3001",
-  // ADMIN_URL: "https://locahost:3002",
-  SERVER_URL: "https://hacademy-api.herokuapp.com",
-  CLIENT_URL: "https://cafocc.web.app",
-  ADMIN_URL: "https://cafocc-cms.web.app",
+  SERVER_URL: "http://localhost:3000",
+  CLIENT_URL: "https://localhost:3001",
+  ADMIN_URL: "https://locahost:3002",
+  // SERVER_URL: "https://hacademy-api.herokuapp.com",
+  // CLIENT_URL: "https://cafocc.web.app",
+  // ADMIN_URL: "https://cafocc-cms.web.app",
   JWT_SECRET: "jwt_secret",
   GET_STARTED: "GET_STARTED",
   QUIT: "QUIT",
@@ -29,7 +29,11 @@ module.exports = {
     REMOVE_SCHEDULE: "REMOVE_SCHEDULE_FEATURE",
     MORE_FEATURE: "MORE_FEATURE",
     HELP: "FEATURE_HELP",
-    ALL_INVOICE: "FEATURE_ALL_INVOICE"
+    ALL_INVOICE: "FEATURE_ALL_INVOICE",
+    HELP: "FEATURE_HELP",
+    COVID19: "FEATURE_COVID19",
+    COVID19_WORLD: "FEATURE_COVID19_WORLD",
+    COVID19_VN: "FEATURE_COVID19_VN"
   },
   COURSE: {
     COURSES: "COURSES",

@@ -213,7 +213,8 @@ module.exports = [
       "login",
       "sign in",
       "connect facebook",
-      "How can I connect to facebook?"
+      "How can I connect to facebook?",
+      "How to connect to my Facebook account"
     ],
     responses: [
       "• Go to Login page: https://cafocc.web.app/auth/login \n• If you don't have account access Register page: https://cafocc.web.app/auth/register to sign up.",
@@ -239,7 +240,7 @@ module.exports = [
     tag: "verification",
     patterns: [
       "I don't receive verification email",
-      "How to verify my account?",
+      "verify my account?",
       "verify account",
       "resend verification email",
       "verification account",
@@ -365,5 +366,19 @@ module.exports = [
       "I want to send feedback for Chatbot"
     ],
     responses: []
-  }
+  },
+  {
+    tag: "help",
+    patterns: [
+      "help",
+      "i need your help",
+      "how to use chatbot?",
+      "chatbot workflow",
+      "how to chat with bot?",
+      "help me",
+      "I need instructions for using chatbot",
+      "guide me"
+    ],
+    responses: []
+  },
 ];

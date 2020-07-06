@@ -89,6 +89,10 @@ module.exports = class Receive {
     const email = message.toLowerCase();
     let quickReplies = [ quitQuickReply ];
 
+    if (message.toLowerCase() === 'quit') {
+      return await this.handlePayload(QUIT);
+    }
+
     switch (this.user.state) {
       case STATE.SCHEDULE:
         const { field } = scheduleSteps[step];
@@ -293,7 +297,6 @@ module.exports = class Receive {
           response = Response.genByeMessage(this.user);
         } else if (intent !== "None") {
           if (this.user.state === STATE.LOGED_IN) {
-            console.log('helloooooo');
             switch (intent) {
               case "forgot_password": return await this.handlePayload(PROFILE.FORGOT_PASSWORD); break;
               case "schedule": 
@@ -313,13 +316,14 @@ module.exports = class Receive {
             }
           }
           switch (intent) {
-            case "register": return await this.handlePayload(FEATURE.REGISTER); break;
-            case "login": return await this.handlePayload(FEATURE.LOGIN); break;
-            case "popular_course": return await this.handlePayload(COURSE.POPULAR_COURSES); break;
-            case "latest_course": return await this.handlePayload(COURSE.LATEST_COURSES); break;
-            case "course": return await this.handlePayload(COURSE.COURSES); break;
-            case "subject": return await this.handlePayload(SUBJECT.SUBJECTS); break;
-            case "feedback":
+            case "register": return await this.handlePayload(FEATURE.REGISTER);
+            case "login": return await this.handlePayload(FEATURE.LOGIN);
+            case "popular_course": return await this.handlePayload(COURSE.POPULAR_COURSES);
+            case "latest_course": return await this.handlePayload(COURSE.LATEST_COURSES);
+            case "course": return await this.handlePayload(COURSE.COURSES);
+            case "subject": return await this.handlePayload(SUBJECT.SUBJECTS);
+            case "subject": return await this.handlePayload(SUBJECT.SUBJECTS);
+            case "help": return await this.handlePayload(FEATURE.HELP);
               return [
                 Response.genText(answers[Math.floor(Math.random() * answers.length)].answer),
                 Response.genImageTemplate(IMAGES.FEEDBACK),

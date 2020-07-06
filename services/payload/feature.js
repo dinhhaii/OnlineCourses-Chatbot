@@ -5,7 +5,7 @@ const Response = require("../response"),
   i18n = require("../../i18n.config"),
   queryString = require('query-string'),
   { getDayString } = require('../../utils/helper'),
-  { createUser, createTimer, fetchInvoices, updateTimer } = require('../api'),
+  { createUser, createTimer, fetchInvoices, updateTimer, fetchCoronaSummaryWorldAndVietNam, fetchCoronaSummary } = require('../api'),
   jwtExtension = require('jsonwebtoken'),
   generator = require('generate-password'),
   { FEATURE, STATE, registerSteps, scheduleSteps, QUIT, MENU, PROFILE, CLIENT_URL, JWT_SECRET, CART } = require('../../utils/constant');
@@ -239,6 +239,46 @@ module.exports = class FeatureService {
         return Response.genQuickReply(i18n.__("fallback.error", { error: response.data.error }), [ scheduleFeature, quitQuickReply ]);
       case FEATURE.SCHEDULE_CONFIRM_NO:
         return this.handleConfirmCreateTimer(false);
+      case FEATURE.HELP:
+        return [
+          Response.genText(i18n.__("help.support_0")),
+          Response.genText(i18n.__("help.support_1")),
+          Response.genText(i18n.__("help.support_2")),
+          Response.genText(i18n.__("help.support_3")),
+          Response.genQuickReply(i18n.__("help.prompt"), [ 
+            Response.genPostbackButton(i18n.__("menu.get_started"), QUIT)
+          ])
+        ]
+      case FEATURE.COVID19:
+        response = await fetchCoronaSummaryWorldAndVietNam();
+        if (response.data) {
+          const { confirmed, deaths, recovered, update } = response.data.data.global;
+          const date = new Date(update * 1000).toISOString().substr(0,10);
+          return [
+            Response.genText(i18n.__("corona.world")),
+            Response.genText(i18n.__("corona.prompt", { confirmed, deaths, recovered, date })),
+            Response.genQuickReply(i18n.__("corona.vietnam"), [
+              Response.genPostbackButton(i18n.__("feature.vietnam"), FEATURE.COVID19_VN)
+            ])
+          ]
+        }
+        return Response.genText(i18n.__("fallback.error"));
+
+      case FEATURE.COVID19_VN:
+        response = await fetchCoronaSummary();
+        if (response.data) {
+          const countries = response.data.Countries;
+          const vietnam = countries.find(value => value.CountryCode === "VN");
+          if (vietnam) {
+            const { TotalConfirmed, NewDeaths, TotalRecovered, Date } = vietnam;
+            const date = Date.substr(0,10);
+            return [
+              Response.genText(i18n.__("feature.vietnam")),
+              Response.genText(i18n.__("corona.prompt", { confirmed: TotalConfirmed, deaths: NewDeaths, recovered: TotalRecovered, date })),
+            ]
+          }
+        }
+        return Response.genText(i18n.__("fallback.error"));
 
     }
 
