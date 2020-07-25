@@ -9,8 +9,12 @@ const express = require("express"),
   nlpRouter = require('./routes/nlp'),
   emailRouter = require('./routes/email'),
   indexRouter = require('./routes/index'),
+  logger = require('morgan'),
   constant = require('./utils/constant'),
-  NLP = require('./services/nlp');
+  NLP = require('./services/nlp'),
+  http = require('http'),
+  cors = require('cors'),
+  bodyParser = require('body-parser');
 
 NLP.trainData();
 const users = {};
@@ -23,8 +27,12 @@ app.use(
 );
 
 // Parse application/json. Verify that callback came from Facebook
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'));
+app.use(cors());
 app.use(json({ verify: verifyRequestSignature }));
-app.use(express.static(path.join(path.resolve(), "public")));
 app.set("view engine", "ejs");
 
 app.use('/', indexRouter);

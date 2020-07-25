@@ -1,5 +1,4 @@
-const natural = require("natural"),
-  { NlpManager } = require("node-nlp"),
+const { NlpManager } = require("node-nlp"),
   intents = require("../utils/training-data");
 
 class NLP {
