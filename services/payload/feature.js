@@ -270,12 +270,28 @@ module.exports = class FeatureService {
           const countries = response.data.Countries;
           const vietnam = countries.find(value => value.CountryCode === "VN");
           if (vietnam) {
-            const { TotalConfirmed, NewDeaths, TotalRecovered, Date } = vietnam;
+            const {
+              TotalConfirmed,
+              NewDeaths,
+              TotalRecovered,
+              Date,
+              NewConfirmed,
+              NewRecovered,
+            } = vietnam;
             const date = Date.substr(0,10);
             return [
               Response.genText(i18n.__("feature.vietnam")),
-              Response.genText(i18n.__("corona.prompt", { confirmed: TotalConfirmed, deaths: NewDeaths, recovered: TotalRecovered, date })),
-            ]
+              Response.genText(
+                i18n.__("corona.prompt_vietnam", {
+                  confirmed: TotalConfirmed,
+                  deaths: NewDeaths,
+                  recovered: TotalRecovered,
+                  date,
+                  newconfirmed: NewConfirmed,
+                  newrecovered: NewRecovered
+                })
+              ),
+            ];
           }
         }
         return Response.genText(i18n.__("fallback.error"));

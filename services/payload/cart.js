@@ -19,7 +19,7 @@ module.exports = class CartService {
 
     if (course) {
       const buttons = [
-        Response.genWebUrlButton(i18n.__("course.detail"), `${config.clientUrl}/course-detail/${course._id}`),
+        Response.genWebUrlButton(i18n.__("course.detail"), `${CLIENT_URL}/course-detail/${course._id}`),
         Response.genPostbackButton(i18n.__("feature.remove"), `${CART.REMOVE_COURSE}_${course._id}`)
       ];
   
@@ -68,8 +68,9 @@ module.exports = class CartService {
                     const promo = item.discount ? `Discount: -${item.discount.percentage}% (${item.discount.code})` : 'Discount: 0%';
                     return Response.genReceiptElementTemplate(name, promo , 1, price, imageURL);
                 });
-                const adjustments = [{ name: "Discount", amount: total - subtotal }];
+                const adjustments = [{ name: "Discount", amount: (total - subtotal).toString() }];
 
+                console.log(adjustments);
                 return [
                     Response.genReceiptTemplate(`${this.user.userData.firstName} ${this.user.userData.lastName}`, data._id, summary, elements, adjustments),
                     Response.genButtonTemplate(i18n.__("cart.payment"), [ 

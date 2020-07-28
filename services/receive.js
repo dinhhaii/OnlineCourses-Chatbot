@@ -354,7 +354,7 @@ module.exports = class Receive {
     const { payload, type } = attachment;
     const { step } = this.user;
     const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
-
+    return Response.genText(payload.url);
     switch(this.user.state) {
       case STATE.REGISTER:
 
