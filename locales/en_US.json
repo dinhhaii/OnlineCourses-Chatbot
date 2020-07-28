@@ -20,9 +20,9 @@
 	},
 	"website": {
 		"home": "Our home page: https://cafocc.web.app",
-		"login": "Login page: https://cafocc.web.app/auth/login",
-		"register": "Sign up page: https://cafocc.web.app/auth/register",
-		"forgot_password": "Forgot password: https://cafocc.web.app/auth/forgot-password",
+		"login": "Login page: https://cafocc.web.app/login",
+		"register": "Sign up page: https://cafocc.web.app/register",
+		"forgot_password": "Forgot password: https://cafocc.web.app/forgot-password",
 		"change_password": "Change password: https://cafocc.web.app/profile",
 		"cart": "Check your item in cart: https://cafocc.web.app/cart"
 	},
@@ -173,6 +173,7 @@
 	},
 	"corona": {
 		"prompt": "• Confirm: {{confirmed}}\n• Deaths: {{deaths}}\n• Recovered: {{recovered}}\n• Updated: {{date}}",
+		"prompt_vietnam": "• Confirm: {{confirmed}}\n• New confirmed: {{newconfirmed}}\n• Deaths: {{deaths}}\n• New Recovered: {{newrecovered}}\n• Recovered: {{recovered}}\n• Updated: {{date}}",
 		"world": "A summary of total cases updated daily in the world.",
 		"vietnam": "Do you want to get summary of Viet Nam?"
 	}

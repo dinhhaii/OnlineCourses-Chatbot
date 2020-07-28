@@ -1,6 +1,7 @@
 const axios = require('axios'),
     queryString = require('query-string'),
-    { SERVER_URL, CHATBOT_URL } = require('../utils/constant');
+    config = require('./config'),
+    { SERVER_URL } = require('../utils/constant');
 
 const instance = axios.create();
 
@@ -56,7 +57,7 @@ module.exports = {
     },
 
     sendEmail: (email, idFacebook) => {
-        return instance.get(`${CHATBOT_URL}/email/send?email=${email}&idFacebook=${idFacebook}`);
+        return instance.get(`${config.appUrl}/email/send?email=${email}&idFacebook=${idFacebook}`);
     },
 
     addCoupon: (idUser, code) => {
