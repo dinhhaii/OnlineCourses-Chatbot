@@ -191,9 +191,10 @@
 		"choose": "Choose this course",
 		"get_started": "Choose your course you have finished. I will give you some suggestions on other courses",
 		"course": "Choose your course you have finished. I will give you some suggestions on other courses",
-		"min_level": "After completing {{course_name}}, you can refer to some of the following courses",
-		"remain_level": "Here are some advanced/high-level courses for you.",
+		"min_level": "After completing {{course_name}}, you can refer to some of the following courses:",
+		"remain_level": "Here are some advanced/high-level courses for you:",
 		"thanks": "We have some suggestion courses for you! Why don't you register for courses today?",
-		"recommendation": "Another recommendation"
+		"recommendation": "Another recommendation",
+		"sorted_course": "The related course has the largest number of viewers:"
 	}
 }

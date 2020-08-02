@@ -179,18 +179,21 @@ module.exports = class CourseService {
       const _idCourse = payload.substr(14, payload.length - 14);
       const courseResponse = await api.fetchCourse(_idCourse);
       const suggestCoursesResponse = await api.fetchSuggestCourse(_idCourse);
+      const suggestCoursesSortByViewResponse = await api.fetchSuggestCourseSortByView(_idCourse);
+      // Data
       const course = courseResponse.data;
       const suggestCourses = suggestCoursesResponse.data;
-      // const suggestCoursesSortByView = await api.fetchSuggestCourseSortByView(_idCourse);
+      const suggestCoursesSortByView = suggestCoursesSortByViewResponse.data;
+
       const coursesByLevel = groupBy(suggestCourses, 'level');
       
       if (course) {
         const sortedLevel = Object.keys(coursesByLevel).sort();
         const responseSuggestionCourse = this.genResponseForSuggestionCourse(course, sortedLevel, coursesByLevel);
-        // const responseSuggestionCourseByView = genSuggestCourseByView(suggestCoursesSortByView);
+        const responseSuggestionCourseByView = this.genSuggestCourseByView(suggestCoursesSortByView);
         return [
           ...responseSuggestionCourse,
-          // ...responseSuggestionCourseByView,
+          ...responseSuggestionCourseByView,
           Response.genQuickReply(i18n.__('suggestion.thanks'), [
             Response.genPostbackButton(i18n.__('suggestion.recommendation'), COURSE.SUGGESTION)
           ])

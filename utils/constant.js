@@ -1,6 +1,6 @@
 module.exports = {
   // SERVER_URL: "http://localhost:3000",
-  // CLIENT_URL: "http://localhost:3001",
+  // CLIENT_URL: "https://localhost:3001",
   // ADMIN_URL: "http://locahost:3002",
   SERVER_URL: "https://hacademy-api.herokuapp.com",
   CLIENT_URL: "https://cafocc.web.app",

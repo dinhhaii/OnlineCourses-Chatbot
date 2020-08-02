@@ -92,8 +92,6 @@ module.exports = class Receive {
       return await this.handlePayload(QUIT);
     } else if (message.toLowerCase() === 'guide') {
       return await this.handlePayload(FEATURE.FEATURE_GET_STARTED_HELP);
-    } else if (message.toLowerCase() === 'a') {
-      return await this.handlePayload(COURSE.SUGGESTION);
     }
 
     switch (this.user.state) {
@@ -303,6 +301,7 @@ module.exports = class Receive {
         } else if (intent !== "None") {
           if (this.user.state === STATE.LOGED_IN) {
             switch (intent) {
+              case "next_step": return await this.handlePayload(COURSE.SUGGESTION);
               case "forgot_password": return await this.handlePayload(PROFILE.FORGOT_PASSWORD); break;
               case "schedule": 
                 const result = findTimeAndDays(message.toLowerCase());

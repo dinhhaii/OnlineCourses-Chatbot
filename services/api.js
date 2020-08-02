@@ -109,7 +109,7 @@ module.exports = {
     },
 
     fetchSuggestCourseSortByView: (idCourse) => {
-        return instance.get(`${SERVER_URL}/course/suggestion/viewer/${idCourse}`)
+        return instance.get(`${SERVER_URL}/course/suggestion/views/${idCourse}`)
     },
 
 }
