@@ -32,7 +32,6 @@ const FeatureService = require("./payload/feature"),
     JWT_SECRET,
     CLIENT_URL
   } = require("../utils/constant");
-const { find } = require("../utils/training-data");
 
 module.exports = class Receive {
   constructor(user, webhookEvent) {
@@ -91,9 +90,16 @@ module.exports = class Receive {
 
     if (message.toLowerCase() === 'quit') {
       return await this.handlePayload(QUIT);
+    } else if (message.toLowerCase() === 'guide') {
+      return await this.handlePayload(FEATURE.FEATURE_GET_STARTED_HELP);
+    } else if (message.toLowerCase() === 'a') {
+      return await this.handlePayload(COURSE.SUGGESTION);
     }
 
     switch (this.user.state) {
+      case STATE.HELP_TUTORIAL:
+        this.user.setStep(step - 1);
+        return await this.handlePayload(FEATURE.FEATURE_GET_STARTED_HELP_STEP);
       case STATE.SCHEDULE:
         const { field } = scheduleSteps[step];
         switch (step) {
@@ -287,9 +293,8 @@ module.exports = class Receive {
       default:
         let greeting = this.firstEntity(this.webhookEvent.message.nlp, "greetings");
         let bye = this.firstEntity(this.webhookEvent.message.nlp, "bye");
-        const result = await NLP.process(message.toLowerCase());
-        const { intent, answers } = result;
-        console.log("Message: ", message, " - Intent: ", intent);
+        const language = await NLP.detect(message.toLowerCase());
+        const { intent, answers } = await NLP.process(message.toLowerCase(), language);
 
         if (greeting && greeting.confidence > 0.8) {
           response = Response.genGetStartedMessage(this.user);
@@ -316,6 +321,7 @@ module.exports = class Receive {
             }
           }
           switch (intent) {
+            case "feature": return this.handlePayload(MENU.FEATURES);
             case "register": return await this.handlePayload(FEATURE.REGISTER);
             case "login": return await this.handlePayload(FEATURE.LOGIN);
             case "popular_course": return await this.handlePayload(COURSE.POPULAR_COURSES);
@@ -324,6 +330,8 @@ module.exports = class Receive {
             case "subject": return await this.handlePayload(SUBJECT.SUBJECTS);
             case "subject": return await this.handlePayload(SUBJECT.SUBJECTS);
             case "help": return await this.handlePayload(FEATURE.HELP);
+            case "corona": return await this.handlePayload(FEATURE.COVID19_GLOBAL);
+            case "feedback":
               return [
                 Response.genText(answers[Math.floor(Math.random() * answers.length)].answer),
                 Response.genImageTemplate(IMAGES.FEEDBACK),
@@ -334,7 +342,7 @@ module.exports = class Receive {
                 Response.genImageTemplate(IMAGES.REPORT),
               ];
             default:
-              if (!response) {
+              if (!response && answers.length !== 0) {
                 const { answer } = answers[Math.floor(Math.random() * answers.length)];
                 response = Response.genText(answer);
               }
@@ -354,10 +362,8 @@ module.exports = class Receive {
     const { payload, type } = attachment;
     const { step } = this.user;
     const quitQuickReply = Response.genPostbackButton(i18n.__("fallback.quit"), QUIT);
-    return Response.genText(payload.url);
     switch(this.user.state) {
       case STATE.REGISTER:
-
         if (step === 4) {
           if (type !== "image") {
             return [

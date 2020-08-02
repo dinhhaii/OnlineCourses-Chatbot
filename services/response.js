@@ -158,7 +158,7 @@ module.exports = class Response {
     const buttons = [
       this.genPostbackButton(i18n.__("menu.website"), MENU.WEBSITE),
       this.genPostbackButton(i18n.__("menu.features"), MENU.FEATURES),
-      this.genPostbackButton(i18n.__("menu.corona"), FEATURE.COVID19),
+      this.genPostbackButton(i18n.__("menu.corona"), FEATURE.COVID19_GLOBAL),
     ];
 
     const elements = [

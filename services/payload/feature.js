@@ -8,7 +8,7 @@ const Response = require("../response"),
   { createUser, createTimer, fetchInvoices, updateTimer, fetchCoronaSummaryWorldAndVietNam, fetchCoronaSummary } = require('../api'),
   jwtExtension = require('jsonwebtoken'),
   generator = require('generate-password'),
-  { FEATURE, STATE, registerSteps, scheduleSteps, QUIT, MENU, PROFILE, CLIENT_URL, JWT_SECRET, CART } = require('../../utils/constant');
+  { FEATURE, STATE, registerSteps, scheduleSteps, QUIT, MENU, PROFILE, CLIENT_URL, JWT_SECRET, CART, helpSteps, IMAGES, COURSE } = require('../../utils/constant');
 
 module.exports = class FeatureService {
   constructor(user, webhookEvent) {
@@ -249,14 +249,30 @@ module.exports = class FeatureService {
             Response.genPostbackButton(i18n.__("menu.get_started"), QUIT)
           ])
         ]
-      case FEATURE.COVID19:
-        response = await fetchCoronaSummaryWorldAndVietNam();
+      case FEATURE.COVID19_GLOBAL:
+        response = await fetchCoronaSummary();
         if (response.data) {
-          const { confirmed, deaths, recovered, update } = response.data.data.global;
-          const date = new Date(update * 1000).toISOString().substr(0,10);
+          const { Global } = response.data;
+          const {
+            TotalConfirmed,
+            NewDeaths,
+            TotalRecovered,
+            NewConfirmed,
+            NewRecovered,
+            TotalDeaths
+          } = Global;
           return [
             Response.genText(i18n.__("corona.world")),
-            Response.genText(i18n.__("corona.prompt", { confirmed, deaths, recovered, date })),
+            Response.genText(
+              i18n.__("corona.prompt", {
+                confirmed: TotalConfirmed,
+                newdeaths: NewDeaths,
+                deaths: TotalDeaths,
+                recovered: TotalRecovered,
+                newconfirmed: NewConfirmed,
+                newrecovered: NewRecovered
+              })
+            ),
             Response.genQuickReply(i18n.__("corona.vietnam"), [
               Response.genPostbackButton(i18n.__("feature.vietnam"), FEATURE.COVID19_VN)
             ])
@@ -273,6 +289,7 @@ module.exports = class FeatureService {
             const {
               TotalConfirmed,
               NewDeaths,
+              TotalDeaths,
               TotalRecovered,
               Date,
               NewConfirmed,
@@ -282,9 +299,10 @@ module.exports = class FeatureService {
             return [
               Response.genText(i18n.__("feature.vietnam")),
               Response.genText(
-                i18n.__("corona.prompt_vietnam", {
+                i18n.__("corona.prompt", {
                   confirmed: TotalConfirmed,
-                  deaths: NewDeaths,
+                  newdeaths: NewDeaths,
+                  deaths: TotalDeaths,
                   recovered: TotalRecovered,
                   date,
                   newconfirmed: NewConfirmed,
@@ -296,6 +314,75 @@ module.exports = class FeatureService {
         }
         return Response.genText(i18n.__("fallback.error"));
 
+      case FEATURE.FEATURE_GET_STARTED_HELP:
+        this.user.setState(STATE.HELP_TUTORIAL);
+        this.user.setStep(1);
+        return Response.genQuickReply(i18n.__(helpSteps[0].phrase), [
+          Response.genPostbackButton(i18n.__('help.next'), FEATURE.FEATURE_GET_STARTED_HELP_STEP),
+          Response.genPostbackButton(i18n.__('help.skip'), QUIT)
+        ])
+      case FEATURE.FEATURE_GET_STARTED_HELP_STEP:
+        const { step } = this.user;
+        const quickReplyHelp = Response.genQuickReply(i18n.__(helpSteps[step].phrase), [
+          Response.genPostbackButton(i18n.__('help.next'), FEATURE.FEATURE_GET_STARTED_HELP_STEP),
+          Response.genPostbackButton(i18n.__('help.skip'), QUIT)
+        ]);
+        response = quickReplyHelp;
+
+        switch(step) {
+          case 2: response = [
+            Response.genImageTemplate(IMAGES.FACEBOOK_BUTTON),
+            quickReplyHelp 
+          ]
+          break;
+          case 3: response = [
+            Response.genQuickReply(i18n.__(helpSteps[step].phrase), [
+              Response.genPostbackButton(i18n.__('help.quickReply_1'), COURSE.GUIDE),
+              Response.genPostbackButton(i18n.__('help.skip'), QUIT)
+            ])
+          ]
+          break;
+          case 4: 
+            this.user.setStep(0);
+            this.user.setState(this.user.userData.idFacebook ? STATE.LOGED_IN : STATE.NONE);
+            return [
+              Response.genButtonTemplate(i18n.__(helpSteps[4].phrase), [
+                Response.genPostbackButton(i18n.__('help.chat'), QUIT)
+              ])
+            ];
+        }
+        this.user.setStep(step + 1);
+        return response;
+      case FEATURE.CORONA_GUIDE:
+        if (this.user.state === STATE.HELP_TUTORIAL) {
+          response = await fetchCoronaSummary();
+          if (response.data) {
+            const { Global } = response.data;
+            const {
+              TotalConfirmed,
+              NewDeaths,
+              TotalRecovered,
+              NewConfirmed,
+              NewRecovered,
+              TotalDeaths
+            } = Global;
+            return [
+              Response.genText(i18n.__("corona.world")),
+              Response.genQuickReply(i18n.__("corona.prompt", {
+                confirmed: TotalConfirmed,
+                newdeaths: NewDeaths,
+                deaths: TotalDeaths,
+                recovered: TotalRecovered,
+                newconfirmed: NewConfirmed,
+                newrecovered: NewRecovered
+              }), [
+                Response.genPostbackButton(i18n.__('help.next'), FEATURE.FEATURE_GET_STARTED_HELP_STEP)
+              ])
+            ]
+          }
+        }
+        this.user.setState(this.user.userData.idFacebook ? STATE.LOGED_IN : STATE.NONE);
+        return Response.genText(i18n.__('fallback.error'));
     }
 
     if (payload.includes(FEATURE.ADD_SCHEDULE)) {

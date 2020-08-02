@@ -32,13 +32,19 @@ module.exports = {
     ALL_INVOICE: "FEATURE_ALL_INVOICE",
     HELP: "FEATURE_HELP",
     COVID19: "FEATURE_COVID19",
-    COVID19_WORLD: "FEATURE_COVID19_WORLD",
-    COVID19_VN: "FEATURE_COVID19_VN"
+    COVID19_GLOBAL: "FEATURE_COVID19_GLOBAL",
+    COVID19_VN: "FEATURE_COVID19_VN",
+    FEATURE_GET_STARTED_HELP: "FEATURE_GET_STARTED_HELP",
+    FEATURE_GET_STARTED_HELP_STEP: "FEATURE_GET_STARTED_HELP_STEP",
+    CORONA_GUIDE: 'FEATURE_CORONA_GUIDE'
   },
   COURSE: {
     COURSES: "COURSES",
     POPULAR_COURSES: "POPULAR_COURSES",
     LATEST_COURSES: "LATEST_COURSES",
+    GUIDE: "COURSE_GUIDE",
+    SUGGESTION: "COURSE_SUGGESTION",
+    CHOOSE_COURSE: "CHOOSE_COURSE"
   },
   SUBJECT: {
     SUBJECTS: "SUBJECTS",
@@ -64,6 +70,8 @@ module.exports = {
       "https://firebasestorage.googleapis.com/v0/b/cafocc.appspot.com/o/images%2Ffeedback.png?alt=media&token=de9d26a4-f2d3-4ee7-87bf-cfc192842d54",
     REPORT:
       "https://firebasestorage.googleapis.com/v0/b/cafocc.appspot.com/o/images%2Freport.png?alt=media&token=11395ddd-076b-43d7-9b93-39fb5560faa8",
+    FACEBOOK_BUTTON:
+      "https://firebasestorage.googleapis.com/v0/b/cafocc.appspot.com/o/images%2FScreen%20Shot%202020-07-29%20at%2023.11.50.png?alt=media&token=5a0e478a-197e-4d3a-a318-b3bd1ec15003"
   },
   STATE: {
     LOGED_IN: "LOGED_IN",
@@ -73,7 +81,8 @@ module.exports = {
     ADD_COUPON: "ADD_COUPON",
     REGISTER: "REGISTER",
     CONDUCT_SURVEYS: "CONDUCT_SURVEYS",
-    SCHEDULE: "SCHEDULE"
+    SCHEDULE: "SCHEDULE",
+    HELP_TUTORIAL: "HELP_TUTORIAL"
   },
   registerSteps: [
     { phrase: "register.get_started"},
@@ -98,5 +107,12 @@ module.exports = {
     { phrase: "schedule.time", field: "time" },
     { phrase: "schedule.days", field: "days" },
     { phrase: "schedule.info" }
+  ],
+  helpSteps: [
+    { phrase: "help.prompt_0" },
+    { phrase: "help.prompt_1" },
+    { phrase: "help.prompt_2" },
+    { phrase: "help.prompt_3" },
+    { phrase: "help.prompt_4" }
   ]
 };
