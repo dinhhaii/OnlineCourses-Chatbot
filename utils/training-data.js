@@ -215,6 +215,7 @@ module.exports = [
       "connect facebook",
       "How can I connect to facebook?",
       "How to connect to my Facebook account"
+      "I want to sign in with my account"
     ],
     responses: [
       "• Go to Login page: https://cafocc.web.app/auth/login \n• If you don't have account access Register page: https://cafocc.web.app/auth/register to sign up.",
@@ -276,7 +277,7 @@ module.exports = [
       "What courses people usually take on your site?",
       "most-enrolled courses",
       "suggest me some popular courses",
-      "suggest me some most-rated courses",
+      "suggest me some most-rated courses"
     ],
     responses: []
   },
@@ -380,5 +381,56 @@ module.exports = [
       "guide me"
     ],
     responses: []
+  },
+  // ---------------------------- NEW -----------------
+  {
+    tag: "feature",
+    patterns: [
+      "show me some features",
+      "i need more features",
+      "what can you do?",
+      "what can i do here?"
+    ],
+    responses: []
+  },
+  {
+    tag: "suggestion",
+    patterns: [
+      "suggest courses",
+      "Can I get some courses on your site?",
+      "I need some courses on your site",
+      "recommended courses",
+      "Can I get recommended courses on your site?",
+      "I need some recommended courses on your site",
+      "What courses you usually recommend?",
+      "most-suggested courses",
+      "suggest me some courses",
+      "recommend me some courses",
+    ],
+    responses: []
+  },
+  {
+    tag: "next_step",
+    patterns: [
+      "I have done learning this course, what's next?",
+      "what courses i should learn next?",
+      "next courses i should take to improve",
+      "what is the next-step after i have done this course?",
+      "are there some courses more advanced than this?"
+    ],
+    responses: []
+  },
+  {
+    tag: "frequently_asked_questions_(faq)",
+    patterns: [
+      "faq",
+      "can i get some faq?",
+      "frequently asked questions",
+      "questions frequently asked",
+      "what questions people usually ask?"
+    ],
+    responses: [
+      "What courses are on Hacademy?\nHow can I pay for a course?\nCan I check my current cart?\nHow can I set timer for my courses?\nHow can I have an account on Hacademy?\nHow many items are there in my cart?\nCan I check out my cart?\nHow to become a learner on Hacademy?\nHow to become a lecturer on Hacademy?\nHow can I update my profile?\nWhat is the next-step after I have done some courses?\nHow can I report a course?\nHow can I give feedback to a course?\nHow can I comment on a lesson?\nHow can I contact to other people?"
+    ]
   },
 ];
