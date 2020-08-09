@@ -145,7 +145,7 @@ module.exports = {
 
     // Days
     let days = [];
-    const regexDays = /((every|mon|tues|wed(nes)?|thur(s)?|fri|sat(ur)?|sun)(day)?(s)?)\b/ig;
+    const regexDays = /(mỗi ngày)|(hàng ngày)|(chủ nhật)|((thứ)\s*(hai|ba|tư|năm|sáu|bảy|[2-7]))|((every|mon|tues|wed(nes)?|thur(s)?|fri|sat(ur)?|sun)(day)?(s)?)\b/gmiu;
     while ((executorDays = regexDays.exec(message.toLowerCase())) !== null) {
       if (executorDays.index === regexDays.lastIndex) {
         regexDays.lastIndex++;
@@ -155,19 +155,34 @@ module.exports = {
         value = value[value.length - 1] === 's' ? value.substr(0, value.length - 1) : value;
         switch(value) {
           case "sun":
+          case "chủ nhật":
           case "sunday": days.push(0); break;
+          case "thứ 2":
+          case "thứ hai":
           case "mon":
           case "monday": days.push(1); break;
+          case "thứ 3":
+          case "thứ ba":
           case "tues":
           case "tuesday": days.push(2); break;
+          case "thứ 4":
+          case "thứ tư":
           case "wed":
           case "wednesday": days.push(3); break;
+          case "thứ năm":
+          case "thứ 5":
           case "thur":
           case "thursday": days.push(4); break;
+          case "thứ 6":
+          case "thứ sáu":
           case "fri":
           case "friday": days.push(5); break;
+          case "thứ 7":
+          case "thứ bảy":
           case "sat":
           case "saturday": days.push(6); break;
+          case "mỗi ngày":
+          case "hàng ngày":
           case "everyday":
           case "daily": days = [0,1,2,3,4,5,6]; break;
         }

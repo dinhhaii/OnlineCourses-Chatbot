@@ -382,7 +382,16 @@ module.exports = [
     ],
     responses: []
   },
-  // ---------------------------- NEW -----------------
+  {
+    tag: "corona",
+    patterns: [
+      "corona",
+      "corona virus",
+      "covid",
+      "covid-19",
+    ],
+    responses: []
+  },
   {
     tag: "feature",
     patterns: [

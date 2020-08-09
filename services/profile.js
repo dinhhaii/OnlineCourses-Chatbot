@@ -1,5 +1,7 @@
 "use strict";
 
+const { FEATURE } = require("../utils/constant");
+
 // Imports dependencies
 const GraphAPi = require("./graph-api"),
   i18n = require("../i18n.config"),
@@ -91,7 +93,7 @@ module.exports = class Profile {
   getGetStarted() {
     return {
       get_started: {
-        payload: "GET_STARTED"
+        payload: FEATURE.FEATURE_GET_STARTED_HELP
       }
     };
   }

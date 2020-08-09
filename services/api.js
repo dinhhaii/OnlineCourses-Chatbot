@@ -10,6 +10,10 @@ module.exports = {
         return instance.post(`${SERVER_URL}/course`, { search, popular, offset, limit });
     },
 
+    fetchCourse: (id) => {
+        return instance.get(`${SERVER_URL}/course/${id}`);
+    },
+
     fetchSubjects: (search, offset, limit) => {
         const query = queryString.stringify({
             search, limit, offset
@@ -98,5 +102,14 @@ module.exports = {
 
     fetchCoronaSummaryWorldAndVietNam: () => {
         return instance.get('https://ncov-data.herokuapp.com/api/corona');
-    }
+    },
+
+    fetchSuggestCourse: (idCourse) => {
+        return instance.get(`${SERVER_URL}/course/suggestion/${idCourse}`)
+    },
+
+    fetchSuggestCourseSortByView: (idCourse) => {
+        return instance.get(`${SERVER_URL}/course/suggestion/views/${idCourse}`)
+    },
+
 }
