@@ -215,6 +215,7 @@ module.exports = [
       "connect facebook",
       "How can I connect to facebook?",
       "How to connect to my Facebook account"
+      "I want to sign in with my account"
     ],
     responses: [
       "• Go to Login page: https://cafocc.web.app/auth/login \n• If you don't have account access Register page: https://cafocc.web.app/auth/register to sign up.",
@@ -276,7 +277,7 @@ module.exports = [
       "What courses people usually take on your site?",
       "most-enrolled courses",
       "suggest me some popular courses",
-      "suggest me some most-rated courses",
+      "suggest me some most-rated courses"
     ],
     responses: []
   },
@@ -429,7 +430,7 @@ module.exports = [
     responses: []
   },
   {
-    tag: "frequently_asked_questions_(faq)",
+    tag: "faq",
     patterns: [
       "faq",
       "can i get some faq?",
@@ -440,5 +441,5 @@ module.exports = [
     responses: [
       "What courses are on Hacademy?\nHow can I pay for a course?\nCan I check my current cart?\nHow can I set timer for my courses?\nHow can I have an account on Hacademy?\nHow many items are there in my cart?\nCan I check out my cart?\nHow to become a learner on Hacademy?\nHow to become a lecturer on Hacademy?\nHow can I update my profile?\nWhat is the next-step after I have done some courses?\nHow can I report a course?\nHow can I give feedback to a course?\nHow can I comment on a lesson?\nHow can I contact to other people?"
     ]
-  }
+  },
 ];
