@@ -366,4 +366,66 @@ module.exports = [
     ],
     responses: [],
   },
+  {
+    tag: "corona",
+    patterns: [
+      "corona",
+      "corona virus",
+      "covid",
+      "covid-19",
+      "tin tức corona",
+      "tin tức covid"
+    ],
+    responses: []
+  },
+  {
+    tag: "feature",
+    patterns: [
+      "gợi ý cho tôi một số chức năng",
+      "tôi cần nhiều chức năng hơn",
+      "bạn có thể làm gì?",
+      "tôi có thể thao tác ở đây?"
+    ],
+    responses: []
+  },
+  {
+    tag: "suggestion",
+    patterns: [
+      "gợi ý cho tôi một số khoá học",
+      "Cho tôi một vài khoá học trên trang được không?",
+      "tôi cần các khoá học trên trang",
+      "đề xuất khoá học",
+      "Cho tôi các khoá học được đề xuất trên trang?",
+      "Tôi cần những khoá học được đề xuất trên trang",
+      "Những khoá học nào hay được đề xuất vậy?",
+      "các khoá học được đề xuất nhiều nhất",
+      "gợi ý cho tôi một vài khoá học",
+      "gợi ý cho tôi các khoá học",
+    ],
+    responses: []
+  },
+  {
+    tag: "next_step",
+    patterns: [
+      "tôi học xong khoá học này rồi thì nên học gì tiếp theo?",
+      "Tôi nên học khoá học nào tiếp theo đây?",
+      "khoá học tiếp theo nào tôi nên học để nâng cao trình độ",
+      "có khoá học nào nâng cao hơn khoá học này không?",
+      "bước đi kế tiếp của tôi khi học xong khoá học này là gì?",
+    ],
+    responses: []
+  },
+  {
+    tag: "faq",
+    patterns: [
+      "faq",
+      "cho tôi biết những câu hỏi thường được hỏi được không?",
+      "các câu hỏi thường gặp",
+      "các câu hỏi hay được hỏi",
+      "Những câu hỏi nào mọi người thường hay hỏi vậy?"
+    ],
+    responses: [
+      "Có những khoá học nào trên Hacademy vậy?\nTôi trả tiền để mua khoá học như thế nào?\nTôi kiểm tra giỏ hàng hiện tại của tôi được không?\nLàm thế nào để tôi cài đặt thông báo cho các khoá học của mình?\nLàm thế nào để tôi có tài khoản trên Hacademy?\nCó bao nhiêu món đồ trong giỏ hàng của tôi?\nTôi thanh toán giỏ hàng tại đây được không?\nLàm thế nào để trở thành người học trên Hacademy?\nLàm thế nào để trở thành giảng viên trên Hacademy?\nLàm thế nào để cập nhật thông tin cá nhân?\nBước đi kế tiếp khi tôi hoàn thành một khoá học?\nLàm thế nào để tôi báo cáo khoá học?\nLàm thế nào để tôi gởi phản hồi đánh giá về khoá học?\nLàm thế nào để bình luận ở một bài giảng?\nLàm thế nào để tôi liên lạc với Hacademy?"
+    ]
+  },
 ];
