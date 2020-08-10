@@ -292,6 +292,15 @@ module.exports = class Receive {
         let greeting = this.firstEntity(this.webhookEvent.message.nlp, "greetings");
         let bye = this.firstEntity(this.webhookEvent.message.nlp, "bye");
         const language = await NLP.detect(message.toLowerCase());
+        console.log(language);
+        if (language === 'vi') {
+          this.user.setLocale('vi_VN');
+          i18n.setLocale('vi_VN');
+        } else {
+          this.user.setLocale('en_EN');
+          i18n.setLocale('en_EN ');
+        }
+
         const { intent, answers } = await NLP.process(message.toLowerCase(), language);
 
         if (greeting && greeting.confidence > 0.8) {

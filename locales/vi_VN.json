@@ -1,80 +1,200 @@
 {
 	"profile": {
-		"greeting": "Chào mừng bạn đến với Original Coast Clothing {{user_first_name}}! Hãy nhấp vào nút Bắt đầu để tận hưởng trải nghiệm nhắn tin mẫu và hoàn toàn tự động của chúng tôi. Nếu bạn muốn xây dựng trải nghiệm tương tự, hãy truy cập https://fb.me/get-sample-oc"
+		"greeting": "Chào mừng đến với Hacademy {{user_first_name}}! Nhấn Get Started để bắt đầu trải nghiệm hệ thống tự động nhắn tin của chúng tôi!"
 	},
 	"menu": {
-		"support": "Hỗ trợ khách hàng",
-		"order": "Cập nhật đơn đặt hàng",
-		"help": "Trò chuyện với nhân viên",
-		"suggestion": "Gợi ý về trang phục",
-		"shop": "Mua ngay",
-		"start_over": "Bắt đầu lại",
-		"website": "menu.website",
-		"features": "menu.features"
+		"website": "Trang web",
+		"login": "Đăng nhập",
+		"help": "Trợ giúp",
+		"features": "Tính năng",
+		"corona": "COVID-19",
+		"get_started": "Bắt đầu",
+		"support": "menu.support",
+		"order": "menu.order",
+		"suggestion": "menu.suggestion",
+		"shop": "menu.shop"
 	},
 	"get_started": {
-		"welcome": "Hi {{userFirstName}}! Chào mừng bạn đến với Original Coast Clothing để khám phá những phong cách phù hợp với mọi hoàn cảnh.",
-		"guidance": "Hãy sử dụng menu bên dưới bất cứ lúc nào để di chuyển giữa các tính năng",
-		"help": "Chúng tôi có thể giúp gì cho bạn nào?"
+		"welcome": "Xin chào {{firstName}}! Chào mừng đến với Hacademy.",
+		"help": "Hôm nay chúng tôi có thể giúp gì cho bạn đây?"
 	},
-	"leadgen": {
-		"promo": "Hi {{userFirstName}}! Giờ đây, công cuộc tìm kiếm trang phục như ý trở nên dễ dàng và tiện lợi hơn rất nhiều.",
-		"title": "Phiếu giảm giá 50%",
-		"subtitle": "Phiếu giảm giá của bạn đây",
-		"apply": "Áp dụng chiết khấu",
-		"coupon": "Đã thêm phiếu giảm giá vào cuộc trò chuyện này. Giờ thì bạn hãy xem thử bộ sưu tập mùa hè đang được chiết khấu nhé"
-	},
-	"curation": {
-		"prompt": "Bạn đang tìm trang phục cho mình hay người khác?",
-		"occasion": "Quá tuyệt! Mình bắt đầu thôi. Trước tiên, bạn định mặc trong dịp nào nhỉ?",
-		"price": "Bạn định chi khoảng bao nhiêu?",
-		"me": "Cho mình!",
-		"someone": "Người khác",
-		"work": "Công việc",
-		"dinner": "Bữa tối",
-		"party": "Tiệc tùng",
-		"sales": "Trò chuyện với nhân viên bán hàng",
-		"shop": "Mua bộ này",
-		"title": "Bộ sưu tập mùa hè 2019",
-		"subtitle": "Trang phục nổi bật",
-		"show": "Bộ khác"
-	},
-	"order": {
-		"prompt": "Chúng tôi luôn sẵn lòng hỗ trợ bạn. Chọn trong số tùy chọn sau",
-		"search": "Tìm kiếm theo số đơn đặt hàng",
-		"account": "Liên kết tài khoản của tôi",
-		"dialog": "Hộp thoại liên kết tài khoản",
-		"searching": "Đang tìm kiếm đơn đặt hàng gần đây nhất...",
-		"number": "Chắc chắn rồi, vui lòng viết số đơn đặt hàng",
-		"status": "Đơn đặt hàng của bạn đang trên đường vận chuyển. 3 ngày nữa là bạn nhận được hàng."
-	},
-	"care": {
-		"prompt": "Để kết nối với đội ngũ phù hợp, vui lòng cho tôi biết bạn cần giúp gì.",
-		"order": "Thắc mắc về đơn đặt hàng",
-		"billing": "Vấn đề về thanh toán",
-		"other": "Khác",
-		"issue": "Hi {{userFirstName}}! Tôi là {{agentFirstName}}. Rất vui được hỗ trợ bạn về mọi thắc mắc liên quan đến {{topic}}.",
-		"default": "Hi {{userFirstName}}! Tôi là {{agentFirstName}}. Rất vui được hỗ trợ bạn hôm nay. Tôi có thể giúp gì cho bạn?",
-		"style": "Hi {{userFirstName}}! Tôi là {{agentFirstName}}. Rất vui được giải đáp cho bạn mọi thắc mắc về phong cách thời trang mùa hè của chúng tôi",
-		"end": "Bản demo đến đây là hết. Hãy tận dụng sức mạnh của nền tảng Messenger để phát triển doanh nghiệp bạn. Truy cập https://fb.me/get-sample-oc để biết cách xây dựng trải nghiệm tương tự",
-		"help": "Trợ giúp"
-	},
-	"survey": {
-		"prompt": "Chào bạn! Bạn có thể phản hồi ngắn gọn về trải nghiệm vừa rồi với {{agentFirstName}} không?",
-		"positive": "Cảm ơn bạn đã phản hồi",
-		"neutral": "Cảm ơn bạn đã phản hồi. Nếu muốn góp ý thêm cho chúng tôi, hãy thoải mái bình luận kèm hashtag #suggestion nhé",
-		"negative": "Cảm ơn đã cho chúng tôi biết. Rất tiếc về điều đó. Nếu được, hãy cho biết chúng tôi nên cải thiện điều gì nhé.",
-		"suggestion": "Chúng tôi đã ghi lại gợi ý của bạn để đội ngũ của mình xem xét trong tương lai. Nếu bạn cần chúng tôi hỗ trợ ngay bây giờ, hãy gõ \"trợ giúp\" vào khung bình luận."
-	},
-	"chat_plugin": {
-		"prompt": "Cảm ơn bạn đã ghé thăm cửa hàng của chúng tôi, hãy chắc chắn kiểm tra tất cả các phong cách tuyệt vời chúng tôi có trong phần mùa hè."
-	},
-	"fallback": {
-		"any": "Rất tiếc, nhưng tôi không nhận ra tin nhắn \"{{message}}\".",
-		"attachment": "Cảm ơn bạn đã gửi file đính kèm. Chúng tôi có thể kết nối bạn với nhân viên để xem lại file này hoặc chúng ta có thể bắt đầu lại."
+	"website": {
+		"home": "Trang chủ: https://cafocc.web.app",
+		"login": "Trang đăng nhập: https://cafocc.web.app/login",
+		"register": "Trang đăng ký: https://cafocc.web.app/register",
+		"forgot_password": "Quên mật khẩu: https://cafocc.web.app/forgot-password",
+		"change_password": "Đổi mật khẩu: https://cafocc.web.app/profile",
+		"cart": "Kiểm tra giỏ hàng: https://cafocc.web.app/cart"
 	},
 	"feature": {
-		"login": "feature.login",
-		"register": "feature.register"
+		"prompt": "Tôi có thể làm gì để giúp bạn?",
+		"get_more_feature": "Bạn có muốn thực hiện những tính năng khác không?",
+		"login": "Đăng nhập",
+		"register": "Đăng ký",
+		"schedule": "Lời nhắc",
+		"update_profile": "Cập nhật profile",
+		"survey": "Khảo sát",
+		"forgot_password": "Quên mật khẩu",
+		"change_password": "Đổi mật khẩu",
+		"access_page": "Access Page",
+		"quick_login": "Quick Login",
+		"connect_facebook": "Kết nối Facebook",
+		"check_cart": "Kiểm giỏ hàng",
+		"add_coupon": "Thêm mã giảm giá",
+		"more_feature": "Tính năng khác",
+		"cart": "Giỏ hàng",
+		"profile": "Profile",
+		"payment": "Thanh toán",
+		"remove": "🗑 Xoá",
+		"edit_cart": "Điều chỉnh giỏ hàng",
+		"vietnam": "Việt Nam",
+		"world": "Thế giới"
+	},
+	"course": {
+		"prompt_none": "Xin lỗi, tôi không tìm được khoá học nào cho bạn. Bạn hãy chọn khoá học khác hoặc các khoá học bên dưới.",
+		"prompt": "Đây là một vài khoá học cho bạn nè 😁",
+		"latest_courses": "Các khoá học mới nhất",
+		"popular_courses": "Các khoá học nổi nhất",
+		"detail": "Chi tiết",
+		"add_to_cart": "Thêm vào giỏ hàng"
+	},
+	"subject": {
+		"prompt_none": "Xin lỗi, tôi không tim được môn học nào cho bạn.",
+		"prompt": "Đây là một vài môn học dành cho bạn.",
+		"all_subjects": "Tất cả môn học",
+		"detail": "Chi tiết",
+		"view_more": "Xem thêm",
+		"prompt-none": "subject.prompt-none"
+	},
+	"email": {
+		"connected": "Tài khoản Facebook của ban đã được liên kết với người dùng {{email}}.",
+		"confirm": "Hãy kiểm tra email của bạn {{email}} để xác thực tài khoản.",
+		"invalid": "Email của bạn không hợp lệ. Hãy thử lại!",
+		"not_found": "Tôi không tìm được người dùng nào có email {{email}}. Hãy nhập lại thông tin hoặc tạo tài khoản mới?.",
+		"input": "Hãy nhập email của bạn để liên kết tài khoản với Facebook",
+		"register": "Đăng ký"
+	},
+	"register": {
+		"get_started": "Hãy làm theo các bước để hoàn tất qui trình đăng ký. Nhập bất kỳ để tiếp tục!",
+		"email": "Cám ơn bạn 😁!\nCho tôi biết email của bạn.",
+		"first_name": "Nhập vào tên của bạn",
+		"last_name": "và cả họ nữa",
+		"image_url": "Gửi tôi một tấm ảnh đại diện cho tài khoản của bạn đi (attachment or url). Nhập '0' để bỏ qua.",
+		"invalid_url": "URL của bạn không hợp lệ. Hãy thử lại!",
+		"invalid_attachment": "Tập tin của bạn không thuộc dạng tập tin hình ảnh. Hãy thử lại!",
+		"bio": "Lời giới thiệu về bạn",
+		"role": "Chọn vị trị bạn muốn làm ở Hacademy",
+		"confirm": "Bạn có chắc là muốn tạo tài khoản này?",
+		"info": "Thông tin của bạn:\n• Email: {{email}}\n• Tên: {{firstName}}\n• Họ: {{lastName}}\n• Giới thiệu: {{bio}}\n• Vị trí: {{role}}",
+		"success": "Cám ơn bạn. Bạn đã đăng ký thành công!",
+		"change_password": "Mật khẩu của bạn là: {{password}}\nTruy cập trang để đăng nhập nhanh và đổi mật khẩu nào 😁.",
+		"failed": "Xin lỗi, đã có lỗi xảy ra '{{error}}'. Chúng tôi không thể tạo tài khoản cho bạn 😞. Hãy thử lại.",
+		"cancel": "Cám ơn bạn. Hy vọng bạn sẽ sớm đăng ký vào Hacademy."
+	},
+	"update": {
+		"get_started": "Hãy làm theo các bước để hoàn thành việc cập nhât. Nhập bất kỳ để tiếp tục.",
+		"email": "Cám ơn 😁!\nCho tôi biết email của bạn.",
+		"first_name": "Nhập tên của bạn",
+		"last_name": "và cả họ nữa",
+		"image_url": "Gửi tôi một tấm ảnh đại diện cho tài khoản của bạn đi (attachment or url). Nhập '0' để bỏ qua.",
+		"invalid_url": "URL của bạn không hợp lệ. Hãy thử lại!",
+		"invalid_attachment": "Tập tin của bạn không thuộc dạng tập tin hình ảnh. Hãy thử lại!",
+		"bio": "Lời giới thiệu về bạn",
+		"confirm": "Bạn đã chắc là muốc thực hiện việc cập nhật này rồi chứ?",
+		"info": "Thông tin của bạn:\n• Email: {{email}}\n• Tên: {{firstName}}\n• Họ: {{lastName}}\n• Giới thiệu: {{bio}}\n",
+		"access_page": "Truy cập trang để đăng nhập nhanh 😁.",
+		"success": "Cám ơn, cập nhật thông tin thành công!",
+		"failed": "Xin lỗi, đã có lỗi xảy ra '{{error}}'. Chúng tôi không thể cập nhật tài khoản của bạn 😞. Hãy thử lại.",
+		"cancel": "Cám ơn. Nếu cần cập nhật hãy quay lại!",
+		"change_password": "1. Trang đăng nhập: https://cafocc.web.app/auth/login\n2. Profile -> Đổi mật khẩu\n\nNếu tài khoản của bạn đã liên kết với Facebook. Nhấn nút bên dưới.",
+		"change_password_failed": "Tài khoản của bạn đã được liên kết với Facebook."
+	},
+	"login": {
+		"quick_login": "Tài khoản của bạn đã liên kết với Facebook. Nhấn \"Access Page\" để đăng nhập nhanh.",
+		"forgot_password": "Hãy nhập email của bạn để nhận mail thay đổi mật khẩu."
+	},
+	"chat_plugin": {
+		"prompt": "Cám ơn đã ghé thăm Hacademy, chắc rằng bạn không bỏ qua khoá học nào trên trang của chúng tôi nhé!"
+	},
+	"fallback": {
+		"any": "Xin lỗi, tôi không nhận dạng được \"{{message}}\".",
+		"quit": "Kết thúc",
+		"error": "Xin lỗi, đã có lỗi xảy ra '{{error}}'. Hãy thử lại.",
+		"attachment": "Chúng tôi hiện chỉ nhận tập tin hình ảnh ở tính năng đăng ký và cập nhật thông tin!"
+	},
+	"confirm": {
+		"yes": "Có",
+		"no": "Không",
+		"email": "Email đã được gởi tới {{email}}. Nếu bạn không thấy mail, hãy nhớ kiểm tra mục Spam nhé. Cám ơn!"
+	},
+	"cart": {
+		"prevent": "Xin lỗi, tài khoản của bạn phải được kết nối với Facebook.",
+		"not_found": "Xin lỗi, không thể tìm thấy giỏ hàng.",
+		"payment": "Bạn muốn thanh toán ngay bây giờ không?",
+		"add_code": "Hãy gửi cho tôi CODE của bạn.",
+		"error_code": "CODE đã được sử dụng hoặc bạn đã nhập sai.",
+		"add_code_success": "Mã giảm giá đã được thêm vào giỏ hàng của bạn. Hãy kiểm tra lại giỏ hàng.",
+		"add_course_success": "Khoá học đã được thêm vào giỏ hàng của bạn. Hãy kiểm tra lại giỏ hàng.",
+		"remove_course_success": "Khoá học đã được xoá khỏi giỏ hàng của bạn.",
+		"no_items": "Không có khoá học nào trong giỏ hàng của bạn. Tôi có một số đề xuất cho bạn nè.",
+		"items": "Có tất cả {{count}} khoá học trong giỏ hàng."
+	},
+	"survey": {
+		"prompt": "Chào bạn, khảo sát chỉ mất tầm 1 phút thôi! Chúng tôi luôn luôn lắng nghe ý kiến người dùng và cải hiện trong tương lai. Rất cám ơn bạn!",
+		"rate": "Sự hài lòng của bạn về Hacademy [1-5]: ",
+		"content": "Bạn có nghĩ Chatbot có lợi không? Và bạn muốn chúng tôi chỉnh sửa hay thêm tính năng nào trong tương lai không?",
+		"thanks": "Cám ơn bạn, khảo sát đã kết thúc!",
+		"rate_warn": "Xin lỗi, đánh giá của bạn phải trong khoảng 1-5. Hãy thử lại!"
+	},
+	"schedule": {
+		"add_notification": "Thông báo",
+		"remove_notification": "Gỡ bỏ thông báo",
+		"view_all": "Xem tất cả",
+		"get_started": "Chọn khoá học mà bạn muốn cài đặt lời nhắc.",
+		"course": "Có tất cả {{count}} khoá học mà bạn đã đăng ký.",
+		"no_course": "Bạn chưa mua khoá học nào.",
+		"time": "Hãy nhập giờ (hh:mm)",
+		"days": "Hãy nhập ngày trong tuần (Ví dụ: 'thứ hai, thứ tư, thứ sáu' hoặc 'mỗi ngày')",
+		"info": "Thông tin của bạn:\n• Thời gian: {{time}}\n• Các ngày: {{days}}",
+		"invalid_time": "Thời gian không hợp lệ. Ví dụ: '20:30', '15h10', 2:30 pm, ...",
+		"invalid_days": "Ngày không hợp lệ. Ví dụ: [chúa nhật - thứ bảy] / [0 - 6] / 'mỗi ngày', cách nhau bởi dấu phẩy.",
+		"success": "Cám ơn, lời nhắc đã được cài đặt thành công!",
+		"failed": "Cám ơn bạn 😁. Bạn có muốn sử dụng thêm tính năng khác không?",
+		"confirm": "Bạn có chắc cài đặt thông báo này?",
+		"course_detail": "Chi tiết khoá học",
+		"cancel_success": "Gỡ bở thông báo cho khoá học thành công."
+	},
+	"help": {
+		"support_0": "• Tài khoản của bạn (trên https://cafocc.web.app) cần phải liên kết với Facebook để có thể thực hiện được các tính năng trên Chatbot",
+		"support_1": "• Bạn có thể hỏi Chatbot bất cứ gì. Ví dụ: 'Làm thể nào để liên kết với Facebook', 'Tôi muốn nhận thông báo về khoá học của tôi vào mỗi 5:00 tối mỗi thứ 2, thứ 4, thứ 6 hàng tuần', 'Tôi muốn kiểm tra giỏ hàng.', ...",
+		"support_2": "• Nếu bạn chưa liên kết với Facebook:\n - Đăng nhập (Liên kết Facebook)\n - Đănh ký (Tạo tài khoản mới liên kết với tài khoản Facebook hiện tại)\n - Khảo sát (Gửi phản hồi cho đội ngũ phát triển)",
+		"support_3": "• Nêú bạn đã liên kết với Facebook: \n - Cập nhật profile\n - Đổi mật khẩu\n - Quên mật khẩu\n - Kiểm tra giỏ hàng\n - Thêm mã giảm giá\n - Lời nhắc (cài đặt thông báo cho khoá học với một thời gian cụ thể và ngày trong tuần)\n - Khảo sát",
+		"prompt": "Bạn đã muốn thử bây giờ chưa? 😁",
+		"next": "Tiếp tục",
+		"skip": "Bỏ qua",
+		"prompt_0": "Đây có phải lần đầu bạn sử dụng Chatbot không?",
+		"prompt_1": "Hãy làm theo các bước ở bên dưới",
+		"prompt_2": "Bạn có thể tương tác với Chatbot thông qua các nút bấm.",
+		"prompt_3": "hoặc dùng ngôn ngữ tự nhiên để nhắn tin trò chuyện với Chatbot",
+		"prompt_4": "Cám ơn, bạn đã hoàn thành phần hướng dẫn. Để nhờ trợ giúp hãy nhập 'guide' hoặc 'help'.",
+		"quickReply_1": "khoá học javascript",
+		"quickReply_2": "tin tức corona",
+		"another_course": "Tốt đấy! Hãy thử thêm cái nữa nào.",
+		"chat": "Chat với bot"
+	},
+	"corona": {
+		"prompt": "• Ca nhiễm: {{confirmed}}\n• Ca nhiêm mới: {{newconfirmed}}\n• Ca tử vong: {{deaths}}\n• Ca tử vong mới: {{newdeaths}}\n• Hồi phục: {{recovered}}\n• Cập nhật: {{date}}",
+		"world": "Tổng quát về số ca mắc covid trên toàn thế giới.",
+		"vietnam": "Bạn có muốn xem tổng quát về tình hình covid ở Việt Nam?"
+	},
+	"suggestion": {
+		"choose": "Chọn khoá học này",
+		"get_started": "Hãy chọn một khoá học mà bạn đã học xong. Tôi sẽ đề xuất cho bạn một vài khoá học.",
+		"course": "Hãy chọn một khoá học mà bạn đã học xong. Tôi sẽ đề xuất cho bạn một vài khoá học.",
+		"min_level": "Sau khi hoàn tất học khoá học {{course_name}}, bạn có thể học thêm các khoá học như:",
+		"remain_level": "Đây là một số các kháo học nâng cao dành cho bạn:",
+		"thanks": "Tôi có mốt số các khoá học đề xuất cho bạn đây, tại sao hôm nay bạn chưa đăng ký khoá học nào thế?",
+		"recommendation": "Mốt vài các đề xuất khác",
+		"sorted_course": "Những khoá học này được sự quan tâm của rất nhiều người học:"
 	}
 }

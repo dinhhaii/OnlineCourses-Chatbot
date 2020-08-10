@@ -70,6 +70,10 @@ module.exports = class User {
     this.state = value;
   }
 
+  setLocale(value) {
+    this.locale = value;
+  }
+  
   setStep(value) {
     this.step = value;
   }
@@ -92,7 +96,7 @@ module.exports = class User {
 
   async setProfile(userProfile) {
     const { id } = userProfile;
-    this.setProfileFacebook(userProfile);
+    // this.setProfileFacebook(userProfile);
     try {
       if (id) {
         const { data } = await fetchUser(id);

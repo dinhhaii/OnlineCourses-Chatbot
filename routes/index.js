@@ -74,21 +74,14 @@ router.post("/webhook", async (req, res) => {
       let senderPsid = webhookEvent.sender.id;
 
       if (!(senderPsid in users)) {
+        i18n.setLocale("en_EN");
         let user = new User(senderPsid);
-
-        GraphAPi.getUserProfile(senderPsid)
-          .then(async (userProfile) => {
-            i18n.setLocale("en_US");
-            const result = await user.setProfile(userProfile);
-            users[senderPsid] = result;
-            let receiveMessage = new Receive(users[senderPsid], webhookEvent);
-            return await receiveMessage.handleMessage();
-          })
-          .catch((error) => {
-            console.log("Profile is unavailable:", error);
-          })
+        const result = await user.setProfile({ id: senderPsid });
+        users[senderPsid] = result;
+        let receiveMessage = new Receive(users[senderPsid], webhookEvent);
+        return await receiveMessage.handleMessage();
       } else {
-        i18n.setLocale("en_US");
+        i18n.setLocale(users[senderPsid].locale);
         let receiveMessage = new Receive(users[senderPsid], webhookEvent);
         return await receiveMessage.handleMessage();
       }
