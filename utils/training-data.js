@@ -214,7 +214,7 @@ module.exports = [
       "sign in",
       "connect facebook",
       "How can I connect to facebook?",
-      "How to connect to my Facebook account"
+      "How to connect to my Facebook account",
       "I want to sign in with my account"
     ],
     responses: [
