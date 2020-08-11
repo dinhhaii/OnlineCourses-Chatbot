@@ -112,4 +112,7 @@ module.exports = {
         return instance.get(`${SERVER_URL}/course/suggestion/views/${idCourse}`)
     },
 
+    getReviewCourse: (idCourse) => {
+        return instance.get(`${SERVER_URL}/course/review/${idCourse}`)
+    }
 }

@@ -41,6 +41,7 @@ module.exports = class CourseService {
     if (item) {
       const buttons = [
         Response.genWebUrlButton(i18n.__("course.detail"), `${config.clientUrl}/course-detail/${item._id}`),
+        Response.genPostbackButton(i18n.__("course.review"), `${COURSE.REVIEW}_${item._id}`),
         Response.genPostbackButton(i18n.__("course.add_to_cart"), `${CART.ADD_TO_CART}_${item._id}`)
       ];
   
@@ -175,6 +176,22 @@ module.exports = class CourseService {
           }
           return Response.genQuickReply(i18n.__("fallback.error", { error: response.data.error }));
     }
+
+    if (payload.includes(COURSE.REVIEW)) {
+      const _idCourse = payload.substr(14, payload.length - 14);
+      const response = await api.getReviewCourse(_idCourse); 
+      if (!response.data.error) {
+        const { rate, registered, viewed, sentiment, name } = response.data;
+        return [
+          Response.genText(i18n.__("course.review_prompt", { name })),
+          Response.genQuickReply(i18n.__("course.course_review", { rate, registered, viewed, sentiment }), [
+            Response.genPostbackButton(i18n.__("course.add_to_cart"), `${CART.ADD_TO_CART}_${_idCourse}`)
+          ])
+        ]
+      }
+      return Response.genQuickReply(i18n.__("fallback.error", { error: response.data.error }));
+    }
+
     if (payload.includes(COURSE.CHOOSE_COURSE)) {
       const _idCourse = payload.substr(14, payload.length - 14);
       const courseResponse = await api.fetchCourse(_idCourse);

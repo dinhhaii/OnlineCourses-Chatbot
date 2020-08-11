@@ -56,7 +56,10 @@
 		"latest_courses": "Latest courses",
 		"popular_courses": "Popular courses",
 		"detail": "Detail",
-		"add_to_cart": "Add to cart"
+		"add_to_cart": "Add to cart",
+		"review": "Review",
+		"review_prompt": "Review {{name}} course:",
+		"course_review": "• Rate: {{rate}}/5\n• Sentiment: {{sentiment}}\n• Viewed: {{viewed}}\n• Registered: {{registered}}"
 	},
 	"subject": {
 		"prompt_none": "Sorry, I can't find any subject for you",

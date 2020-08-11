@@ -56,7 +56,10 @@
 		"latest_courses": "Các khoá học mới nhất",
 		"popular_courses": "Các khoá học nổi nhất",
 		"detail": "Chi tiết",
-		"add_to_cart": "Thêm vào giỏ hàng"
+		"add_to_cart": "Thêm vào giỏ hàng",
+		"review": "Xem đánh giá",
+		"review_prompt": "Đánh giá khoá học {{name}}:",
+		"course_review": "• Đánh giá: {{rate}}/5\n• Mức độ hài lòng: {{sentiment}}\n• Số lượt xem: {{viewed}}\n• Số lượt đăng kí: {{registered}}"
 	},
 	"subject": {
 		"prompt_none": "Xin lỗi, tôi không tim được môn học nào cho bạn.",
